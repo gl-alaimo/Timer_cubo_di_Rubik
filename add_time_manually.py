@@ -9,7 +9,7 @@ data_risoluzione = input("Data (ANNO-MESE-GIORNO): ")
 cubo = input("Tipo di cubo: ")
 minuti = int(input("Minuti: "))
 secondi = int(input("Secondi: "))
-millesimi = float(input("Millesimi di secondo: "))
+millesimi = float(input("Millesimi di secondo (per esempio 0.43): "))
 
 # Conversione tempo in secondi
 tempo_impiegato = (minuti * 60) + secondi + millesimi

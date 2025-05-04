@@ -14,7 +14,7 @@ def convert_seconds(seconds):
 
 
 def get_record(cubo):
-    """Get current record from database"""
+    """Get current record from dataframe"""
     df = pd.read_csv("database.csv", sep="\t")
     record_solves = df[df["Cubo"] == cubo].min()
     record_time = record_solves["Secondi"]
@@ -47,14 +47,14 @@ def calcolo_tempo(cubo):
     print("Fine!")
     min, sec = convert_seconds(tempo_impiegato)
     if min == 1:
-        print(f" Tempo impiegato: {min} minuto e {sec} secondi")
+        print(f"Tempo impiegato: {min} minuto e {sec} secondi")
     else:
         print(f"Tempo impiegato: {min} minuti e {sec} secondi")
     return tempo_impiegato, cubo
 
 
 def salvataggio_dati(tempo, cubo):
-    """Save time in the database"""
+    """Save time into the database"""
     data = datetime.now().date()
     with open(file="database.csv", mode="a") as db_file:
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
