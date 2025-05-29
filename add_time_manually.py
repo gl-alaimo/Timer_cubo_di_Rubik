@@ -7,17 +7,20 @@ from run_timer import is_new_record
 print("Inserisci i seguenti dati:")
 data_risoluzione = input("Data (ANNO-MESE-GIORNO): ")
 cubo = input("Tipo di cubo: ")
-minuti = int(input("Minuti: "))
-secondi = int(input("Secondi: "))
-millesimi = float(input("Millesimi di secondo (per esempio 0.43): "))
+agg_altra_soluzione = "si"
 
-# Conversione tempo in secondi
-tempo_impiegato = (minuti * 60) + secondi + millesimi
+while agg_altra_soluzione == "si":
+    minuti = int(input("Minuti: "))
+    secondi = int(input("Secondi: "))
+    millesimi = float(input("Millesimi di secondo (per esempio 0.43): "))
+    # Conversione tempo in secondi
+    tempo_impiegato = (minuti * 60) + secondi + millesimi
 
-is_new_record(tempo_impiegato, cubo)
+    is_new_record(tempo_impiegato, cubo)
 
-# Salvataggio dati nel database
-with open(file="database.csv", mode="a") as db_file:
-    db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
+    # Salvataggio dati nel database
+    with open(file="database.csv", mode="a") as db_file:
+        db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
 
-print("Tempo risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
+    print("Tempo risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
+    agg_altra_soluzione = input("Vuoi inserire un altro tempo per lo stesso cubo?: ")
