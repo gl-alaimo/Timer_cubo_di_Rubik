@@ -23,4 +23,4 @@ while agg_altra_soluzione == "si":
         db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
 
     print("Tempo risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
-    agg_altra_soluzione = input("Vuoi inserire un altro tempo per lo stesso cubo?: ")
+    agg_altra_soluzione = input("\nVuoi inserire un altro tempo per lo stesso cubo? (si o no): ")
