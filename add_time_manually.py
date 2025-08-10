@@ -9,6 +9,7 @@ print("Inserisci i seguenti dati:")
 data_risoluzione = input("Data (ANNO-MESE-GIORNO): ")
 if data_risoluzione == "oggi":
     data_risoluzione = datetime.datetime.now().strftime("%Y-%m-%d")
+
 cubo = input("Tipo di cubo: ")
 agg_altra_soluzione = "si"
 
