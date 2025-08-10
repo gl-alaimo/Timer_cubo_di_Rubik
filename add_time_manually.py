@@ -1,4 +1,5 @@
 """Add time manually to database."""
+import datetime
 
 from run_timer import is_new_record
 
@@ -6,6 +7,9 @@ from run_timer import is_new_record
 # Inserimento dati manuali
 print("Inserisci i seguenti dati:")
 data_risoluzione = input("Data (ANNO-MESE-GIORNO): ")
+if data_risoluzione == "oggi":
+    data_risoluzione = datetime.datetime.now().strftime("%Y-%m-%d")
+
 cubo = input("Tipo di cubo: ")
 agg_altra_soluzione = "si"
 
