@@ -27,7 +27,7 @@ def is_new_record(tempo_impiegato:int, cubo:str):
     if tempo_impiegato < my_record:
         record_min, record_sec = convert_seconds(my_record)
         current_min, current_sec = convert_seconds(tempo_impiegato)
-        print(f"Hai battuto il tuo record di {record_min-current_min} minuti e {record_sec-current_sec} secondi!!!\n"
+        print(f"Hai battuto il tuo record di {record_min-current_min} minuti e {(record_sec-current_sec).__round__(2)} secondi!!!\n"
               f"Record precedente {record_min} minuti e {record_sec} secondi")
 
 
@@ -70,6 +70,18 @@ def salvataggio_dati(tempo, cubo):
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
 
 
+def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
+    """Calcolo diff tempo in media e tempo attuale"""
+    df = pd.read_csv("database.csv", sep="\t")
+    media_df = df[df["Cubo"] == cubo]
+    media = media_df["Secondi"].mean()
+    if tempo_impiegato < media:
+        print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
+    elif tempo_impiegato > media:
+        print(f"Ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
+    else:
+        print("Ci hai impiegato come al solito")
+
 def main_function():
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
     print(titolo.renderText("Rubik Timer"))
@@ -91,6 +103,7 @@ def main_function():
 
     tempo_impiegato, cubo = calcolo_tempo(cubo)
     is_new_record(tempo_impiegato, cubo)
+    diffs_media_tempo_attuale(cubo=cubo, tempo_impiegato=tempo_impiegato)
     salvataggio_dati(tempo_impiegato, cubo)
 
 if __name__ == "__main__": 
