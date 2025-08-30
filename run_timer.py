@@ -5,7 +5,7 @@ import time
 from pyfiglet import Figlet
 
 
-def convert_seconds(seconds):
+def convert_seconds(seconds:int):
     """Conversione dei secondi in minuti e secondi"""
     minutes, seconds = divmod(seconds, 60)
     minutes = int(minutes)
@@ -13,7 +13,7 @@ def convert_seconds(seconds):
     return minutes, seconds
 
 
-def get_record(cubo):
+def get_record(cubo:str):
     """Get current record from dataframe"""
     df = pd.read_csv("database.csv", sep="\t")
     record_solves = df[df["Cubo"] == cubo].min()
@@ -21,7 +21,17 @@ def get_record(cubo):
     return record_time
 
 
-def calcolo_tempo(cubo):
+def is_new_record(tempo_impiegato:int, cubo:str):
+    """Check if record has been beaten"""
+    my_record = get_record(cubo)
+    if tempo_impiegato < my_record:
+        record_min, record_sec = convert_seconds(my_record)
+        current_min, current_sec = convert_seconds(tempo_impiegato)
+        print(f"Hai battuto il tuo record di {record_min-current_min} minuti e {record_sec-current_sec} secondi!!!\n"
+              f"Record precedente {record_min} minuti e {record_sec} secondi")
+
+
+def calcolo_tempo(cubo:str):
     """Calculate solving time"""
     input("Premi invio per iniziare ")
     finito = False
@@ -58,14 +68,6 @@ def salvataggio_dati(tempo, cubo):
     data = datetime.now().date()
     with open(file="database.csv", mode="a") as db_file:
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
-
-
-def is_new_record(tempo_impiegato, cubo):
-    """Check if record has been beaten"""
-    my_record = get_record(cubo)
-    if tempo_impiegato < my_record:
-        min, sec = convert_seconds(my_record)
-        print(f"Hai battuto il tuo record!!! Record precedente {min} minuti e {sec} secondi")
 
 
 def main_function():
