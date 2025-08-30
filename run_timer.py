@@ -75,7 +75,7 @@ def main_function():
     small_cube_moves = ['U', 'D', 'R', 'L', 'F', 'B', 'U1°', 'D1°', 'R1°', 'L1°', 'F1°', 'B1°', 'U2', 'D2', 'R2', 'L2', 'F2', 'B2']
     big_cube_moves = ["u", "d", "r", "l", "f", "b", "u1°", "d1°", "r1°", "l1°", "f1°", "b1°", "u2", "d2", "r2", "l2", "f2", "b2", "Uu2", "Dd2", "Rr2", "Ll2", "Ff2", "Bb2", "U2", "D2", "R2", "L2", "F2", "B2", "U1°", "D1°", "R1°", "L1°", "F1°", "B1°"]
 
-    cubo = input("Digita il tipo di cubo e premi invio: ")
+    cubo = input("Digita il tipo di cubo: ")
     if cubo == "4x4" or cubo == "5x5":
         mescolamento_random_4x4_5x5 = [random.choice(big_cube_moves) for m in range(20)]
         print("Movimenti casuali suggeriti per mischiare il cubo:\n",mescolamento_random_4x4_5x5)
