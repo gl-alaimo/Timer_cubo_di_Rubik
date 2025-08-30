@@ -6,7 +6,7 @@ from run_timer import is_new_record
 
 # Inserimento dati manuali
 print("Inserisci i seguenti dati:")
-data_risoluzione = input("Data (ANNO-MESE-GIORNO): ")
+data_risoluzione = input("Data (ANNO-MESE-GIORNO) oppure 'oggi': ")
 if data_risoluzione == "oggi":
     data_risoluzione = datetime.datetime.now().strftime("%Y-%m-%d")
 
