@@ -39,7 +39,7 @@ def calcolo_tempo(cubo:str):
 
     while finito == False:
         ora_iniziale = time.time()
-        stop = input("Premi 'p' e invio se vuoi mettere in pausa o solo invio per terminare: ")
+        stop = input("Premi 'p' ed invio se vuoi mettere in pausa o invio per terminare: ")
         if stop == "p":
             ora_finale = time.time()
             tempo_parziale = (tempo_parziale + ora_finale - ora_iniziale).__round__(2)
@@ -54,7 +54,7 @@ def calcolo_tempo(cubo:str):
 
     ora_finale = time.time()
     tempo_impiegato = (ora_finale - ora_iniziale).__round__(2) + tempo_parziale
-    print("Fine!")
+    print("Fine!\n")
     min, sec = convert_seconds(tempo_impiegato)
     if min == 1:
         print(f"Tempo impiegato: {min} minuto e {sec} secondi")
@@ -77,11 +77,22 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
     media = media_df["Secondi"].mean()
     print("La tua media attuale è di", media.__round__(2), "secondi")
     if tempo_impiegato < media:
-        print(f"Questa volta ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
+        print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
     elif tempo_impiegato > media:
-        print(f"Questa volta ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
+        print(f"Ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
     else:
-        print("Questa volta ci hai impiegato come al solito")
+        print("Ci hai impiegato come al solito")
+
+
+def diffs_record_tempo_attuale(record:int, tempo_impiegato:int):
+    """Calcolo diff tempo record personale e tempo soluzione attuale"""
+    if tempo_impiegato > record:
+        print(f"Ci hai impiegato", (tempo_impiegato-record).__round__(2), "secondi in più rispetto al record")
+    elif tempo_impiegato == record:
+        print("Hai eguaglito il tuo record")
+    else:
+        pass # Informazioni sul record in questo caso verrano date dalla funzione is_new_record()
+
 
 def main_function():
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
@@ -105,6 +116,7 @@ def main_function():
     tempo_impiegato, cubo = calcolo_tempo(cubo)
     is_new_record(tempo_impiegato, cubo)
     diffs_media_tempo_attuale(cubo=cubo, tempo_impiegato=tempo_impiegato)
+    diffs_record_tempo_attuale(record=my_record, tempo_impiegato=tempo_impiegato)
     salvataggio_dati(tempo_impiegato, cubo)
 
 if __name__ == "__main__": 
