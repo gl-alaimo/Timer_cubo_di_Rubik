@@ -71,16 +71,17 @@ def salvataggio_dati(tempo, cubo):
 
 
 def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
-    """Calcolo diff tempo in media e tempo attuale"""
+    """Calcolo diff tempo soluzione media e tempo soluzione attuale"""
     df = pd.read_csv("database.csv", sep="\t")
     media_df = df[df["Cubo"] == cubo]
     media = media_df["Secondi"].mean()
+    print("La tua media attuale è di", media.__round__(2), "secondi")
     if tempo_impiegato < media:
-        print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
+        print(f"Questa volta ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
     elif tempo_impiegato > media:
-        print(f"Ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
+        print(f"Questa volta ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
     else:
-        print("Ci hai impiegato come al solito")
+        print("Questa volta ci hai impiegato come al solito")
 
 def main_function():
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
