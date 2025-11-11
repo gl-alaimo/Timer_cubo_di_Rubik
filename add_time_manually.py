@@ -1,7 +1,7 @@
 """Add time manually to database."""
 import datetime
 
-from run_timer import is_new_record
+from rubik_library import is_new_record
 
 
 # Inserimento dati manuali
