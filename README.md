@@ -11,6 +11,9 @@ This script runs a timer and logs the results into the `database.csv` file. It i
 ### `add_time_manually.py`
 This script allows you to manually add time entries to the `database.csv` file. It is useful for logging data that was not recorded in real-time.
 
+### `solve_5_times.py`
+This script runs a timer for 5 times and logs the results into the `database.csv` file. It is useful for tracking time while solving the cube in real time like in professional competitions. It provides average time of the last 5 solves and the best time.
+
 ### `database.csv`
 A tab-separated values (TSV) file that stores time data. Each row contains:
 - **Data**: The date of the entry (e.g., `2025-11-08`).
@@ -24,7 +27,7 @@ A Jupyter Notebook for analyzing and visualizing the data stored in `database.cs
 
 - Run the timer: `python run_timer.py`
 - Add time manually: `python add_time_manually.py`
-
+- Solve 5 times: `python solve_5_times.py`
 
 ## License
 
