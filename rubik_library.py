@@ -77,7 +77,13 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
     df = pd.read_csv("database.csv", sep="\t")
     media_df = df[df["Cubo"] == cubo]
     media = media_df["Secondi"].mean()
-    print("La tua media attuale è di", media.__round__(2), "secondi")
+    media = media.__round__(2)
+    # conversione media da secondi in minuti e secondi
+    media_in_minuti = convert_seconds(media)
+    formatted_media_in_minuti = (media_in_minuti[0], str(media_in_minuti[1]))
+    formatted_media_in_minuti = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
+
+    print("La tua media attuale è di", media, "secondi, ovvero", formatted_media_in_minuti)
     if tempo_impiegato < media:
         print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
     elif tempo_impiegato > media:
