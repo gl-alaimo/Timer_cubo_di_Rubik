@@ -15,7 +15,7 @@ def conversione_secondi(secondi:int):
 
 def ricerca_record(cubo:str):
     """Ricerca il record attuale nel database"""
-    df = read_csv("database.csv", sep="\t")
+    df = read_csv("../database.csv", sep="\t")
     record_risoluzione = df[df["Cubo"] == cubo].min()
     tempo_record = record_risoluzione["Secondi"]
     return tempo_record
