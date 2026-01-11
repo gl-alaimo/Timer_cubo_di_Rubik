@@ -1,8 +1,8 @@
 """Libreria Rubik timer"""
 
 from datetime import datetime
-from pandas import read_csv
 from time import time
+from pandas import read_csv
 
 
 def conversione_secondi(secondi:int):
@@ -37,7 +37,7 @@ def calcolo_tempo(cubo:str):
     finito = False
     tempo_parziale = 0
 
-    while finito == False:
+    while finito is False:
         ora_iniziale = time()
         stop = input("Premi 'p' ed invio se vuoi mettere in pausa o invio per terminare: ")
         if stop == "p":
@@ -66,7 +66,7 @@ def calcolo_tempo(cubo:str):
 def salvataggio_dati(tempo, cubo):
     """Salva il tempo di risoluzione nel database"""
     data = datetime.now().date()
-    with open(file="database.csv", mode="a") as db_file:
+    with open(file="database.csv", mode="a", encoding="utf-8") as db_file:
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
 
 
