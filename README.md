@@ -1,35 +1,41 @@
-# Rubik Timer time tracker
+# Progetto Rubik Timer
 
-This repository contains a set of Python scripts for managing and logging Rubik's Cube time-related data. It includes functionality for manually adding time entries, running a timer, and storing data in a CSV file.
-The scripts suggests moves to perform in order to scrumble the cube and allows to pause the timer. In the end calculates average time, records, diffs between current solve and average and record.
+Questo progetto è un'applicazione Python progettata per gestire e analizzare i tempi di risoluzione del cubo di Rubik. Include funzionalità per registrare i tempi in tempo reale o caricare tempi di risoluzione manualmente.
 
-## Files and Their Purpose
+## Struttura del Progetto
 
-### `run_timer.py`
-This script runs a timer and logs the results into the `database.csv` file. It is useful for tracking time while solving the cube in real time.
+- **rubik_library.py**: Libreria Python con funzioni utili per la gestione del cubo di Rubik.
+- **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
+- **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
+- **risolvi_5_volte.py**: Script per risolvere il cubo 5 volte e registrare i tempi.
+- **database.csv**: File CSV che memorizza i tempi di risoluzione.
+- **notebook.ipynb**: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
-### `add_time_manually.py`
-This script allows you to manually add time entries to the `database.csv` file. It is useful for logging data that was not recorded in real-time.
 
-### `solve_5_times.py`
-This script runs a timer for 5 times and logs the results into the `database.csv` file. It is useful for tracking time while solving the cube in real time like in professional competitions. It provides average time of the last 5 solves and the best time.
+## Requisiti
 
-### `database.csv`
-A tab-separated values (TSV) file that stores time data. Each row contains:
-- **Data**: The date of the entry (e.g., `2025-11-08`).
-- **Secondi**: The time recorded in seconds (e.g., `281.5`).
-- **Cubo**: The type of cube (e.g., `4x4`, `3x3`).
+- Python 3.x
+- Librerie aggiuntive (se necessarie) specificate nel file `requirements.txt` (se presente).
 
-### `notebook.ipynb`
-A Jupyter Notebook for analyzing and visualizing the data stored in `database.csv`.
+## Come Utilizzare
 
-## How to run the scripts
+1. **Avviare il Timer**:
+   Esegui lo script `avvia_timer.py` per registrare i tempi di risoluzione:
+   ```bash
+   python avvia_timer.py
+2. **Caricare i dati manualmente**:
+    Esegui lo script `carica_tempo.py` per caricare i tempi di risoluzione:
+    ```bash
+    python carica_tempo.py
+3. **Riolvere il cubo 5 volte**:
+    Esegui lo script `risolvi_5_volte.py` per registrare i tempi di risoluzione:
+    ```bash
+    python risolvi_5_volte.py
+## Contributi
+Se desideri contribuire al progetto, sentiti libero di aprire una pull request o segnalare problemi nella sezione "Issues".
 
-- Run the timer: `python run_timer.py`
-- Add time manually: `python add_time_manually.py`
-- Solve 5 times: `python solve_5_times.py`
+## Licenza
+Questo progetto è distribuito sotto la licenza MIT.
 
-## License
-
-This project is private.<br>
-Author: Giuseppe Luca Alaimo (gl-alaimo)
+## Contatti
+Giuseppe Luca Alaimo gl.alaimo@protonmail.com
