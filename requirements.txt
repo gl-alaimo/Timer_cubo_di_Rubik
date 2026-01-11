@@ -1,0 +1,2 @@
+pandas==2.3.3
+pyfiglet==1.0.2
