@@ -32,5 +32,5 @@ def funzione_principale():
     rubik_library.salvataggio_dati(tempo_impiegato, cubo)
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     funzione_principale()

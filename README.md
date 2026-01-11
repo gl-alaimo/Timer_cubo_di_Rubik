@@ -1,10 +1,10 @@
-# Progetto Rubik Timer
+# Timer cubo di Rubik
 
-Questo progetto è un'applicazione Python progettata per gestire e analizzare i tempi di risoluzione del cubo di Rubik. Include funzionalità per registrare i tempi in tempo reale o caricare tempi di risoluzione manualmente.
-
+Questo progetto contiene un Notebook e diversi script scritti in Python progettati per registrare ed analizzare i tempi di risoluzione di diversi tipi di cubi di Rubik. Include funzionalità per registrare i tempi di risoluzione in tempo reale o caricare tempi di risoluzione manualmente, suggerire mosse per mescolare il cubo prima di iniziare a risolverlo, tenere traccia dei record personali e dei tempi medi di risoluzione.
+Ottimo per fare pratica e tenere traccia dei propri progressi.
 ## Struttura del Progetto
 
-- **rubik_library.py**: Libreria Python con funzioni utili per la gestione del cubo di Rubik.
+- **rubik_library.py**: Libreria Python contenente funzioni usate nei diversi script.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
 - **risolvi_5_volte.py**: Script per risolvere il cubo 5 volte e registrare i tempi.
@@ -12,40 +12,38 @@ Questo progetto è un'applicazione Python progettata per gestire e analizzare i 
 - **notebook.ipynb**: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
 ## Tipi di cubi supportati
-<li>2x2
-<li>3x3
-<li>4x4
-<li>5x5
-<li>Mirror
-<li>Megaminx
+- 2x2
+- 3x3
+- 4x4
+- 5x5
+- Mirror
+- Megaminx
 
 ## Requisiti
 
 - Python 3.x
-- Librerie aggiuntive specificate nel file `requirements.txt`.
+- Librerie aggiuntive specificate nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
 
-## Come Utilizzare
-Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando del terminale:
+## Come funziona
+Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando dal terminale:
 `cd scripts` e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
-   Esegui lo script `avvia_timer.py` per registrare i tempi di risoluzione:
+   Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione:
    ```bash
    python avvia_timer.py
 2. **Caricare i dati manualmente**:
-    Esegui lo script `carica_tempo.py` per caricare i tempi di risoluzione:
+    Eseguire lo script `carica_tempo.py` per caricare i tempi di risoluzione:
     ```bash
     python carica_tempo.py
 3. **Riolvere il cubo 5 volte**:
-    Esegui lo script `risolvi_5_volte.py` per registrare i tempi di risoluzione:
+    Eseguire lo script `risolvi_5_volte.py` per registrare 5 tempi di risoluzione per lo stesso tipo di cubo:
     ```bash
     python risolvi_5_volte.py
 4. **Eseguire il notebook**:
-    Eseguire il notebook in un ambiente supportato (ad esempio Jupyter https://jupyter.org/)
-## Contributi
-Se desideri contribuire al progetto, sentiti libero di aprire una pull request o segnalare problemi nella sezione "Issues".
+    Eseguire il notebook in un ambiente supportato (ad esempio tramite Jupyter https://jupyter.org/) per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
 ## Licenza
-Questo progetto è distribuito sotto la licenza MIT.
+Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="/gl-alaimo/Rubik_Timer/tree/main/LICENCE">LICENSE</a> per ulteriori informazioni, 
 
 ## Contatti
 Giuseppe Luca Alaimo gl.alaimo@protonmail.com
