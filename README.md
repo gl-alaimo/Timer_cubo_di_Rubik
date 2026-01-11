@@ -11,14 +11,22 @@ Questo progetto è un'applicazione Python progettata per gestire e analizzare i 
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook.ipynb**: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
+## Tipi di cubi supportati
+<li>2x2
+<li>3x3
+<li>4x4
+<li>5x5
+<li>Mirror
+<li>Megaminx
 
 ## Requisiti
 
 - Python 3.x
-- Librerie aggiuntive (se necessarie) specificate nel file `requirements.txt`.
+- Librerie aggiuntive specificate nel file `requirements.txt`.
 
 ## Come Utilizzare
-
+Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando del terminale:
+`cd scripts` e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
    Esegui lo script `avvia_timer.py` per registrare i tempi di risoluzione:
    ```bash
@@ -31,6 +39,8 @@ Questo progetto è un'applicazione Python progettata per gestire e analizzare i 
     Esegui lo script `risolvi_5_volte.py` per registrare i tempi di risoluzione:
     ```bash
     python risolvi_5_volte.py
+4. **Eseguire il notebook**:
+    Eseguire il notebook in un ambiente supportato (ad esempio Jupyter https://jupyter.org/)
 ## Contributi
 Se desideri contribuire al progetto, sentiti libero di aprire una pull request o segnalare problemi nella sezione "Issues".
 

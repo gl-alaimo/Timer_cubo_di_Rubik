@@ -66,13 +66,13 @@ def calcolo_tempo(cubo:str):
 def salvataggio_dati(tempo, cubo):
     """Salva il tempo di risoluzione nel database"""
     data = datetime.now().date()
-    with open(file="database.csv", mode="a", encoding="utf-8") as db_file:
+    with open(file="../database.csv", mode="a", encoding="utf-8") as db_file:
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
 
 
 def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
     """Calcola la diffeerenza del tempo medio di risoluzione e il tempo di risoluzione attuale"""
-    df = read_csv("database.csv", sep="\t")
+    df = read_csv("../database.csv", sep="\t")
     media_df = df[df["Cubo"] == cubo]
     media = media_df["Secondi"].mean()
     media = media.__round__(2)

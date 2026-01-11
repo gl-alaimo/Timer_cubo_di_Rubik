@@ -27,7 +27,7 @@ def funzione_principale():
         tempo_impiegato, cubo = rubik_library.calcolo_tempo(cubo)
         rubik_library.salvataggio_dati(tempo_impiegato, cubo)
 
-    df = read_csv("database.csv", sep="\t")
+    df = read_csv("../database.csv", sep="\t")
     ultime_5_risoluzioni = df.tail(5)
     media = ultime_5_risoluzioni["Secondi"].mean()
     print("\nRisultati:")

@@ -22,7 +22,7 @@ while aggiungere_altra_soluzione == "si":
 
     controllo_nuovo_record(tempo_impiegato, cubo)
 
-    with open(file="database.csv", mode="a", encoding="utf-8") as db_file:
+    with open(file="../database.csv", mode="a", encoding="utf-8") as db_file:
         db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
 
     print("Tempo risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
