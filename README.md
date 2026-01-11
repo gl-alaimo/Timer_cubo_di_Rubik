@@ -15,7 +15,7 @@ Questo progetto è un'applicazione Python progettata per gestire e analizzare i 
 ## Requisiti
 
 - Python 3.x
-- Librerie aggiuntive (se necessarie) specificate nel file `requirements.txt` (se presente).
+- Librerie aggiuntive (se necessarie) specificate nel file `requirements.txt`.
 
 ## Come Utilizzare
 
