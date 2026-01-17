@@ -35,7 +35,7 @@ Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando d
     ```bash
     python carica_tempo.py
 3. **Eseguire il notebook**:
-    Eseguire il notebook in un ambiente supportato (ad esempio tramite Jupyter https://jupyter.org/) per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
+    Eseguire il notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/) dopo aver registrato o caricato diverse risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
 ## Licenza
 Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni, 
