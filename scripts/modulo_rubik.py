@@ -1,4 +1,4 @@
-"""Libreria Rubik timer"""
+"""Modulo Rubik timer"""
 
 from datetime import datetime
 from time import time
@@ -92,9 +92,21 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int):
 def diff_record_tempo_attuale(record:int, tempo_impiegato:int):
     """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale"""
     if tempo_impiegato > record:
-        print(f"Ci hai impiegato", (tempo_impiegato-record).__round__(2), "secondi in più rispetto al record")
+        print("Ci hai impiegato", (tempo_impiegato-record).__round__(2), "secondi in più rispetto al record")
     elif tempo_impiegato == record:
         print("Hai eguaglito il tuo record")
     else:
         pass # Informazioni sul record in questo caso verrano date dalla funzione controllo_nuovo_record()
+
+
+def media_ultime_5(cubo):
+    """Calcola la media delle ultime 5 risoluzioni di un certo tipo di cubo"""
+    df = read_csv("../database.csv", sep="\t")
+    ultime_5 = df[df["Cubo"] == cubo].tail(5)["Secondi"]
+    media_soluzioni, tempi_totali = 0, 0
+    for tempo in ultime_5:
+        tempi_totali = tempi_totali + tempo
+    media_soluzioni = tempi_totali / 5
+    media_in_minuti = conversione_secondi(media_soluzioni)
+    print("Media delle ultime 5 risoluzioni di questo cubo:", media_in_minuti)
 
