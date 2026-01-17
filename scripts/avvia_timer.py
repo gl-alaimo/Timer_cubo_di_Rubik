@@ -22,8 +22,11 @@ def funzione_principale():
         print("Movimenti casuali suggeriti per mischiare il cubo:\n",mescolamento_random_2x2_3x3)
 
     record_personale = modulo_rubik.ricerca_record(cubo)
-    min, sec = modulo_rubik.conversione_secondi(record_personale)
-    print(f"Record da battere {min} minuti e {sec} secondi")
+    if record_personale != 0:
+        minuti, sec = modulo_rubik.conversione_secondi(record_personale)
+        print(f"Record da battere: {minuti} minuti e {sec} secondi")
+    else:
+        print("Nessun record impostato al momento.")
 
     tempo_impiegato, cubo = modulo_rubik.calcolo_tempo(cubo)
     modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)

@@ -3,7 +3,7 @@
 
 from datetime import datetime
 
-from scripts.modulo_rubik import controllo_nuovo_record
+from modulo_rubik import controllo_nuovo_record
 
 
 print("Inserisci i seguenti dati:")
