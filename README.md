@@ -4,10 +4,9 @@ Questo progetto contiene un Notebook e diversi script scritti in Python progetta
 Ottimo per fare pratica e tenere traccia dei propri progressi.
 ## Struttura del Progetto
 
-- **rubik_library.py**: Libreria Python contenente funzioni usate nei diversi script.
+- **modulo_rubik.py**: Modulo Python contenente funzioni usate nei diversi script.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
-- **risolvi_5_volte.py**: Script per risolvere il cubo 5 volte e registrare i tempi.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook.ipynb**: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
@@ -22,7 +21,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 ## Requisiti
 
 - Python 3.x
-- Librerie aggiuntive specificate nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
+- Moduli aggiuntive specificate nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
 
 ## Come funziona
 Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando dal terminale:
@@ -35,11 +34,7 @@ Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando d
     Eseguire lo script `carica_tempo.py` per caricare i tempi di risoluzione:
     ```bash
     python carica_tempo.py
-3. **Riolvere il cubo 5 volte**:
-    Eseguire lo script `risolvi_5_volte.py` per registrare 5 tempi di risoluzione per lo stesso tipo di cubo:
-    ```bash
-    python risolvi_5_volte.py
-4. **Eseguire il notebook**:
+3. **Eseguire il notebook**:
     Eseguire il notebook in un ambiente supportato (ad esempio tramite Jupyter https://jupyter.org/) per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
 ## Licenza
