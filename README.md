@@ -10,18 +10,10 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook.ipynb**: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
-## Tipi di cubi supportati
-- 2x2
-- 3x3
-- 4x4
-- 5x5
-- Mirror
-- Megaminx
-
 ## Requisiti
 
 - Python 3.x
-- Moduli aggiuntive specificate nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
+- Moduli aggiuntivi specificati nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
 
 ## Come funziona
 Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando dal terminale:
