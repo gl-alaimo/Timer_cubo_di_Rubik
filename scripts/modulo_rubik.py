@@ -122,7 +122,7 @@ def grafico_medie_mensili(df_cubo, anno:int):
     """Crea un grafico con il tempo medio mensile delle soluzioni di un certo cubo"""
     df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"],
                                            sort=False)["Secondi"].mean().plot(kind="bar")
-    plt.title(label=f"Tempo medio mensile soluzioni cubo nel {anno}")
+    plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Mese")
     plt.yticks(ticks=[0,10,20,30,40,50,60,70,80,90,100])
@@ -134,7 +134,7 @@ def grafico_medie_mensili(df_cubo, anno:int):
 def grafico_medie_annuali(df_cubo):
     """Crea un grafico con il tempo medio annuale delle soluzioni di un certo cubo"""
     df_cubo.groupby(by=["Anno"])["Secondi"].mean().plot(kind="bar")
-    plt.title(label="Tempo medio annuale soluzioni cubo")
+    plt.title(label="Tempo medio annuale risoluzioni cubo")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Anno")
     plt.xticks(rotation=0)
