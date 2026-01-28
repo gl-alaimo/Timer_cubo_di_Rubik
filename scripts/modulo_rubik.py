@@ -3,6 +3,7 @@
 from datetime import datetime
 from time import time
 from pandas import read_csv
+from matplotlib import pyplot as plt
 
 
 def conversione_secondi(secondi:int):
@@ -115,3 +116,41 @@ def media_ultime_5(cubo):
         media_soluzioni = tempi_totali / 5
         media_in_minuti = conversione_secondi(media_soluzioni)
         print(f"Media delle ultime 5 risoluzioni di questo cubo: {media_in_minuti[0]} minuti e { media_in_minuti[1]} secondi")
+
+
+def grafico_medie_mensili(df_cubo, anno:int):
+    """Crea un grafico con il tempo medio mensile delle soluzioni di un certo cubo"""
+    df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"],
+                                           sort=False)["Secondi"].mean().plot(kind="bar")
+    plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
+    plt.ylabel(ylabel="Secondi")
+    plt.xlabel(xlabel="Mese")
+    plt.yticks(ticks=[0,10,20,30,40,50,60,70,80,90,100])
+    plt.xticks(rotation=0)
+    plt.grid(axis="y")
+    plt.show()
+
+
+def grafico_medie_annuali(df_cubo):
+    """Crea un grafico con il tempo medio annuale delle soluzioni di un certo cubo"""
+    df_cubo.groupby(by=["Anno"])["Secondi"].mean().plot(kind="bar")
+    plt.title(label="Tempo medio annuale risoluzioni cubo")
+    plt.ylabel(ylabel="Secondi")
+    plt.xlabel(xlabel="Anno")
+    plt.xticks(rotation=0)
+    plt.show()
+
+
+def grafico_record_media_massimo(df_cubo):
+    """Crea un grafico a barre con tempo record, media e tempo massimo"""
+    plt.figure(figsize=(4,4))
+    plt.bar(x=["Record", "Media", "Tempo massimo"],
+            height=[ricerca_record("3x3"),
+                    df_cubo["Secondi"].mean().round(2),
+                    df_cubo["Secondi"].max().round(2)],
+            color=["green", "blue", "red"])
+    plt.title("Record media e tempo massimo")
+    plt.ylabel("Secondi")
+    plt.show()
+
+
