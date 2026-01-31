@@ -2,9 +2,11 @@
 
 Questo progetto contiene un Notebook e diversi script scritti in Python progettati per registrare ed analizzare i tempi di risoluzione di diversi tipi di cubi di Rubik. Include funzionalità per registrare i tempi di risoluzione in tempo reale o caricare tempi di risoluzione manualmente, suggerire mosse per mescolare il cubo prima di iniziare a risolverlo, tenere traccia dei record personali e dei tempi medi di risoluzione.
 Ottimo per fare pratica e tenere traccia dei propri progressi.
+
+
 ## Struttura del Progetto
 
-- **modulo_rubik.py**: Modulo Python contenente funzioni usate nei diversi script.
+- **modulo_rubik.py**: Modulo Python contenente funzioni usate nei diversi script e notebook.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
@@ -31,7 +33,10 @@ Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando d
     Eseguire il notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/) dopo aver registrato o caricato diverse risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
 ## Licenza
-Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni, 
+Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni.
 
 ## Contatti
 Giuseppe Luca Alaimo gl.alaimo@protonmail.com
+
+## Anteprima script avvia_timer.py
+<img src="immagini/Anteprima_script.png">
