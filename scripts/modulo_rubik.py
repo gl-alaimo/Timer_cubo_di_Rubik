@@ -9,7 +9,8 @@ from matplotlib import pyplot as plt
 # Funzioni per gli script
 
 def conversione_secondi(secondi: int) -> tuple:
-    """Converte i secondi in minuti e secondi\n
+    """Converte i secondi in minuti e secondi
+
         Parametri:
             secondi (int): Numero di secondi da convertire
         Returns:
@@ -22,7 +23,8 @@ def conversione_secondi(secondi: int) -> tuple:
 
 
 def ricerca_record(cubo:str) -> int:
-    """Ricerca il record attuale nel database\n
+    """Ricerca il record attuale nel database
+
         Parametri:
             cubo (str): Tipo di cubo
         Returns:
@@ -38,7 +40,8 @@ def ricerca_record(cubo:str) -> int:
 
 
 def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
-    """Controlla se il record è stato battuto.\n
+    """Controlla se il record è stato battuto.
+
         Parametri:
             tempo_impiegato (int): Tempo impiegato in secondi
             cubo (str): Tipo di cubo
@@ -54,7 +57,8 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
 
 
 def calcolo_tempo(cubo:str) -> tuple:
-    """Calcola il tempo impiegato.\n
+    """Calcola il tempo impiegato.
+
     Parametri:
             cubo (str): Tipo di cubo
         Returns:
@@ -91,7 +95,8 @@ def calcolo_tempo(cubo:str) -> tuple:
 
 
 def salvataggio_dati(tempo:int, cubo:str) -> None:
-    """Salva il tempo di risoluzione nel database\n
+    """Salva il tempo di risoluzione nel database
+
         Parametri:
             tempo (int): Tempo impiegato
             cubo (str): Tipo di cubo
@@ -104,7 +109,8 @@ def salvataggio_dati(tempo:int, cubo:str) -> None:
 
 
 def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
-    """Calcola la diffeerenza del tempo medio di risoluzione e il tempo di risoluzione attuale\n
+    """Calcola la diffeerenza del tempo medio di risoluzione e il tempo di risoluzione attuale
+
         Parametri:
             cubo (str): Tipo di cubo
             tempo_impiegato (int): Tempo impiegato
@@ -130,7 +136,8 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
 
 
 def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
-    """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale\n
+    """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale
+
         Parametri:
             record (int): Record attuale
             tempo_impiegato (int): Tempo impiegato
@@ -147,7 +154,8 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
 
 
 def media_ultime_5(cubo:str) -> None:
-    """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo\n
+    """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo
+    
         Parametri:
             cubo (str): Tipo di cubo
         Returns:

@@ -40,7 +40,7 @@ Giuseppe Luca Alaimo gl.alaimo@protonmail.com
 
 ## Anteprima script avvia_timer.py
 <img src="immagini/Anteprima_script.png">
-<br>
 
 ## Anteprima notebook_cubo_3x3.ipynb
-<img src="immagini/Anteprima_notebook.png">
+<img src="immagini/Anteprima_notebook_1.png">
+<img src="immagini/Anteprima_notebook_2.png">
