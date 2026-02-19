@@ -10,7 +10,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
-- **notebook_generale**, **notebook_cubo_2x2**, **notebook_cubo_3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
+- **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
 
 ## Requisiti
@@ -41,6 +41,6 @@ Giuseppe Luca Alaimo gl.alaimo@protonmail.com
 ## Anteprima script avvia_timer.py
 <img src="immagini/Anteprima_script.png">
 
-## Anteprima notebook_cubo_3x3.ipynb
+## Anteprima notebook_cubo_3x3x3.ipynb
 <img src="immagini/Anteprima_notebook_1.png">
 <img src="immagini/Anteprima_notebook_2.png">
