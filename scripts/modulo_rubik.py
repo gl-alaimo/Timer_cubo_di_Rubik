@@ -244,7 +244,7 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
     """
     plt.figure(figsize=(4,4))
     plt.bar(x=["Record", "Media", "Tempo massimo"],
-            height=[ricerca_record("3x3"),
+            height=[ricerca_record("3x3x3"),
                     df_cubo["Secondi"].mean().round(2),
                     df_cubo["Secondi"].max().round(2)],
             color=["green", "blue", "red"])

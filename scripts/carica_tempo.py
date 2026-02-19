@@ -11,7 +11,7 @@ data_risoluzione = input("Data (ANNO-MESE-GIORNO) oppure 'oggi': ")
 if data_risoluzione == "oggi":
     data_risoluzione = datetime.now().strftime("%Y-%m-%d")
 
-cubo = input("Tipo di cubo: ").lower()
+cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, Megaminx): ").lower()
 aggiungere_altra_soluzione = "si"
 
 while aggiungere_altra_soluzione == "si":
