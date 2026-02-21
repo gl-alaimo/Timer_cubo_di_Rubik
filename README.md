@@ -12,6 +12,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
+Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo.
 
 ## Requisiti
 
@@ -19,7 +20,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - Moduli aggiuntivi specificati nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
 
 ## Come funziona
-Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando dal terminale:
+Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartella "scripts" con il seguente comando dal terminale:
 `cd scripts` e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
    Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione:
@@ -36,7 +37,7 @@ Per prima cosa bisogna andare nella cartella "scripts" con il seguente comando d
 Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni.
 
 ## Contatti
-Giuseppe Luca Alaimo gl.alaimo@protonmail.com
+Giuseppe Alaimo gl.alaimo@protonmail.com
 
 ## Anteprima script avvia_timer.py
 <img src="immagini/Anteprima_script.png">
