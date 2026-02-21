@@ -244,7 +244,7 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
     """
     plt.figure(figsize=(4,4))
     plt.bar(x=["Record", "Media", "Tempo massimo"],
-            height=[ricerca_record("3x3x3"),
+            height=[ricerca_record(cubo="3x3x3"),
                     df_cubo["Secondi"].mean().round(2),
                     df_cubo["Secondi"].max().round(2)],
             color=["green", "blue", "red"])
@@ -359,4 +359,22 @@ def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
     plt.ylabel("Num di risoluzioni")
     plt.xlabel("Cubi")
     plt.xticks(rotation=0)
+    plt.show()
+
+
+def grafico_risoluzioni_recenti(df: pandas.DataFrame) -> None:
+    """Crea un grafico con le ultime 10 risoluzioni.
+    
+    Parametri:
+        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        None
+    """
+    plt.figure()
+    plt.title("Tempi di risoluzione recenti")
+    plt.scatter(df.tail(10)["Data completa"], df.tail(10)["Secondi"])
+    plt.xticks(rotation=65)
+    plt.ylabel("Secondi")
+    plt.xlabel("Data")
     plt.show()
