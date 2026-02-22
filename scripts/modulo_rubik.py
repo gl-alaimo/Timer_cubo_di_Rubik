@@ -211,7 +211,6 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Mese")
-    plt.yticks(ticks=[0,10,20,30,40,50,60,70,80,90,100])
     plt.xticks(rotation=0)
     plt.show()
 
@@ -287,6 +286,7 @@ def grafico_tutti_record(df: pandas.DataFrame) -> None:
     plt.xticks(rotation=0)
     plt.show()
 
+
 def mostra_record(df: pandas.DataFrame) -> None:
     """Mostra i record per tutti i tipi di cubo.
     
@@ -297,7 +297,6 @@ def mostra_record(df: pandas.DataFrame) -> None:
         None
     """
     print(df.groupby(by="Cubo").min().sort_values(by="Secondi").drop(columns=["Data", "Secondi"]))
-    
 
 
 def calcola_media_risoluzioni(df: pandas.DataFrame) -> None:
@@ -345,6 +344,7 @@ def calcola_num_risoluzioni(df: pandas.DataFrame) -> None:
     """
     print(df["Cubo"].value_counts())
 
+
 def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
     """Crea un grafico con il numero di risoluzioni per tutti i tipi di cubo.
     
@@ -378,3 +378,30 @@ def grafico_risoluzioni_recenti(df: pandas.DataFrame) -> None:
     plt.ylabel("Secondi")
     plt.xlabel("Data")
     plt.show()
+
+
+def caricamento_dati(cubo: str):
+    """
+    Carica i dati dal database.
+
+    Parametri:
+        cubo (str): Tipo di cubo
+    
+        Returns:
+        df (pandas.Dataframe)
+    """
+    df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
+    df = df[df["Cubo"] == cubo]
+    # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
+    df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    df = aggiunta_colonne_data(df)
+    return df
+
+
+def stampa_record(cubo:str):
+    """Stampa il record del cubo specificato"""
+    minuti, secondi = conversione_secondi((ricerca_record(cubo)))
+    if minuti > 0:
+        print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
+    else:
+        print(f"Il record attuale è di {secondi} secondi")
