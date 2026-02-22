@@ -18,7 +18,7 @@ def conversione_secondi(secondi: int) -> tuple:
     """
     minuti, sec = divmod(secondi, 60)
     minuti = int(minuti)
-    sec = round(sec, 2)
+    sec = round(number=sec, ndigits=2)
     return minuti, sec
 
 
@@ -52,7 +52,7 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     if tempo_impiegato < mio_record:
         record_min, record_sec = conversione_secondi(mio_record)
         minuti_attuali, secondi_attuali = conversione_secondi(tempo_impiegato)
-        print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs((record_sec-secondi_attuali).__round__(2))} secondi!!!\n"
+        print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n"
               f"Record precedente {record_min} minuti e {record_sec} secondi")
 
 
@@ -73,7 +73,7 @@ def calcolo_tempo(cubo:str) -> tuple:
         stop = input("Premi 'p' ed invio se vuoi mettere in pausa o invio per terminare: ")
         if stop == "p":
             ora_finale = time()
-            tempo_parziale = (tempo_parziale + ora_finale - ora_iniziale).__round__(2)
+            tempo_parziale = round(number=tempo_parziale + ora_finale - ora_iniziale, ndigits=2)
             min, sec = conversione_secondi(tempo_parziale)
             if min == 1:
                 print(f"In pausa... Tempo impiegato fino ad ora: {min} minuto e {sec} secondi")
@@ -84,7 +84,7 @@ def calcolo_tempo(cubo:str) -> tuple:
             finito = True
 
     ora_finale = time()
-    tempo_impiegato = (ora_finale - ora_iniziale).__round__(2) + tempo_parziale
+    tempo_impiegato = round(number=ora_finale - ora_iniziale, ndigits=2) + tempo_parziale
     print("Fine!\n")
     min, sec = conversione_secondi(tempo_impiegato)
     if min == 1:
@@ -121,16 +121,16 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
     if len(df[df["Cubo"] == cubo]) != 0:
         media_df = df[df["Cubo"] == cubo]
         media = media_df["Secondi"].mean()
-        media = media.__round__(2)
+        media = round(number=media, ndigits=2)
         media_in_minuti = conversione_secondi(media)
         media_in_minuti_formattata = (media_in_minuti[0], str(media_in_minuti[1]))
         media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
         print("La tua media attuale è di", media_in_minuti_formattata)
         if tempo_impiegato < media:
-            print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
+            print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno del solito")
         elif tempo_impiegato > media:
-            print(f"Ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
+            print(f"Ci hai impiegato {round(number=tempo_impiegato-media, ndigits=2)} secondi in piu del solito")
         else:
             print("Ci hai impiegato come al solito")
 
@@ -146,7 +146,7 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
     """
     if record != 0:
         if tempo_impiegato > record:
-            print("Ci hai impiegato", (tempo_impiegato-record).__round__(2), "secondi in più rispetto al record")
+            print("Ci hai impiegato", round(number=tempo_impiegato-record, ndigits=2), "secondi in più rispetto al record")
         elif tempo_impiegato == record:
             print("Hai eguaglito il tuo record")
         else:
@@ -380,7 +380,7 @@ def grafico_risoluzioni_recenti(df: pandas.DataFrame) -> None:
     plt.show()
 
 
-def caricamento_dati(cubo: str):
+def caricamento_dati(cubo: str) -> pandas.DataFrame:
     """
     Carica i dati dal database.
 
@@ -388,7 +388,7 @@ def caricamento_dati(cubo: str):
         cubo (str): Tipo di cubo
     
         Returns:
-        df (pandas.Dataframe)
+        df (pandas.DataFrame)
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
     df = df[df["Cubo"] == cubo]
@@ -398,8 +398,15 @@ def caricamento_dati(cubo: str):
     return df
 
 
-def stampa_record(cubo:str):
-    """Stampa il record del cubo specificato"""
+def stampa_record(cubo:str) -> None:
+    """Stampa il record del cubo specificato
+    
+    Parametri:
+        cubo (str): Tipo di cubo
+    
+    Returns:
+        None
+    """
     minuti, secondi = conversione_secondi((ricerca_record(cubo)))
     if minuti > 0:
         print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
