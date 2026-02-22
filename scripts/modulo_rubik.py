@@ -18,7 +18,7 @@ def conversione_secondi(secondi: int) -> tuple:
     """
     minuti, sec = divmod(secondi, 60)
     minuti = int(minuti)
-    sec = round(sec, 2)
+    sec = round(number=sec, ndigits=2)
     return minuti, sec
 
 
@@ -52,7 +52,7 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     if tempo_impiegato < mio_record:
         record_min, record_sec = conversione_secondi(mio_record)
         minuti_attuali, secondi_attuali = conversione_secondi(tempo_impiegato)
-        print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs((record_sec-secondi_attuali).__round__(2))} secondi!!!\n"
+        print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n"
               f"Record precedente {record_min} minuti e {record_sec} secondi")
 
 
@@ -73,7 +73,7 @@ def calcolo_tempo(cubo:str) -> tuple:
         stop = input("Premi 'p' ed invio se vuoi mettere in pausa o invio per terminare: ")
         if stop == "p":
             ora_finale = time()
-            tempo_parziale = (tempo_parziale + ora_finale - ora_iniziale).__round__(2)
+            tempo_parziale = round(number=tempo_parziale + ora_finale - ora_iniziale, ndigits=2)
             min, sec = conversione_secondi(tempo_parziale)
             if min == 1:
                 print(f"In pausa... Tempo impiegato fino ad ora: {min} minuto e {sec} secondi")
@@ -84,7 +84,7 @@ def calcolo_tempo(cubo:str) -> tuple:
             finito = True
 
     ora_finale = time()
-    tempo_impiegato = (ora_finale - ora_iniziale).__round__(2) + tempo_parziale
+    tempo_impiegato = round(number=ora_finale - ora_iniziale, ndigits=2) + tempo_parziale
     print("Fine!\n")
     min, sec = conversione_secondi(tempo_impiegato)
     if min == 1:
@@ -121,16 +121,16 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
     if len(df[df["Cubo"] == cubo]) != 0:
         media_df = df[df["Cubo"] == cubo]
         media = media_df["Secondi"].mean()
-        media = media.__round__(2)
+        media = round(number=media, ndigits=2)
         media_in_minuti = conversione_secondi(media)
         media_in_minuti_formattata = (media_in_minuti[0], str(media_in_minuti[1]))
         media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
         print("La tua media attuale è di", media_in_minuti_formattata)
         if tempo_impiegato < media:
-            print(f"Ci hai impiegato {(media-tempo_impiegato).__round__(2)} secondi in meno del solito")
+            print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno del solito")
         elif tempo_impiegato > media:
-            print(f"Ci hai impiegato {(tempo_impiegato-media).__round__(2)} secondi in piu del solito")
+            print(f"Ci hai impiegato {round(number=tempo_impiegato-media, ndigits=2)} secondi in piu del solito")
         else:
             print("Ci hai impiegato come al solito")
 
@@ -146,7 +146,7 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
     """
     if record != 0:
         if tempo_impiegato > record:
-            print("Ci hai impiegato", (tempo_impiegato-record).__round__(2), "secondi in più rispetto al record")
+            print("Ci hai impiegato", round(number=tempo_impiegato-record, ndigits=2), "secondi in più rispetto al record")
         elif tempo_impiegato == record:
             print("Hai eguaglito il tuo record")
         else:
@@ -211,7 +211,6 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Mese")
-    plt.yticks(ticks=[0,10,20,30,40,50,60,70,80,90,100])
     plt.xticks(rotation=0)
     plt.show()
 
@@ -244,7 +243,7 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
     """
     plt.figure(figsize=(4,4))
     plt.bar(x=["Record", "Media", "Tempo massimo"],
-            height=[ricerca_record("3x3x3"),
+            height=[ricerca_record(cubo="3x3x3"),
                     df_cubo["Secondi"].mean().round(2),
                     df_cubo["Secondi"].max().round(2)],
             color=["green", "blue", "red"])
@@ -287,6 +286,7 @@ def grafico_tutti_record(df: pandas.DataFrame) -> None:
     plt.xticks(rotation=0)
     plt.show()
 
+
 def mostra_record(df: pandas.DataFrame) -> None:
     """Mostra i record per tutti i tipi di cubo.
     
@@ -297,7 +297,6 @@ def mostra_record(df: pandas.DataFrame) -> None:
         None
     """
     print(df.groupby(by="Cubo").min().sort_values(by="Secondi").drop(columns=["Data", "Secondi"]))
-    
 
 
 def calcola_media_risoluzioni(df: pandas.DataFrame) -> None:
@@ -345,6 +344,7 @@ def calcola_num_risoluzioni(df: pandas.DataFrame) -> None:
     """
     print(df["Cubo"].value_counts())
 
+
 def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
     """Crea un grafico con il numero di risoluzioni per tutti i tipi di cubo.
     
@@ -360,3 +360,55 @@ def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
     plt.xlabel("Cubi")
     plt.xticks(rotation=0)
     plt.show()
+
+
+def grafico_risoluzioni_recenti(df: pandas.DataFrame) -> None:
+    """Crea un grafico con le ultime 10 risoluzioni.
+    
+    Parametri:
+        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        None
+    """
+    plt.figure()
+    plt.title("Tempi di risoluzione recenti")
+    plt.scatter(df.tail(10)["Data completa"], df.tail(10)["Secondi"])
+    plt.xticks(rotation=65)
+    plt.ylabel("Secondi")
+    plt.xlabel("Data")
+    plt.show()
+
+
+def caricamento_dati(cubo: str) -> pandas.DataFrame:
+    """
+    Carica i dati dal database.
+
+    Parametri:
+        cubo (str): Tipo di cubo
+    
+        Returns:
+        df (pandas.DataFrame)
+    """
+    df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
+    df = df[df["Cubo"] == cubo]
+    # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
+    df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    df = aggiunta_colonne_data(df)
+    return df
+
+
+def stampa_record(cubo:str) -> None:
+    """Stampa il record del cubo specificato
+    
+    Parametri:
+        cubo (str): Tipo di cubo
+    
+    Returns:
+        None
+    """
+    minuti, secondi = conversione_secondi((ricerca_record(cubo)))
+    if minuti > 0:
+        print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
+    else:
+        print(f"Il record attuale è di {secondi} secondi")
