@@ -172,14 +172,14 @@ def media_ultime_5(cubo:str) -> None:
         print(f"Media delle ultime 5 risoluzioni di questo cubo: {media_in_minuti[0]} minuti e { media_in_minuti[1]} secondi")
 
 
-def aggiunta_colonne_data(df:pandas.DataFrame) -> pandas.DataFrame:
+def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
     """Aggiunge colonne anno mese e giorno e riordina le colonne"""
-    df = df.assign(Anno=df["Data"].dt.year)
-    df = df.assign(Mese=df["Data"].dt.month)
-    df = df.assign(Giorno=df["Data"].dt.day)
-    df = df[["Data", "Anno", "Mese", "Giorno", "Secondi", "Tempo", "Cubo"]] # Riordinamento colonne
-    df = df.rename(columns={"Data":"Data completa"}) # Cambio nome colonna Data
-    df["Mese"] = df["Mese"].replace({1:"Gen",
+    df_cubo = df_cubo.assign(Anno=df_cubo["Data"].dt.year)
+    df_cubo = df_cubo.assign(Mese=df_cubo["Data"].dt.month)
+    df_cubo = df_cubo.assign(Giorno=df_cubo["Data"].dt.day)
+    df_cubo = df_cubo[["Data", "Anno", "Mese", "Giorno", "Secondi", "Tempo", "Cubo"]] # Riordinamento colonne
+    df_cubo = df_cubo.rename(columns={"Data":"Data completa"}) # Cambio nome colonna Data
+    df_cubo["Mese"] = df_cubo["Mese"].replace({1:"Gen",
                                     2:"Feb",
                                     3:"Mar",
                                     4:"Apr",
@@ -192,7 +192,7 @@ def aggiunta_colonne_data(df:pandas.DataFrame) -> pandas.DataFrame:
                                     11:"Nov",
                                     12:"Dic"
                                     })
-    return df
+    return df_cubo
 
 # Funzioni per i notebook
 
@@ -230,6 +230,28 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
     plt.xlabel(xlabel="Anno")
     plt.xticks(rotation=0)
     plt.show()
+
+
+def stampa_record_media_massimo(df_cubo: pandas.DataFrame, cubo:int) -> None:
+    """Stampa il tempo massimo, medio e minimo
+    
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        cubo (str): Tipo di cubo
+        
+    Returns:
+        None
+    """
+    record = ricerca_record(cubo)
+    record_min, record_sec = conversione_secondi(record)
+    media = df_cubo["Secondi"].mean().round(2)
+    media_min, media_sec = conversione_secondi(media)
+    tempo_massimo = df_cubo["Secondi"].max().round(2)
+    tempo_massimo_min, tempo_massimo_sec = conversione_secondi(tempo_massimo)
+    
+    print(f"Tempo record {record_min}:{record_sec}\n",
+        f"Tempo medio {media_min}:{media_sec}\n",
+        f"Tempo massimo {tempo_massimo_min}:{tempo_massimo_sec}")
 
 
 def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
@@ -270,16 +292,16 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
     plt.show()
 
 
-def grafico_tutti_record(df: pandas.DataFrame) -> None:
+def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
     """Crea un grafico con i record per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    df.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi").plot.bar()
+    df_cubo.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi").plot.bar()
     plt.title("Soluzioni piu veloci per tipo di cubo")
     plt.ylabel("Secondi")
     plt.xlabel("Cubi")
@@ -287,28 +309,28 @@ def grafico_tutti_record(df: pandas.DataFrame) -> None:
     plt.show()
 
 
-def mostra_record(df: pandas.DataFrame) -> None:
+def mostra_record(df_cubo: pandas.DataFrame) -> None:
     """Mostra i record per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    print(df.groupby(by="Cubo").min().sort_values(by="Secondi").drop(columns=["Data", "Secondi"]))
+    print(df_cubo.groupby(by="Cubo").min().sort_values(by="Secondi").drop(columns=["Data", "Secondi"]))
 
 
-def calcola_media_risoluzioni(df: pandas.DataFrame) -> None:
+def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     """Calcola la media dei tempi di risoluzione per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    medie_df = df.groupby(by="Cubo")["Secondi"].mean().round(2)
+    medie_df = df_cubo.groupby(by="Cubo")["Secondi"].mean().round(2)
     print("Media in secondi\n\n",medie_df,"\n")
     print("Media in minuti e secondi\n")
     print("Cubo     Minuti e secondi")
@@ -316,16 +338,16 @@ def calcola_media_risoluzioni(df: pandas.DataFrame) -> None:
         print(i, "\t", conversione_secondi(s))
 
 
-def grafico_media_risoluzioni(df: pandas.DataFrame) -> None:
+def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     """Crea un grafico con i tempi medi di risoluzione per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    df.groupby(by="Cubo")["Secondi"].mean().sort_values().plot.bar()
+    df_cubo.groupby(by="Cubo")["Secondi"].mean().sort_values().plot.bar()
     plt.title("Medie delle soluzioni per tipo di cubo")
     plt.ylabel("Secondi")
     plt.xlabel("Cubi")
@@ -333,28 +355,28 @@ def grafico_media_risoluzioni(df: pandas.DataFrame) -> None:
     plt.show()
 
 
-def calcola_num_risoluzioni(df: pandas.DataFrame) -> None:
+def calcola_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     """Calcola il numero di risoluzioni per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    print(df["Cubo"].value_counts())
+    print(df_cubo["Cubo"].value_counts())
 
 
-def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
+def grafico_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     """Crea un grafico con il numero di risoluzioni per tutti i tipi di cubo.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
-    df["Cubo"].value_counts().plot.bar()
+    df_cubo["Cubo"].value_counts().plot.bar()
     plt.title("Numero di risoluzioni dei diversi cubi")
     plt.ylabel("Num di risoluzioni")
     plt.xlabel("Cubi")
@@ -362,18 +384,18 @@ def grafico_num_risoluzioni(df: pandas.DataFrame) -> None:
     plt.show()
 
 
-def grafico_risoluzioni_recenti(df: pandas.DataFrame) -> None:
+def grafico_risoluzioni_recenti(df_cubo: pandas.DataFrame) -> None:
     """Crea un grafico con le ultime 10 risoluzioni.
     
     Parametri:
-        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
         None
     """
     plt.figure()
     plt.title("Tempi di risoluzione recenti")
-    plt.scatter(df.tail(10)["Data completa"], df.tail(10)["Secondi"])
+    plt.scatter(df_cubo.tail(10)["Data completa"], df_cubo.tail(10)["Secondi"])
     plt.xticks(rotation=65)
     plt.ylabel("Secondi")
     plt.xlabel("Data")
