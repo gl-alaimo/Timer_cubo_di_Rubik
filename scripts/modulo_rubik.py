@@ -52,8 +52,20 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     if tempo_impiegato < mio_record:
         record_min, record_sec = conversione_secondi(mio_record)
         minuti_attuali, secondi_attuali = conversione_secondi(tempo_impiegato)
-        print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n"
-              f"Record precedente {record_min} minuti e {record_sec} secondi")
+
+        if record_min-minuti_attuali == 0:
+            print(f"Hai battuto il tuo record di {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+        elif record_min-minuti_attuali == 1:
+            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+        else:
+            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+
+        if record_min == 0:
+            print(f"Record precedente: {record_sec} secondi")
+        elif record_min == 1:
+            print(f"Record precedente: {record_min} minuto e {record_sec} secondi")
+        else:
+            print(f"Record precedente: {record_min} minuti e {record_sec} secondi")
 
 
 def calcolo_tempo(cubo:str) -> tuple:
@@ -87,7 +99,9 @@ def calcolo_tempo(cubo:str) -> tuple:
     tempo_impiegato = round(number=ora_finale - ora_iniziale, ndigits=2) + tempo_parziale
     print("Fine!\n")
     min, sec = conversione_secondi(tempo_impiegato)
-    if min == 1:
+    if min == 0:
+        print(f"Tempo impiegato: {sec} secondi")
+    elif min == 1:
         print(f"Tempo impiegato: {min} minuto e {sec} secondi")
     else:
         print(f"Tempo impiegato: {min} minuti e {sec} secondi")
@@ -109,7 +123,7 @@ def salvataggio_dati(tempo:int, cubo:str) -> None:
 
 
 def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
-    """Calcola la diffeerenza del tempo medio di risoluzione e il tempo di risoluzione attuale
+    """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale
 
         Parametri:
             cubo (str): Tipo di cubo
@@ -124,7 +138,12 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
         media = round(number=media, ndigits=2)
         media_in_minuti = conversione_secondi(media)
         media_in_minuti_formattata = (media_in_minuti[0], str(media_in_minuti[1]))
-        media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
+        if media_in_minuti_formattata[0] == 0:
+            media_in_minuti_formattata = f"{media_in_minuti[1]} secondi"
+        elif media_in_minuti_formattata[0] == 1:
+            media_in_minuti_formattata = f"{media_in_minuti[0]} minuto e {media_in_minuti[1]} secondi"
+        else:
+            media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
         print("La tua media attuale è di", media_in_minuti_formattata)
         if tempo_impiegato < media:
@@ -168,8 +187,13 @@ def media_ultime_5(cubo:str) -> None:
         for tempo in ultime_5:
             tempi_totali = tempi_totali + tempo
         media_soluzioni = tempi_totali / 5
-        media_in_minuti = conversione_secondi(media_soluzioni)
-        print(f"Media delle ultime 5 risoluzioni di questo cubo: {media_in_minuti[0]} minuti e { media_in_minuti[1]} secondi")
+        minuti, secondi = conversione_secondi(media_soluzioni)
+        if minuti == 0:
+            print(f"Media delle ultime 5 risoluzioni di questo cubo: {secondi} secondi")
+        elif minuti == 1:
+            print(f"Media delle ultime 5 risoluzioni di questo cubo: {minuti} minuto e {secondi} secondi")
+        else:
+            print(f"Media delle ultime 5 risoluzioni di questo cubo: {minuti} minuti e {secondi} secondi")
 
 
 def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
@@ -334,8 +358,9 @@ def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     print("Media in secondi\n\n",medie_df,"\n")
     print("Media in minuti e secondi\n")
     print("Cubo     Minuti e secondi")
-    for i, s in medie_df.items():
-        print(i, "\t", conversione_secondi(s))
+    for key, value in medie_df.items():
+        value = conversione_secondi(value)
+        print(key, "\t", f"{value[0]}:{value[1]}")
 
 
 def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
@@ -416,7 +441,23 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     df = df[df["Cubo"] == cubo]
     # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
     df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     df = aggiunta_colonne_data(df)
+    return df
+
+
+def caricamento_dati_notebook_generale() -> pandas.DataFrame:
+    """
+    Carica i dati di tutti i tipi di cubi dal database.
+
+        Returns:
+        df (pandas.DataFrame)
+    """
+    df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
+    # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
+    df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    # Formattazione del tempo in min:sec,millisec
+    df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     return df
 
 
