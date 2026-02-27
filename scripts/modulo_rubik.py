@@ -446,6 +446,21 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     return df
 
 
+def caricamento_dati_notebook_generale() -> pandas.DataFrame:
+    """
+    Carica i dati di tutti i tipi di cubi dal database.
+
+        Returns:
+        df (pandas.DataFrame)
+    """
+    df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
+    # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
+    df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    # Formattazione del tempo in min:sec,millisec
+    df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+    return df
+
+
 def stampa_record(cubo:str) -> None:
     """Stampa il record del cubo specificato
     
