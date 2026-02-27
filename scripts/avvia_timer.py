@@ -23,8 +23,13 @@ def funzione_principale():
 
     record_personale = modulo_rubik.ricerca_record(cubo)
     if record_personale != 0:
-        tempo_record = modulo_rubik.conversione_secondi(record_personale)
-        print(f"Record da battere: {tempo_record[0]} minuti e {tempo_record[1]} secondi")
+        minuti, secondi = modulo_rubik.conversione_secondi(record_personale)
+        if minuti == 0:
+            print(f"Record da battere: {secondi} secondi")
+        elif minuti == 1:
+            print(f"Record da battere: {minuti} minuto e {secondi} secondi")
+        else:
+            print(f"Record da battere: {minuti} minuti e {secondi} secondi")
     else:
         print("Nessun record impostato al momento.")
 
