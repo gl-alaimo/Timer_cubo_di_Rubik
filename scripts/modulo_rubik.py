@@ -334,8 +334,9 @@ def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     print("Media in secondi\n\n",medie_df,"\n")
     print("Media in minuti e secondi\n")
     print("Cubo     Minuti e secondi")
-    for i, s in medie_df.items():
-        print(i, "\t", conversione_secondi(s))
+    for key, value in medie_df.items():
+        value = conversione_secondi(value)
+        print(key, "\t", f"{value[0]}:{value[1]}")
 
 
 def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
@@ -416,6 +417,7 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     df = df[df["Cubo"] == cubo]
     # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
     df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+    df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     df = aggiunta_colonne_data(df)
     return df
 
