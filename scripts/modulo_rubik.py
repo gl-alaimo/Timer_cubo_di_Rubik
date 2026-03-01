@@ -475,3 +475,30 @@ def stampa_record(cubo:str) -> None:
         print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
     else:
         print(f"Il record attuale è di {secondi} secondi")
+
+
+def medie_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Series:
+    """Stampa i tempi medi di risoluzione mensili del cubo e dell'anno specificato
+    
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        anno (int): anno
+    
+    Returns:
+        None
+    """
+    print(df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2))
+
+
+def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Series:
+    """Numero di risoluzioni mensili dell'anno specificato
+
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        anno (int): anno
+    
+    Returns:
+        None
+    """
+    print(df_cubo[df_cubo["Anno"]==anno]["Mese"].value_counts())
+
