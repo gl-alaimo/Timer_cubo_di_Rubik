@@ -512,5 +512,5 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
     Returns:
         None
     """
-    df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2)
+    print(df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2))
 
