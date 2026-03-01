@@ -502,3 +502,15 @@ def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Ser
     """
     print(df_cubo[df_cubo["Anno"]==anno]["Mese"].value_counts())
 
+
+def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
+    """Stampa i tempi medi di risoluzione annuali
+    
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+    
+    Returns:
+        None
+    """
+    print(df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2))
+
