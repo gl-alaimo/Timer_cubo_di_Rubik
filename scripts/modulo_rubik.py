@@ -362,13 +362,10 @@ def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    medie_df = df_cubo.groupby(by="Cubo")["Secondi"].mean().round(2)
-    print("Media in secondi\n\n",medie_df,"\n")
-    print("Media in minuti e secondi\n")
-    print("Cubo     Minuti e secondi")
-    for key, value in medie_df.items():
-        value = conversione_secondi(value)
-        print(key, "\t", f"{value[0]}:{value[1]}")
+    medie_df = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").min()
+    medie_df.insert(loc=1, column="Tempo", value=medie_df["Secondi"].apply(conversione_secondi))
+    medie_df['Tempo'] = medie_df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+    print(medie_df)
 
 
 def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
@@ -380,7 +377,7 @@ def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    df_cubo.groupby(by="Cubo")["Secondi"].mean().sort_values().plot.bar()
+    df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").min().sort_values(by="Secondi").plot.bar()
     plt.title("Medie delle soluzioni per tipo di cubo")
     plt.ylabel("Secondi")
     plt.xlabel("Cubi")
