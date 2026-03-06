@@ -338,7 +338,7 @@ def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
     plt.show()
 
 
-def mostra_record(df_cubo: pandas.DataFrame) -> None:
+def mostra_tutti_record(df_cubo: pandas.DataFrame) -> None:
     """Mostra i record per tutti i tipi di cubo.
     
     Parametri:
@@ -347,7 +347,10 @@ def mostra_record(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    print(df_cubo.groupby(by="Cubo").min().sort_values(by="Secondi").drop(columns=["Data", "Secondi"]))
+    df_records = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").min()
+    df_records.insert(loc=1, column="Tempo", value=df_records["Secondi"].apply(conversione_secondi))
+    df_records['Tempo'] = df_records['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+    print(df_records)
 
 
 def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
