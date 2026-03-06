@@ -10,10 +10,10 @@ from matplotlib import pyplot as plt
 
 def conversione_secondi(secondi: int) -> tuple:
     """Converte i secondi in minuti e secondi
-
-        Parametri:
+    
+    Parametri:
             secondi (int): Numero di secondi da convertire
-        Returns:
+    Returns:
             minuti, sec (tuple): Restituisce una tuple composta da minuti e secondi
     """
     minuti, sec = divmod(secondi, 60)
@@ -25,9 +25,9 @@ def conversione_secondi(secondi: int) -> tuple:
 def ricerca_record(cubo:str) -> int:
     """Ricerca il record attuale nel database
 
-        Parametri:
+    Parametri:
             cubo (str): Tipo di cubo
-        Returns:
+    Returns:
             tempo_record (int): Restituisce il tempo record
     """
     df = pandas.read_csv("../database.csv", sep="\t")
@@ -42,10 +42,10 @@ def ricerca_record(cubo:str) -> int:
 def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     """Controlla se il record è stato battuto.
 
-        Parametri:
+    Parametri:
             tempo_impiegato (int): Tempo impiegato in secondi
             cubo (str): Tipo di cubo
-        Returns:
+    Returns:
             Stampa informazioni sul record
     """
     mio_record = ricerca_record(cubo)
@@ -56,9 +56,11 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
         if record_min-minuti_attuali == 0:
             print(f"Hai battuto il tuo record di {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
         elif record_min-minuti_attuali == 1:
-            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
+                  f"minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
         else:
-            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
+                  f"minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
 
         if record_min == 0:
             print(f"Record precedente: {record_sec} secondi")
@@ -73,8 +75,9 @@ def calcolo_tempo(cubo:str) -> tuple:
 
     Parametri:
             cubo (str): Tipo di cubo
-        Returns:
-            tempo_impiegato, cubo (tuple): Stampa informazioni e restiruisce una tuple con il tempo impiegato e il tipo di cubo
+    Returns:
+            tempo_impiegato, cubo (tuple): Stampa informazioni e restiruisce una tuple
+            con il tempo impiegato e il tipo di cubo
     """
     input("Premi invio per iniziare ")
     finito = False
@@ -111,10 +114,10 @@ def calcolo_tempo(cubo:str) -> tuple:
 def salvataggio_dati(tempo:int, cubo:str) -> None:
     """Salva il tempo di risoluzione nel database
 
-        Parametri:
+    Parametri:
             tempo (int): Tempo impiegato
             cubo (str): Tipo di cubo
-        Returns:
+    Returns:
             Salva i dati in un file csv
     """
     data = datetime.now().date()
@@ -125,10 +128,10 @@ def salvataggio_dati(tempo:int, cubo:str) -> None:
 def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
     """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale
 
-        Parametri:
+    Parametri:
             cubo (str): Tipo di cubo
             tempo_impiegato (int): Tempo impiegato
-        Returns:
+    Returns:
             Stampa informazioni sul terminale
     """
     df = pandas.read_csv("../database.csv", sep="\t")
@@ -156,11 +159,11 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
 
 def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
     """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale
-
-        Parametri:
+    
+    Parametri:
             record (int): Record attuale
             tempo_impiegato (int): Tempo impiegato
-        Returns:
+    Returns:
             Stampa informazioni sul terminale
     """
     if record != 0:
@@ -175,9 +178,9 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
 def media_ultime_5(cubo:str) -> None:
     """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo
     
-        Parametri:
+    Parametri:
             cubo (str): Tipo di cubo
-        Returns:
+    Returns:
             Stampa informazioni sul terminale
     """
     df = pandas.read_csv("../database.csv", sep="\t")
@@ -434,7 +437,7 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     Parametri:
         cubo (str): Tipo di cubo
     
-        Returns:
+    Returns:
         df (pandas.DataFrame)
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
@@ -450,7 +453,7 @@ def caricamento_dati_notebook_generale() -> pandas.DataFrame:
     """
     Carica i dati di tutti i tipi di cubi dal database.
 
-        Returns:
+    Returns:
         df (pandas.DataFrame)
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
