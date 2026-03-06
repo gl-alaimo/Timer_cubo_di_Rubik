@@ -90,7 +90,9 @@ def calcolo_tempo(cubo:str) -> tuple:
             ora_finale = time()
             tempo_parziale = round(number=tempo_parziale + ora_finale - ora_iniziale, ndigits=2)
             min, sec = conversione_secondi(tempo_parziale)
-            if min == 1:
+            if min == 0:
+                print(f"In pausa... Tempo impiegato fino ad ora: {sec} secondi")
+            elif min == 1:
                 print(f"In pausa... Tempo impiegato fino ad ora: {min} minuto e {sec} secondi")
             else:
                 print(f"In pausa... Tempo impiegato fino ad ora: {min} minuti e {sec} secondi")
@@ -474,10 +476,12 @@ def stampa_record(cubo:str) -> None:
         None
     """
     minuti, secondi = conversione_secondi((ricerca_record(cubo)))
-    if minuti > 0:
-        print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
-    else:
+    if minuti == 0:
         print(f"Il record attuale è di {secondi} secondi")
+    elif minuti == 1 :
+        print(f"Il record attuale è di {minuti} minuto e {secondi} secondi")
+    else:
+        print(f"Il record attuale è di {minuti} minuti e {secondi} secondi")
 
 
 def medie_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Series:
