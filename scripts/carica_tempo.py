@@ -7,17 +7,17 @@ from modulo_rubik import controllo_nuovo_record
 
 
 print("Inserisci i seguenti dati:")
-data_risoluzione = input("Data (ANNO-MESE-GIORNO) oppure 'oggi': ")
+data_risoluzione = input("Data (con formato ANNO-MESE-GIORNO) ad esempio '2026-03-20' oppure 'oggi': ")
 if data_risoluzione == "oggi":
     data_risoluzione = datetime.now().strftime("%Y-%m-%d")
 
-cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, Megaminx): ").lower()
+cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, Megaminx): ").title()
 aggiungere_altra_soluzione = "si"
 
 while aggiungere_altra_soluzione == "si":
     minuti = int(input("Minuti: "))
     secondi = int(input("Secondi: "))
-    millesimi = float(input("Millesimi di secondo (per esempio 0.43): "))
+    millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
     tempo_impiegato = (minuti * 60) + secondi + millesimi
 
     controllo_nuovo_record(tempo_impiegato, cubo)

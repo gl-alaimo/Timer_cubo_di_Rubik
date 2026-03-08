@@ -202,7 +202,13 @@ def media_ultime_5(cubo:str) -> None:
 
 
 def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
-    """Aggiunge colonne anno mese e giorno e riordina le colonne"""
+    """Aggiunge colonne 'Anno' 'Mese' e 'Giorno" al DataFrame e riordina le colonne.
+
+    Parametri:
+            df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+    Returns:
+            df_cubo (pandas.DataFrame): DataFrame aggiornato
+    """
     df_cubo = df_cubo.assign(Anno=df_cubo["Data"].dt.year)
     df_cubo = df_cubo.assign(Mese=df_cubo["Data"].dt.month)
     df_cubo = df_cubo.assign(Giorno=df_cubo["Data"].dt.day)
@@ -520,4 +526,3 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
         None
     """
     print(df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2))
-
