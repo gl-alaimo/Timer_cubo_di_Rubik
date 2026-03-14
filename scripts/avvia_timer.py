@@ -1,25 +1,57 @@
-"""Script che misura il tempo di risoluzione e fornisce varie statistiche"""
+"""Script che calcola il tempo di risoluzione e fornisce varie statistiche"""
 
-from random import choice
+from random import choice, shuffle
 from pyfiglet import Figlet
 import modulo_rubik
+
+lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror", "kilominx", "pyraminx", "megaminx"]
+movimenti_cubi_piccoli = [["U", "U'", "U2"], ["D", "D'", "D2"],
+                          ["L", "L'", "L2"], ["R", "R'", "R2"],
+                          ["B", "B'", "B2"], ["F", "F'", "F2"]]
+movimenti_cubi_grandi = [["U", "U'", "u", "u'", "U2", "u2", "Uu2"],
+                         ["D", "D'", "d", "d'", "D2", "d2", "Dd2"],
+                         ["L", "L'", "l", "l'", "L2", "l2", "Ll2"],
+                         ["R", "R'", "r", "r'", "R2", "r2", "Rr2"],
+                         ["B", "B'", "b", "b'", "B2", "b2", "Bb2"],
+                         ["F", "F'", "f", "f'", "F2", "f2", "Ff2"],
+                         ["M", "M'", "m", "m'", "M2", "m2", "Mm2"],
+                         ["S", "S'", "s", "s'", "S2", "s2", "Ss2"],
+                         ["E", "E'", "e", "e'", "E2", "e2", "Ee2"]]
+
+def genera_mosse_casuali(lista:list):
+    """Genera una lista di mosse casuali da fare per mischiare il cubo prima di risolverlo"""
+    lista_movimenti_casuali_a = []
+    lista_movimenti_casuali_b = []
+    lista_movimenti_casuali_c = []
+
+    for mossa in lista:
+        lista_movimenti_casuali_a.append(choice(mossa))
+        lista_movimenti_casuali_b.append(choice(mossa))
+        lista_movimenti_casuali_c.append(choice(mossa))
+
+    shuffle(lista_movimenti_casuali_a)
+    shuffle(lista_movimenti_casuali_b)
+    shuffle(lista_movimenti_casuali_c)
+
+    if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0]):
+        lista_movimenti_casuali_a.pop()
+    if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
+        lista_movimenti_casuali_b.pop()
+
+    lista_movimenti_casuali = lista_movimenti_casuali_a + lista_movimenti_casuali_b + lista_movimenti_casuali_c
+    print("Movimenti casuali suggeriti per mischiare il cubo:\n", *lista_movimenti_casuali)
 
 
 def funzione_principale():
     """Funzione principale"""
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
     print(titolo.renderText("Timer cubo di Rubik"))
+    cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
 
-    moviementi_cubi_piccoli = ['U', 'D', 'R', 'L', 'F', 'B', 'U1°', 'D1°', 'R1°', 'L1°', 'F1°', 'B1°', 'U2', 'D2', 'R2', 'L2', 'F2', 'B2']
-    moviementi_cubi_grandi = ["u", "d", "r", "l", "f", "b", "u1°", "d1°", "r1°", "l1°", "f1°", "b1°", "u2", "d2", "r2", "l2", "f2", "b2", "Uu2", "Dd2", "Rr2", "Ll2", "Ff2", "Bb2", "U2", "D2", "R2", "L2", "F2", "B2", "U1°", "D1°", "R1°", "L1°", "F1°", "B1°"]
-
-    cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, Megaminx): ").lower()
-    if cubo == "4x4x4" or cubo == "5x5x5":
-        mescolamento_random_4x4x4_5x5x5 = [choice(moviementi_cubi_grandi) for i in range(20)]
-        print("Movimenti casuali suggeriti per mischiare il cubo:\n",mescolamento_random_4x4x4_5x5x5)
+    if cubo in lista_tipi_cubo_piccoli:
+        genera_mosse_casuali(lista=movimenti_cubi_piccoli)
     else:
-        mescolamento_random_2x2x2_3x3x3 = [choice(moviementi_cubi_piccoli) for i in range(20)]
-        print("Movimenti casuali suggeriti per mischiare il cubo:\n",mescolamento_random_2x2x2_3x3x3)
+        genera_mosse_casuali(lista=movimenti_cubi_grandi)
 
     record_personale = modulo_rubik.ricerca_record(cubo)
     if record_personale != 0:
