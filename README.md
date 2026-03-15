@@ -40,8 +40,14 @@ Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href
 Giuseppe Alaimo gl.alaimo@protonmail.com
 
 ## Anteprima script avvia_timer.py
-<img src="immagini/Anteprima_script.png">
+<img src="immagini/Anteprima_script_avvia_timer.png">
+
+## Anteprima script carica_tempo.py
+<img src="immagini/Anteprima_script_carica_tempo.png">
 
 ## Anteprima notebook_cubo_3x3x3.ipynb
 <img src="immagini/Anteprima_notebook_1.png">
 <img src="immagini/Anteprima_notebook_2.png">
+
+## Anteprima notebook_generale.ipynb
+<img src="immagini/Anteprima_notebook_3.png">
