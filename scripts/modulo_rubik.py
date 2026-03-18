@@ -241,12 +241,14 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     Returns:
         None
     """
-    df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"],
-                                           sort=False)["Secondi"].mean().plot(kind="bar", figsize=(11,5))
+    dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
     plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Mese")
     plt.xticks(rotation=0)
+    for la_barra in grafico.containers:
+        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
     plt.show()
 
 
@@ -259,11 +261,14 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    df_cubo.groupby(by=["Anno"])["Secondi"].mean().plot(kind="bar", figsize=(11,5))
+    dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].mean()
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
     plt.title(label="Tempo medio annuale risoluzioni cubo")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Anno")
     plt.xticks(rotation=0)
+    for la_barra in grafico.containers:
+        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
     plt.show()
 
 
@@ -283,7 +288,6 @@ def stampa_record_media_massimo(df_cubo: pandas.DataFrame, cubo:int) -> None:
     media_min, media_sec = conversione_secondi(media)
     tempo_massimo = df_cubo["Secondi"].max().round(2)
     tempo_massimo_min, tempo_massimo_sec = conversione_secondi(tempo_massimo)
-    
     print(f"Tempo record {record_min}:{record_sec}\n",
         f"Tempo medio {media_min}:{media_sec}\n",
         f"Tempo massimo {tempo_massimo_min}:{tempo_massimo_sec}")
@@ -319,11 +323,14 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
     Returns:
         None
     """
-    df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index().plot(kind="bar", figsize=(11,5))
+    dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
     plt.title(f"Numero risoluzioni del {anno} in base al mese")
     plt.ylabel("Num risoluzioni")
     plt.xlabel("Mese")
     plt.xticks(rotation=0)
+    for la_barra in grafico.containers:
+        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values, label_type='center')
     plt.show()
 
 
@@ -336,12 +343,14 @@ def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    df_cubo.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi").plot.bar(figsize=(11,5))
-    #plt.figure(figsize=(15,10))
+    dati_per_grafico = df_cubo.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi")
+    grafico = dati_per_grafico.plot.bar(figsize=(11,5))
     plt.title("Soluzioni piu veloci per tipo di cubo")
     plt.ylabel("Secondi")
     plt.xlabel("Cubi")
     plt.xticks(rotation=0)
+    for barra in grafico.containers:
+        grafico.bar_label(container=barra, labels=dati_per_grafico.values[0], label_type="edge")
     plt.show()
 
 
@@ -384,11 +393,14 @@ def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().sort_values(by="Secondi").plot.bar(figsize=(11,5))
+    dati_per_grafico = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().sort_values(by="Secondi")
+    grafico = dati_per_grafico.plot.bar(figsize=(11,5))
     plt.title("Medie delle soluzioni per tipo di cubo")
     plt.ylabel("Secondi")
     plt.xlabel("Cubi")
     plt.xticks(rotation=0)
+    for barra in grafico.containers:
+        grafico.bar_label(container=barra, labels=dati_per_grafico.values[0].round(2), label_type="edge")
     plt.show()
 
 
@@ -413,11 +425,14 @@ def grafico_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    df_cubo["Cubo"].value_counts().plot.bar(figsize=(11,5))
+    dati_per_grafico = df_cubo["Cubo"].value_counts()
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
     plt.title("Numero di risoluzioni dei diversi cubi")
     plt.ylabel("Num di risoluzioni")
     plt.xlabel("Cubi")
     plt.xticks(rotation=0)
+    for barra in grafico.containers:
+        grafico.bar_label(container=barra,labels=dati_per_grafico.values, label_type="center")
     plt.show()
 
 
@@ -459,8 +474,7 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
 
 
 def caricamento_dati_notebook_generale() -> pandas.DataFrame:
-    """
-    Carica i dati di tutti i tipi di cubi dal database.
+    """Carica i dati di tutti i tipi di cubi dal database.
 
     Returns:
         df (pandas.DataFrame)
