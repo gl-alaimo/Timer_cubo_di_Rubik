@@ -393,7 +393,7 @@ def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    dati_per_grafico = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().sort_values(by="Secondi")
+    dati_per_grafico = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().round(2).sort_values(by="Secondi")
     grafico = dati_per_grafico.plot.bar(figsize=(11,5))
     plt.title("Medie delle soluzioni per tipo di cubo")
     plt.ylabel("Secondi")
