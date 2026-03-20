@@ -445,10 +445,11 @@ def grafico_risoluzioni_recenti(df_cubo: pandas.DataFrame) -> None:
     Returns:
         None
     """
-    plt.figure(figsize=(11,5))
+    plt.figure(figsize=(13,5))
     plt.title("Tempi di risoluzione recenti")
     plt.scatter(df_cubo.tail(10)["Data completa"], df_cubo.tail(10)["Secondi"])
-    plt.xticks(rotation=65)
+    plt.grid(axis="y")
+    plt.xticks(rotation=0)
     plt.ylabel("Secondi")
     plt.xlabel("Data")
     plt.show()
