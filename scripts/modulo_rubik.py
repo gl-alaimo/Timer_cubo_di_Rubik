@@ -214,18 +214,18 @@ def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
     df_cubo = df_cubo.assign(Giorno=df_cubo["Data"].dt.day)
     df_cubo = df_cubo[["Data", "Anno", "Mese", "Giorno", "Secondi", "Tempo", "Cubo"]] # Riordinamento colonne
     df_cubo = df_cubo.rename(columns={"Data":"Data completa"}) # Cambio nome colonna Data
-    df_cubo["Mese"] = df_cubo["Mese"].replace({1:"Gen",
-                                    2:"Feb",
-                                    3:"Mar",
-                                    4:"Apr",
-                                    5:"Mag",
-                                    6:"Giu",
-                                    7:"Lug",
-                                    8:"Ago",
-                                    9:"Set",
-                                    10:"Ott",
-                                    11:"Nov",
-                                    12:"Dic"
+    df_cubo["Mese"] = df_cubo["Mese"].replace({1:"Gennaio",
+                                    2:"Febbraio",
+                                    3:"Marzo",
+                                    4:"Aprile",
+                                    5:"Maggio",
+                                    6:"Giugno",
+                                    7:"Luglio",
+                                    8:"Agosto",
+                                    9:"Settembre",
+                                    10:"Ottobre",
+                                    11:"Novembre",
+                                    12:"Dicembre"
                                     })
     return df_cubo
 
@@ -243,7 +243,7 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(label=f"Tempo medio mensile risoluzioni cubo nel {anno}")
+    plt.title(label=f"Tempo medio mensile delle risoluzioni nel {anno}")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Mese")
     plt.xticks(rotation=0)
@@ -263,7 +263,7 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
     """
     dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].mean()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(label="Tempo medio annuale risoluzioni cubo")
+    plt.title(label="Tempo medio annuale delle risoluzioni")
     plt.ylabel(ylabel="Secondi")
     plt.xlabel(xlabel="Anno")
     plt.xticks(rotation=0)
@@ -303,12 +303,13 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
         None
     """
     plt.figure(figsize=(11,5))
-    plt.bar(x=["Record", "Media", "Tempo massimo"],
+    plt.bar(x=["Tempo minimo", "Tempo medio", "Tempo massimo"],
             height=[ricerca_record(cubo=df_cubo["Cubo"].iloc[0]),
                     df_cubo["Secondi"].mean().round(2),
                     df_cubo["Secondi"].max().round(2)],
-            color=["green", "blue", "red"])
-    plt.title("Record media e tempo massimo")
+            color=["green", "blue", "red"],
+            width=0.3)
+    plt.title("Tempo minimo, medio e massimo")
     plt.ylabel("Secondi")
     plt.show()
 
@@ -325,7 +326,7 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(f"Numero risoluzioni del {anno} in base al mese")
+    plt.title(f"Numero risoluzioni mensili del {anno}")
     plt.ylabel("Num risoluzioni")
     plt.xlabel("Mese")
     plt.xticks(rotation=0)
@@ -446,7 +447,7 @@ def grafico_risoluzioni_recenti(df_cubo: pandas.DataFrame) -> None:
         None
     """
     plt.figure(figsize=(13,5))
-    plt.title("Tempi di risoluzione recenti")
+    plt.title("Tempi e data delle risoluzioni recenti")
     plt.scatter(df_cubo.tail(10)["Data completa"], df_cubo.tail(10)["Secondi"])
     plt.grid(axis="y")
     plt.xticks(rotation=0)
@@ -467,6 +468,7 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
     df = df[df["Cubo"] == cubo]
+    df = df.reset_index(drop=True)
     # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
     df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
     df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
@@ -542,3 +544,49 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
         None
     """
     print(df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2))
+
+
+def grafico_ultime_tot_risoluzioni(df_cubo: pandas.DataFrame, num_ultime_risoluzioni:int = 50) -> None:
+    """Crea un grafico con i tempi e la media delle ultime tot risoluzioni.
+
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        num_ultime_risoluzioni (int): Numero delle ultime risoluzioni. Se non specificato, il suo valore predefinito è 50.
+
+    Returns:
+        None
+    """
+    df_cubo = df_cubo.tail(num_ultime_risoluzioni)
+    media = df_cubo["Secondi"].mean().round(2)
+
+    plt.figure(figsize=(13,5))
+    plt.title(f"Tempi delle ultime {num_ultime_risoluzioni} risoluzioni")
+    plt.scatter(df_cubo.index, df_cubo["Secondi"])
+    plt.plot(df_cubo.index, df_cubo["Secondi"])
+    plt.axhline(y=media, color="purple", label="Media")
+    plt.grid(axis="y")
+    plt.xticks(rotation=0)
+    plt.ylabel("Secondi")
+    plt.xlabel("Numemo risoluzione")
+    plt.legend()
+    plt.show()
+
+    minuti, secondi = conversione_secondi(media)
+    print(f"Tempo medio: {minuti}:{secondi}")
+
+
+def classifica_migliori_soluzioni(df_cubo: pandas.DataFrame) -> None:
+    """Crea un grafico con i tempi e la media delle ultime tot risoluzioni.
+
+    Parametri:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        num_ultime_risoluzioni (int): Numero delle ultime risoluzioni. Se non specificato, il suo valore predefinito è 50.
+
+    Returns:
+        None
+    """
+    df_top_10 = df_cubo.sort_values(by="Secondi", ascending=True).head(10).reset_index(drop=True)
+    df_top_10.insert(loc=6, column="Differenza secondi", value=pandas.DataFrame.diff(df_top_10["Secondi"]))
+    df_top_10["Differenza secondi"] = df_top_10["Differenza secondi"].fillna(value=0)
+    df_top_10.drop(columns=["Cubo"], inplace=True)
+    print(df_top_10)
