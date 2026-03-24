@@ -56,8 +56,9 @@ Giuseppe Alaimo gl.alaimo@protonmail.com
 <img src="immagini/Anteprima_script_carica_tempo.png">
 
 ## Anteprima notebook_cubo_3x3x3.ipynb
-<img src="immagini/Anteprima_notebook_1.png">
-<img src="immagini/Anteprima_notebook_2.png">
+<img src="immagini/Anteprima_notebook_3x3x3_1.png">
+<img src="immagini/Anteprima_notebook_3x3x3_2.png">
+<img src="immagini/Anteprima_notebook_3x3x3_3.png">
 
 ## Anteprima notebook_generale.ipynb
-<img src="immagini/Anteprima_notebook_3.png">
+<img src="immagini/Anteprima_notebook_generale.png">
