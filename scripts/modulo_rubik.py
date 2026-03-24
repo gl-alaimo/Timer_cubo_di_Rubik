@@ -54,13 +54,13 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
         minuti_attuali, secondi_attuali = conversione_secondi(tempo_impiegato)
 
         if record_min-minuti_attuali == 0:
-            print(f"Hai battuto il tuo record di {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+            print(f"Hai battuto il tuo record di {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
         elif record_min-minuti_attuali == 1:
             print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
-                  f"minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+                  f"minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
         else:
             print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
-                  f"minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!\n")
+                  f"minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
 
         if record_min == 0:
             print(f"Record precedente: {record_sec} secondi")
@@ -150,11 +150,11 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
         else:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
-        print("La tua media attuale è di", media_in_minuti_formattata)
+        print("La tua media assoluta è di", media_in_minuti_formattata)
         if tempo_impiegato < media:
-            print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno del solito")
+            print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno rispetto alla media assoluta")
         elif tempo_impiegato > media:
-            print(f"Ci hai impiegato {round(number=tempo_impiegato-media, ndigits=2)} secondi in piu del solito")
+            print(f"Ci hai impiegato {round(number=tempo_impiegato-media, ndigits=2)} secondi in piu rispetto alla media assoluta")
         else:
             print("Ci hai impiegato come al solito")
 
@@ -172,33 +172,34 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
         if tempo_impiegato > record:
             print("Ci hai impiegato", round(number=tempo_impiegato-record, ndigits=2), "secondi in più rispetto al record")
         elif tempo_impiegato == record:
-            print("Hai eguaglito il tuo record")
+            print("Hai eguagliato il tuo record")
         else:
             pass # Informazioni sul record in questo caso verrano date dalla funzione controllo_nuovo_record()
 
 
-def media_ultime_5(cubo:str) -> None:
+def media_ultime_tot_risoluzioni(cubo:str, num_ultime_risoluzioni: int) -> None:
     """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo
     
     Parametri:
             cubo (str): Tipo di cubo
+            num_ultime_risoluzioni (int): Numero delle ultime risoluzioni
     Returns:
             Stampa informazioni sul terminale
     """
     df = pandas.read_csv("../database.csv", sep="\t")
-    if len(df[df["Cubo"] == cubo]) >= 5:
-        ultime_5 = df[df["Cubo"] == cubo].tail(5)["Secondi"]
+    if len(df[df["Cubo"] == cubo]) >= num_ultime_risoluzioni:
+        ultime_risoluzioni = df[df["Cubo"] == cubo].tail(num_ultime_risoluzioni)["Secondi"]
         media_soluzioni, tempi_totali = 0, 0
-        for tempo in ultime_5:
+        for tempo in ultime_risoluzioni:
             tempi_totali = tempi_totali + tempo
-        media_soluzioni = tempi_totali / 5
+        media_soluzioni = tempi_totali / num_ultime_risoluzioni
         minuti, secondi = conversione_secondi(media_soluzioni)
         if minuti == 0:
-            print(f"Media delle ultime 5 risoluzioni di questo cubo: {secondi} secondi")
+            print(f"Media delle ultime {num_ultime_risoluzioni} risoluzioni: {secondi} secondi")
         elif minuti == 1:
-            print(f"Media delle ultime 5 risoluzioni di questo cubo: {minuti} minuto e {secondi} secondi")
+            print(f"Media delle ultime {num_ultime_risoluzioni} risoluzioni: {minuti} minuto e {secondi} secondi")
         else:
-            print(f"Media delle ultime 5 risoluzioni di questo cubo: {minuti} minuti e {secondi} secondi")
+            print(f"Media delle ultime {num_ultime_risoluzioni} risoluzioni: {minuti} minuti e {secondi} secondi")
 
 
 def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
