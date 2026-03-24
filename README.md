@@ -20,16 +20,26 @@ Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati 
 - Moduli aggiuntivi specificati nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
 
 ## Come funziona
-Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartella "scripts" con il seguente comando dal terminale:
-`cd scripts` e poi eseguire uno dei comandi descritti sotto:
+Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartella "scripts" con il seguente comando dal terminale di Windows:
+`cd .\scripts\` (oppure `cd scripts` da un terminale di tipo bash) e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
-   Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione:
-   ```bash
+   Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione in tempo reale.<br>
+   Da un terminale Windows:
+   ```
+   python .\avvia_timer.py
+   ```
+   Da un terminale bash:
+   ```
    python avvia_timer.py
 2. **Caricare i dati manualmente**:
-    Eseguire lo script `carica_tempo.py` per caricare i tempi di risoluzione:
-    ```bash
-    python carica_tempo.py
+    Eseguire lo script `carica_tempo.py` per caricare i tempi di risoluzione registrati in passato.<br>
+   Da un terminale Windows:
+   ```
+   python .\carica_tempo.py
+   ```
+   Da un terminale bash:
+   ```
+   python carica_tempo.py
 3. **Eseguire i notebook**:
     Eseguire i notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/) dopo aver registrato o caricato diverse risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
