@@ -5,19 +5,9 @@ from pyfiglet import Figlet
 import modulo_rubik
 
 
-lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror", "kilominx", "pyraminx", "megaminx"]
-movimenti_cubi_piccoli = [["U", "U'", "U2"], ["D", "D'", "D2"],
-                          ["L", "L'", "L2"], ["R", "R'", "R2"],
-                          ["B", "B'", "B2"], ["F", "F'", "F2"]]
-movimenti_cubi_grandi = [["U", "U'", "u", "u'", "U2", "u2", "Uu2"],
-                         ["D", "D'", "d", "d'", "D2", "d2", "Dd2"],
-                         ["L", "L'", "l", "l'", "L2", "l2", "Ll2"],
-                         ["R", "R'", "r", "r'", "R2", "r2", "Rr2"],
-                         ["B", "B'", "b", "b'", "B2", "b2", "Bb2"],
-                         ["F", "F'", "f", "f'", "F2", "f2", "Ff2"],
-                         ["M", "M'", "m", "m'", "M2", "m2", "Mm2"],
-                         ["S", "S'", "s", "s'", "S2", "s2", "Ss2"],
-                         ["E", "E'", "e", "e'", "E2", "e2", "Ee2"]]
+lista_tipi_cubo_piccoli = modulo_rubik.lista_tipi_cubo_piccoli
+movimenti_cubi_piccoli = modulo_rubik.movimenti_cubi_piccoli
+movimenti_cubi_grandi = modulo_rubik.movimenti_cubi_grandi
 
 
 def genera_mosse_casuali(lista:list):
