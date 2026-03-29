@@ -10,30 +10,6 @@ movimenti_cubi_piccoli = modulo_rubik.movimenti_cubi_piccoli
 movimenti_cubi_grandi = modulo_rubik.movimenti_cubi_grandi
 
 
-def genera_mosse_casuali(lista:list):
-    """Genera una lista di mosse casuali da fare per mischiare il cubo prima di risolverlo"""
-    lista_movimenti_casuali_a = []
-    lista_movimenti_casuali_b = []
-    lista_movimenti_casuali_c = []
-
-    for mossa in lista:
-        lista_movimenti_casuali_a.append(choice(mossa))
-        lista_movimenti_casuali_b.append(choice(mossa))
-        lista_movimenti_casuali_c.append(choice(mossa))
-
-    shuffle(lista_movimenti_casuali_a)
-    shuffle(lista_movimenti_casuali_b)
-    shuffle(lista_movimenti_casuali_c)
-
-    if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0]):
-        lista_movimenti_casuali_a.pop()
-    if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
-        lista_movimenti_casuali_b.pop()
-
-    lista_movimenti_casuali = lista_movimenti_casuali_a + lista_movimenti_casuali_b + lista_movimenti_casuali_c
-    print("Movimenti casuali suggeriti per mischiare il cubo:\n", *lista_movimenti_casuali)
-
-
 def funzione_principale():
     """Funzione principale"""
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
@@ -43,9 +19,9 @@ def funzione_principale():
 
     while riprovare == "si":
         if cubo in lista_tipi_cubo_piccoli:
-            genera_mosse_casuali(lista=movimenti_cubi_piccoli)
+            modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_piccoli)
         else:
-            genera_mosse_casuali(lista=movimenti_cubi_grandi)
+            modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_grandi)
 
         record_personale = modulo_rubik.ricerca_record(cubo)
         if record_personale != 0:
