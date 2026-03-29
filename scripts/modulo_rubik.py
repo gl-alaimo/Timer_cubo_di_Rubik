@@ -28,22 +28,25 @@ def genera_mosse_casuali(lista:list):
     lista_movimenti_casuali_a = []
     lista_movimenti_casuali_b = []
     lista_movimenti_casuali_c = []
+    lista_movimenti_casuali = []
 
-    for mossa in lista:
-        lista_movimenti_casuali_a.append(choice(mossa))
-        lista_movimenti_casuali_b.append(choice(mossa))
-        lista_movimenti_casuali_c.append(choice(mossa))
+    for i in range(2):
+        for mossa in lista:
+            lista_movimenti_casuali_a.append(choice(mossa))
+            lista_movimenti_casuali_b.append(choice(mossa))
+            lista_movimenti_casuali_c.append(choice(mossa))
 
-    shuffle(lista_movimenti_casuali_a)
-    shuffle(lista_movimenti_casuali_b)
-    shuffle(lista_movimenti_casuali_c)
+        shuffle(lista_movimenti_casuali_a)
+        shuffle(lista_movimenti_casuali_b)
+        shuffle(lista_movimenti_casuali_c)
 
-    if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0]):
-        lista_movimenti_casuali_a.pop()
-    if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
-        lista_movimenti_casuali_b.pop()
+        if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0]):
+            lista_movimenti_casuali_a.pop()
+        if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
+            lista_movimenti_casuali_b.pop()
 
-    lista_movimenti_casuali = lista_movimenti_casuali_a + lista_movimenti_casuali_b + lista_movimenti_casuali_c
+        lista_movimenti_casuali = lista_movimenti_casuali + lista_movimenti_casuali_a + lista_movimenti_casuali_b + lista_movimenti_casuali_c
+
     print("Movimenti casuali suggeriti per mischiare il cubo:\n", *lista_movimenti_casuali)
 
 
