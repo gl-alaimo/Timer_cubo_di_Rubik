@@ -43,8 +43,10 @@ def funzione_principale():
             print(f"Tempo impiegato: {minuti} minuto e {secondi} secondi")
         else:
             print(f"Tempo impiegato: {minuti} minuti e {secondi} secondi")
+        print("Tempo risoluzione aggiunto al database")
 
-        modulo_rubik.salvataggio_dati(tempo_impiegato, cubo)
+        modulo_rubik.controllo_nuovo_record(tempo_impiegato=tempo_impiegato, cubo=cubo)
+        modulo_rubik.salvataggio_dati(tempo=tempo_impiegato, cubo=cubo)
         lista_risultati.append(tempo_impiegato)
     
     print("\nLista di tutti i risultati", lista_risultati)
@@ -60,7 +62,14 @@ def funzione_principale():
 
     media_3_risoluzioni = round(number=(lista_risultati[0] + lista_risultati[1]
                                         + lista_risultati[2]) / 3, ndigits=2)
-    print("Media delle tre risoluzioni:", media_3_risoluzioni)
+    minuti, secondi = modulo_rubik.conversione_secondi(media_3_risoluzioni)
+
+    if minuti == 0:
+        print(f"Media delle tre risoluzioni: {secondi} secondi")
+    elif minuti == 1:
+        print(f"Media delle tre risoluzioni: {minuti} minuto e {secondi} secondi")
+    else:
+        print(f"Media delle tre risoluzioni: {minuti} minuti e {secondi} secondi")
 
 
 if __name__ == "__main__":
