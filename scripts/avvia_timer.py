@@ -6,8 +6,11 @@ import modulo_rubik
 
 
 lista_tipi_cubo_piccoli = modulo_rubik.lista_tipi_cubo_piccoli
+lista_dodecaedri = modulo_rubik.lista_dodecaedri
 movimenti_cubi_piccoli = modulo_rubik.movimenti_cubi_piccoli
 movimenti_cubi_grandi = modulo_rubik.movimenti_cubi_grandi
+movimenti_pyraminx = modulo_rubik.movimenti_pyraminx
+movimenti_dodecaedro = modulo_rubik.movimenti_dodecaedro
 
 
 def funzione_principale():
@@ -18,7 +21,11 @@ def funzione_principale():
     riprovare = "si"
 
     while riprovare == "si":
-        if cubo in lista_tipi_cubo_piccoli:
+        if cubo == "pyraminx":
+            modulo_rubik.genera_mosse_casuali(lista=movimenti_pyraminx)
+        elif cubo in lista_dodecaedri:
+            modulo_rubik.genera_mosse_casuali(lista=movimenti_dodecaedro)
+        elif cubo in lista_tipi_cubo_piccoli:
             modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_piccoli)
         else:
             modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_grandi)
