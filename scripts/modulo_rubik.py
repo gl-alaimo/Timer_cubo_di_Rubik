@@ -7,7 +7,8 @@ import pandas
 from matplotlib import pyplot as plt
 
 
-lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror", "kilominx", "pyraminx", "megaminx"]
+lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror", "kilominx", "megaminx"]
+movimenti_pyraminx = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"], ["F", "F'", "F2"]]
 movimenti_cubi_piccoli = [["U", "U'", "U2"], ["D", "D'", "D2"],
                           ["L", "L'", "L2"], ["R", "R'", "R2"],
                           ["B", "B'", "B2"], ["F", "F'", "F2"]]
@@ -30,7 +31,7 @@ def genera_mosse_casuali(lista:list):
     lista_movimenti_casuali_c = []
     lista_movimenti_casuali = []
 
-    for i in range(2):
+    for _ in range(2):
         for mossa in lista:
             lista_movimenti_casuali_a.append(choice(mossa))
             lista_movimenti_casuali_b.append(choice(mossa))
@@ -45,7 +46,8 @@ def genera_mosse_casuali(lista:list):
         if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
             lista_movimenti_casuali_b.pop()
 
-        lista_movimenti_casuali = lista_movimenti_casuali + lista_movimenti_casuali_a + lista_movimenti_casuali_b + lista_movimenti_casuali_c
+        lista_movimenti_casuali = lista_movimenti_casuali + lista_movimenti_casuali_a +\
+        lista_movimenti_casuali_b + lista_movimenti_casuali_c
 
     print("Movimenti casuali suggeriti per mischiare il cubo:\n", *lista_movimenti_casuali)
 

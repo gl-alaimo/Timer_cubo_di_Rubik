@@ -1,6 +1,6 @@
 # Timer cubo di Rubik
 
-Questo progetto contiene dei Notebook e diversi script scritti in Python progettati per registrare ed analizzare i tempi di risoluzione di diversi tipi di cubi di Rubik. Include funzionalità per registrare i tempi di risoluzione in tempo reale o caricare tempi di risoluzione manualmente, suggerire mosse per mescolare il cubo prima di iniziare a risolverlo, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro.
+Questo progetto contiene dei Notebook e diversi script scritti in Python progettati per registrare ed analizzare i tempi di risoluzione di diversi tipi di cubi di Rubik. Include funzionalità per registrare i tempi di risoluzione in tempo reale o caricare tempi di risoluzione manualmente, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro.
 Ottimo per fare pratica e tenere traccia dei propri progressi.
 
 ## Struttura del Progetto
