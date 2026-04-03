@@ -7,8 +7,12 @@ import pandas
 from matplotlib import pyplot as plt
 
 
-lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror", "kilominx", "megaminx"]
+lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror"]
+lista_dodecaedri = ["kilominx", "megaminx"]
 movimenti_pyraminx = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"], ["F", "F'", "F2"]]
+movimenti_dodecaedro = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"],
+                        ["F", "F'", "F2"], ["B", "B'", "B2"], ["BL", "BL'", "BL2"],
+                        ["BR", "BR'", "BR2"], ["W", "W'", "W2"], ["E", "E'", "E2"]]
 movimenti_cubi_piccoli = [["U", "U'", "U2"], ["D", "D'", "D2"],
                           ["L", "L'", "L2"], ["R", "R'", "R2"],
                           ["B", "B'", "B2"], ["F", "F'", "F2"]]
