@@ -1,6 +1,5 @@
 """Script che calcola il tempo di risoluzione e fornisce varie statistiche"""
 
-from random import choice, shuffle
 from pyfiglet import Figlet
 import modulo_rubik
 
