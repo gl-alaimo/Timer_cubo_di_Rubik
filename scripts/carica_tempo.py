@@ -2,8 +2,7 @@
 
 
 from datetime import datetime
-
-from modulo_rubik import controllo_nuovo_record
+import modulo_rubik
 
 
 print("Inserisci i seguenti dati:")
@@ -20,7 +19,14 @@ while aggiungere_altra_soluzione == "si":
     millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
     tempo_impiegato = (minuti * 60) + secondi + millesimi
 
-    controllo_nuovo_record(tempo_impiegato, cubo)
+    modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)
+    record_personale = modulo_rubik.ricerca_record(cubo)
+    modulo_rubik.diff_record_tempo_attuale(record=record_personale, tempo_impiegato=tempo_impiegato)
+    # Informazioni sulla media
+    modulo_rubik.diffs_media_tempo_attuale(cubo=cubo, tempo_impiegato=tempo_impiegato)
+    modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=100)
+    modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=12)
+    modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=5)
 
     with open(file="../database.csv", mode="a", encoding="utf-8") as db_file:
         db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
