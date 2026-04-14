@@ -28,26 +28,36 @@ movimenti_cubi_grandi = [["U", "U'", "u", "u'", "U2", "u2", "Uu2"],
 
 # Funzioni per gli script
 
-def genera_mosse_casuali(lista:list):
-    """Genera una lista di mosse casuali da fare per mischiare il cubo prima di risolverlo"""
-    lista_movimenti_casuali_a = []
-    lista_movimenti_casuali_b = []
-    lista_movimenti_casuali_c = []
+def genera_movimenti_casuali(lista_movimenti:list):
+    """Genera una lista di movimenti casuali da fare per mischiare il cubo prima di risolverlo
+    
+    Params:
+        lista_movimenti (list): Lista di liste contententi tutti i movimenti.
+
+    Returns:
+        None.
+    
+    """
+
     lista_movimenti_casuali = []
 
     for _ in range(2):
-        for mossa in lista:
-            lista_movimenti_casuali_a.append(choice(mossa))
-            lista_movimenti_casuali_b.append(choice(mossa))
-            lista_movimenti_casuali_c.append(choice(mossa))
+        lista_movimenti_casuali_a = []
+        lista_movimenti_casuali_b = []
+        lista_movimenti_casuali_c = []
+
+        for movimento in lista_movimenti:
+            lista_movimenti_casuali_a.append(choice(movimento))
+            lista_movimenti_casuali_b.append(choice(movimento))
+            lista_movimenti_casuali_c.append(choice(movimento))
 
         shuffle(lista_movimenti_casuali_a)
         shuffle(lista_movimenti_casuali_b)
         shuffle(lista_movimenti_casuali_c)
 
-        if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0]):
+        if lista_movimenti_casuali_a[-1].startswith(lista_movimenti_casuali_b[0][0]):
             lista_movimenti_casuali_a.pop()
-        if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0]):
+        if lista_movimenti_casuali_b[-1].startswith(lista_movimenti_casuali_c[0][0]):
             lista_movimenti_casuali_b.pop()
 
         lista_movimenti_casuali = lista_movimenti_casuali + lista_movimenti_casuali_a +\

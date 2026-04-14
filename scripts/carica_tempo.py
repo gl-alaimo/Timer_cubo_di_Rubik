@@ -17,6 +17,7 @@ while aggiungere_altra_soluzione == "si":
     minuti = int(input("Minuti: "))
     secondi = int(input("Secondi: "))
     millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
+    print()
     tempo_impiegato = (minuti * 60) + secondi + millesimi
 
     modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)
