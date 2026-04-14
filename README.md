@@ -3,16 +3,16 @@
 Questo progetto contiene dei Notebook e diversi script scritti in Python progettati per registrare ed analizzare i tempi di risoluzione di diversi tipi di cubi di Rubik. Include funzionalità per registrare i tempi di risoluzione in tempo reale o caricare tempi di risoluzione manualmente, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro.
 Ottimo per fare pratica e tenere traccia dei propri progressi.
 
+
 ## Struttura del Progetto
 
 - **modulo_rubik.py**: Modulo Python contenente funzioni usate nei diversi script e notebook.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
-- **simula_competizione.py**: Script per simulare una competizione, calcolando il tempo di 5 risoluzioni e fornendo la media dei risultati escludendo il tempo minimo e massimo.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
-Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo.
+Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo. (Ad esempio <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts/notebook_cubo_3x3x3.ipynb">questo file notebook</a>)
 
 ## Requisiti
 
@@ -31,7 +31,6 @@ Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartel
    Da un terminale bash:
    ```
    python avvia_timer.py
-   ```
 2. **Caricare i dati manualmente**:
     Eseguire lo script `carica_tempo.py` per caricare i tempi di risoluzione registrati in passato.<br>
    Da un terminale Windows:
@@ -41,18 +40,7 @@ Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartel
    Da un terminale bash:
    ```
    python carica_tempo.py
-   ```
-3. **Simulare una competizione**:
-    Eseguire lo script `simula_competizione.py` per simulare una competizione, registrando i tempi di 5 risoluzioni e calcolando la media escludendo il tempo minimo e massimo.<br>
-   Da un terminale Windows:
-   ```
-   python .\simula_competizione.py
-   ```
-   Da un terminale bash:
-   ```
-   python simula_competizione.py
-   ```
-4. **Eseguire i notebook**:
+3. **Eseguire i notebook**:
     Eseguire i notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/) dopo aver registrato o caricato diverse risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro grazie anche alla generazione di grafici.
 
 ## Licenza

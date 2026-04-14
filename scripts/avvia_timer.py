@@ -21,13 +21,13 @@ def funzione_principale():
 
     while riprovare == "si":
         if cubo == "pyraminx":
-            modulo_rubik.genera_mosse_casuali(lista=movimenti_pyraminx)
+            modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_pyraminx)
         elif cubo in lista_dodecaedri:
-            modulo_rubik.genera_mosse_casuali(lista=movimenti_dodecaedro)
+            modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_dodecaedro)
         elif cubo in lista_tipi_cubo_piccoli:
-            modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_piccoli)
+            modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_cubi_piccoli)
         else:
-            modulo_rubik.genera_mosse_casuali(lista=movimenti_cubi_grandi)
+            modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_cubi_grandi)
 
         record_personale = modulo_rubik.ricerca_record(cubo)
         if record_personale != 0:
