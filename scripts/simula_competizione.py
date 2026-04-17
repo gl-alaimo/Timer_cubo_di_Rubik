@@ -50,7 +50,7 @@ def funzione_principale():
             print(f"Tempo impiegato: {minuti} minuto e {secondi} secondi")
         else:
             print(f"Tempo impiegato: {minuti} minuti e {secondi} secondi")
-        print("Tempo risoluzione aggiunto al database")
+        print("Tempo di risoluzione aggiunto al database")
 
         modulo_rubik.controllo_nuovo_record(tempo_impiegato=tempo_impiegato, cubo=cubo)
         modulo_rubik.salvataggio_dati(tempo=tempo_impiegato, cubo=cubo)
