@@ -32,5 +32,5 @@ while aggiungere_altra_soluzione == "si":
     with open(file="../database.csv", mode="a", encoding="utf-8") as db_file:
         db_file.write(f"{data_risoluzione}\t{tempo_impiegato}\t{cubo}\n")
 
-    print("Tempo risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
+    print("Tempo di risoluzione aggiunto al database:", data_risoluzione, tempo_impiegato, cubo)
     aggiungere_altra_soluzione = input("\nVuoi inserire un altro tempo per lo stesso cubo? (si o no): ")

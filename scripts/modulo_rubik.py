@@ -208,7 +208,7 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
         else:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
-        print("La tua media assoluta è di", media_in_minuti_formattata)
+        print("Media di tutti i tempi", media_in_minuti_formattata)
         if tempo_impiegato < media:
             print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno rispetto alla media assoluta")
         elif tempo_impiegato > media:
