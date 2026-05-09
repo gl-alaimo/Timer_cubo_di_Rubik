@@ -17,6 +17,7 @@ def funzione_principale():
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
     print(titolo.renderText("Timer cubo di Rubik"))
     cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
+    print()
     riprovare = "si"
 
     while riprovare == "si":
@@ -33,11 +34,11 @@ def funzione_principale():
         if record_personale != 0:
             minuti, secondi = modulo_rubik.conversione_secondi(record_personale)
             if minuti == 0:
-                print(f"Record da battere: {secondi} secondi")
+                print(f"Record attuale: {secondi} secondi")
             elif minuti == 1:
-                print(f"Record da battere: {minuti} minuto e {secondi} secondi")
+                print(f"Record attuale: {minuti} minuto e {secondi} secondi")
             else:
-                print(f"Record da battere: {minuti} minuti e {secondi} secondi")
+                print(f"Record attuale: {minuti} minuti e {secondi} secondi")
         else:
             print("Nessun record impostato al momento.")
 
