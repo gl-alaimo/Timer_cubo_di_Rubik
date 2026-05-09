@@ -3,6 +3,7 @@
 from datetime import datetime
 from time import time
 from random import choice, shuffle
+from colorama import Fore, Style
 import pandas
 from matplotlib import pyplot as plt
 
@@ -64,6 +65,7 @@ def genera_movimenti_casuali(lista_movimenti:list):
         lista_movimenti_casuali_b + lista_movimenti_casuali_c
 
     print("Movimenti casuali suggeriti per mischiare il cubo:\n", *lista_movimenti_casuali)
+    print()
 
 
 def conversione_secondi(secondi: int) -> tuple:
@@ -110,22 +112,34 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     if tempo_impiegato < mio_record:
         record_min, record_sec = conversione_secondi(mio_record)
         minuti_attuali, secondi_attuali = conversione_secondi(tempo_impiegato)
+        print(Fore.GREEN + "Nuovo record personale!")
 
         if record_min-minuti_attuali == 0:
-            print(f"Hai battuto il tuo record di {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
+            print(Fore.GREEN + f"Ci hai impiegato {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi in meno rispetto al record precedente")
         elif record_min-minuti_attuali == 1:
-            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
-                  f"minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
+            print(Fore.GREEN + f"Ci hai impiegato 1 "
+                  f"minuto e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi in meno rispetto al record precedente")
         else:
-            print(f"Hai battuto il tuo record di {record_min-minuti_attuali} "
-                  f"minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi!!!")
+            print(Fore.GREEN + f"Ci hai impiegato {record_min-minuti_attuali} "
+                  f"minuti e {abs(round(number=record_sec-secondi_attuali, ndigits=2))} secondi in meno rispetto al record precedente")
+        print(Style.RESET_ALL)
 
-        if record_min == 0:
-            print(f"Record precedente: {record_sec} secondi")
-        elif record_min == 1:
-            print(f"Record precedente: {record_min} minuto e {record_sec} secondi")
-        else:
-            print(f"Record precedente: {record_min} minuti e {record_sec} secondi")
+
+def mostra_tempo_attuale(minuti:int, secondi:int) -> None:
+    """Mostra il tempo di risoluzione attuale impiegato.
+
+    Params:
+        minuti (int): Minuti impiegati
+        secondi (int): Secondi impiegati
+    Returns:
+        None
+    """
+    if minuti == 0:
+        print(Fore.CYAN + f"Tempo impiegato: {secondi} secondi" + Style.RESET_ALL)
+    elif minuti == 1:
+        print(Fore.CYAN + f"Tempo impiegato: 1 minuto e {secondi} secondi" + Style.RESET_ALL)
+    else:
+        print(Fore.CYAN + f"Tempo impiegato: {minuti} minuti e {secondi} secondi" + Style.RESET_ALL)
 
 
 def calcolo_tempo(cubo:str) -> tuple:
@@ -137,7 +151,7 @@ def calcolo_tempo(cubo:str) -> tuple:
         tempo_impiegato, cubo (tuple): Stampa informazioni e restiruisce una tuple
         con il tempo impiegato e il tipo di cubo
     """
-    input("Premi invio per iniziare ")
+    input("Premi invio per iniziare: ")
     finito = False
     tempo_parziale = 0
 
@@ -147,13 +161,13 @@ def calcolo_tempo(cubo:str) -> tuple:
         if stop == "p":
             ora_finale = time()
             tempo_parziale = round(number=tempo_parziale + ora_finale - ora_iniziale, ndigits=2)
-            min, sec = conversione_secondi(tempo_parziale)
-            if min == 0:
-                print(f"In pausa... Tempo impiegato fino ad ora: {sec} secondi")
-            elif min == 1:
-                print(f"In pausa... Tempo impiegato fino ad ora: {min} minuto e {sec} secondi")
+            minuti, secondi = conversione_secondi(tempo_parziale)
+            if minuti == 0:
+                print(f"In pausa... Tempo impiegato fino ad ora: {secondi} secondi")
+            elif minuti == 1:
+                print(f"In pausa... Tempo impiegato fino ad ora: 1 minuto e {secondi} secondi")
             else:
-                print(f"In pausa... Tempo impiegato fino ad ora: {min} minuti e {sec} secondi")
+                print(f"In pausa... Tempo impiegato fino ad ora: {minuti} minuti e {secondi} secondi")
             input("Premi invio per continuare")
         else:
             finito = True
@@ -161,13 +175,9 @@ def calcolo_tempo(cubo:str) -> tuple:
     ora_finale = time()
     tempo_impiegato = round(number=ora_finale - ora_iniziale, ndigits=2) + tempo_parziale
     print("Fine!\n")
-    min, sec = conversione_secondi(tempo_impiegato)
-    if min == 0:
-        print(f"Tempo impiegato: {sec} secondi")
-    elif min == 1:
-        print(f"Tempo impiegato: {min} minuto e {sec} secondi")
-    else:
-        print(f"Tempo impiegato: {min} minuti e {sec} secondi")
+    minuti, secondi = conversione_secondi(tempo_impiegato)
+    mostra_tempo_attuale(minuti, secondi)
+
     return tempo_impiegato, cubo
 
 
@@ -208,7 +218,7 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
         else:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
 
-        print("Media di tutti i tempi", media_in_minuti_formattata)
+        print("Media di tutti i tempi:", media_in_minuti_formattata)
         if tempo_impiegato < media:
             print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno rispetto alla media assoluta")
         elif tempo_impiegato > media:

@@ -44,12 +44,7 @@ def funzione_principale():
         tempo_impiegato = round(number=ora_finale - ora_iniziale, ndigits=2)
         print("Fine!\n")
         minuti, secondi = modulo_rubik.conversione_secondi(tempo_impiegato)
-        if minuti == 0:
-            print(f"Tempo impiegato: {secondi} secondi")
-        elif minuti == 1:
-            print(f"Tempo impiegato: {minuti} minuto e {secondi} secondi")
-        else:
-            print(f"Tempo impiegato: {minuti} minuti e {secondi} secondi")
+        modulo_rubik.mostra_tempo_attuale(minuti, secondi)
         print("Tempo di risoluzione aggiunto al database")
 
         modulo_rubik.controllo_nuovo_record(tempo_impiegato=tempo_impiegato, cubo=cubo)
