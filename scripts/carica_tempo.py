@@ -2,9 +2,11 @@
 
 
 from datetime import datetime
+from pyfiglet import Figlet
 import modulo_rubik
 
-
+titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
+print(titolo.renderText("Timer cubo di Rubik"))
 print("Inserisci i seguenti dati:")
 data_risoluzione = input("Data (con formato ANNO-MESE-GIORNO) ad esempio '2026-03-20' oppure 'oggi': ")
 if data_risoluzione == "oggi":
