@@ -301,10 +301,10 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
         None
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(label=f"Tempo medio mensile delle risoluzioni nel {anno}")
-    plt.ylabel(ylabel="Secondi")
-    plt.xlabel(xlabel="Mese")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color="#0caaf6")
+    plt.title(label=f"Tempo medio mensile delle risoluzioni nel {anno}", fontweight="bold")
+    plt.ylabel(ylabel="Secondi", fontweight="bold")
+    plt.xlabel(xlabel="Mese", fontweight="bold")
     plt.xticks(rotation=0)
     for la_barra in grafico.containers:
         grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
@@ -336,10 +336,10 @@ def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
         None
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(label=f"Tempo record mensile delle risoluzioni nel {anno}")
-    plt.ylabel(ylabel="Secondi")
-    plt.xlabel(xlabel="Mese")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color="#73b06a")
+    plt.title(label=f"Tempo record mensile delle risoluzioni nel {anno}", fontweight="bold")
+    plt.ylabel(ylabel="Secondi", fontweight="bold")
+    plt.xlabel(xlabel="Mese", fontweight="bold")
     plt.xticks(rotation=0)
     for la_barra in grafico.containers:
         grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
@@ -356,10 +356,10 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
         None
     """
     dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].mean()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(label="Tempo medio annuale delle risoluzioni")
-    plt.ylabel(ylabel="Secondi")
-    plt.xlabel(xlabel="Anno")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color="#7366cb", width=0.3)
+    plt.title(label="Tempo medio annuale delle risoluzioni", fontweight="bold")
+    plt.ylabel(ylabel="Secondi", fontweight="bold")
+    plt.xlabel(xlabel="Anno", fontweight="bold")
     plt.xticks(rotation=0)
     for la_barra in grafico.containers:
         grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
@@ -402,10 +402,10 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
             height=[ricerca_record(cubo=df_cubo["Cubo"].iloc[0]),
                     df_cubo["Secondi"].mean().round(2),
                     df_cubo["Secondi"].max().round(2)],
-            color=["green", "blue", "red"],
+            color=["#73b06a", "#0caaf6", "#d21518"],
             width=0.3)
-    plt.title("Tempo minimo, medio e massimo")
-    plt.ylabel("Secondi")
+    plt.title("Tempo minimo, medio e massimo", fontweight="bold")
+    plt.ylabel("Secondi", fontweight="bold")
     plt.show()
 
 
@@ -420,10 +420,10 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
         None
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title(f"Numero risoluzioni mensili del {anno}")
-    plt.ylabel("Num risoluzioni")
-    plt.xlabel("Mese")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color="#838d99")
+    plt.title(f"Numero risoluzioni mensili del {anno}", fontweight="bold")
+    plt.ylabel("Numero risoluzioni", fontweight="bold",)
+    plt.xlabel("Mese", fontweight="bold",)
     plt.xticks(rotation=0)
     for la_barra in grafico.containers:
         grafico.bar_label(container=la_barra, labels=dati_per_grafico.values, label_type='center')
@@ -440,10 +440,10 @@ def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
         None
     """
     dati_per_grafico = df_cubo.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi")
-    grafico = dati_per_grafico.plot.bar(figsize=(11,5))
-    plt.title("Soluzioni piu veloci per tipo di cubo")
-    plt.ylabel("Secondi")
-    plt.xlabel("Cubi")
+    grafico = dati_per_grafico.plot.bar(figsize=(11,5), color="#73b06a")
+    plt.title("Soluzioni piu veloci per tipo di cubo", fontweight="bold")
+    plt.ylabel("Secondi", fontweight="bold")
+    plt.xlabel("Cubi", fontweight="bold")
     plt.xticks(rotation=0)
     for barra in grafico.containers:
         grafico.bar_label(container=barra, labels=dati_per_grafico.values[0], label_type="edge")
@@ -490,10 +490,10 @@ def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         None
     """
     dati_per_grafico = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().round(2).sort_values(by="Secondi")
-    grafico = dati_per_grafico.plot.bar(figsize=(11,5))
-    plt.title("Medie delle soluzioni per tipo di cubo")
-    plt.ylabel("Secondi")
-    plt.xlabel("Cubi")
+    grafico = dati_per_grafico.plot.bar(figsize=(11,5), color="#0caaf6")
+    plt.title("Medie delle soluzioni per tipo di cubo", fontweight="bold")
+    plt.ylabel("Secondi", fontweight="bold")
+    plt.xlabel("Cubi", fontweight="bold")
     plt.xticks(rotation=0)
     for barra in grafico.containers:
         grafico.bar_label(container=barra, labels=dati_per_grafico.values[0].round(2), label_type="edge")
@@ -522,10 +522,10 @@ def grafico_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         None
     """
     dati_per_grafico = df_cubo["Cubo"].value_counts()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5))
-    plt.title("Numero di risoluzioni dei diversi cubi")
-    plt.ylabel("Num di risoluzioni")
-    plt.xlabel("Cubi")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color="#479fa6")
+    plt.title("Numero di risoluzioni dei diversi cubi", fontweight="bold")
+    plt.ylabel("Num di risoluzioni", fontweight="bold")
+    plt.xlabel("Cubi", fontweight="bold")
     plt.xticks(rotation=0)
     for barra in grafico.containers:
         grafico.bar_label(container=barra,labels=dati_per_grafico.values, label_type="center")
@@ -542,12 +542,12 @@ def grafico_risoluzioni_recenti(df_cubo: pandas.DataFrame) -> None:
         None
     """
     plt.figure(figsize=(13,5))
-    plt.title("Tempi e data delle risoluzioni recenti")
+    plt.title("Tempi e data delle risoluzioni recenti", fontweight="bold")
     plt.scatter(df_cubo.tail(10)["Data completa"], df_cubo.tail(10)["Secondi"])
     plt.grid(axis="y")
     plt.xticks(rotation=0)
-    plt.ylabel("Secondi")
-    plt.xlabel("Data")
+    plt.ylabel("Secondi", fontweight="bold")
+    plt.xlabel("Data", fontweight="bold")
     plt.show()
 
 
@@ -661,14 +661,14 @@ def grafico_ultime_tot_risoluzioni(df_cubo: pandas.DataFrame, num_ultime_risoluz
     media = df_cubo["Secondi"].mean().round(2)
 
     plt.figure(figsize=(13,5))
-    plt.title(f"Tempi delle ultime {num_ultime_risoluzioni} risoluzioni")
+    plt.title(f"Tempi delle ultime {num_ultime_risoluzioni} risoluzioni", fontweight="bold")
     plt.scatter(df_cubo.index, df_cubo["Secondi"])
     plt.plot(df_cubo.index, df_cubo["Secondi"])
     plt.axhline(y=media, color="purple", label="Media")
     plt.grid(axis="y")
     plt.xticks(rotation=0)
-    plt.ylabel("Secondi")
-    plt.xlabel("Numemo risoluzione")
+    plt.ylabel("Secondi", fontweight="bold")
+    plt.xlabel("Numemo risoluzione", fontweight="bold")
     plt.legend()
     plt.show()
 
