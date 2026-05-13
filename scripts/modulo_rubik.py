@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 
 lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror"]
 lista_dodecaedri = ["kilominx", "megaminx"]
-movimenti_pyraminx = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"], ["F", "F'", "F2"]]
+movimenti_pyraminx = [["U", "U'"], ["L", "L'"], ["R", "R'"], ["F", "F'"]]
 movimenti_dodecaedro = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"],
                         ["F", "F'", "F2"], ["B", "B'", "B2"], ["BL", "BL'", "BL2"],
                         ["BR", "BR'", "BR2"], ["W", "W'", "W2"], ["E", "E'", "E2"]]
@@ -257,10 +257,7 @@ def media_ultime_tot_risoluzioni(cubo:str, num_ultime_risoluzioni: int) -> None:
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) >= num_ultime_risoluzioni:
         ultime_risoluzioni = df[df["Cubo"] == cubo].tail(num_ultime_risoluzioni)["Secondi"]
-        media_soluzioni, tempi_totali = 0, 0
-        for tempo in ultime_risoluzioni:
-            tempi_totali = tempi_totali + tempo
-        media_soluzioni = tempi_totali / num_ultime_risoluzioni
+        media_soluzioni = round(number=ultime_risoluzioni.mean(), ndigits=2)
         minuti, secondi = conversione_secondi(media_soluzioni)
         if minuti == 0:
             print(f"Media delle ultime {num_ultime_risoluzioni} risoluzioni: {secondi} secondi")
