@@ -328,8 +328,12 @@ def mostra_record_mensili(df_cubo: pandas.DataFrame, anno: int):
     Returns:
         None
     """
+    df_records = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
+    df_records = pandas.DataFrame(df_records)
+    df_records.insert(loc=1, column="Tempo", value=df_records["Secondi"].apply(conversione_secondi))
+    df_records['Tempo'] = df_records['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     print("Record stabiliti ogni mese\n")
-    print(df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min())
+    print(df_records)
 
 
 def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
@@ -622,8 +626,12 @@ def medie_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Seri
     Returns:
         None
     """
+    df_medie_mensili = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2)
+    df_medie_mensili = pandas.DataFrame(df_medie_mensili)
+    df_medie_mensili.insert(loc=1, column="Tempo", value=df_medie_mensili["Secondi"].apply(conversione_secondi))
+    df_medie_mensili['Tempo'] = df_medie_mensili['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     print("Tempi medi delle risoluzioni mensili\n")
-    print(df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2))
+    print(df_medie_mensili)
 
 
 def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Series:
@@ -649,8 +657,12 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
     Returns:
         None
     """
+    df_medie_annuali = df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2)
+    df_medie_annuali = pandas.DataFrame(df_medie_annuali)
+    df_medie_annuali.insert(loc=1, column="Tempo", value=df_medie_annuali["Secondi"].apply(conversione_secondi))
+    df_medie_annuali['Tempo'] = df_medie_annuali['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
     print("Tempi medi mensili in secondi delle risoluzioni annuali\n")
-    print(df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2))
+    print(df_medie_annuali)
 
 
 def grafico_ultime_tot_risoluzioni(df_cubo: pandas.DataFrame, num_ultime_risoluzioni:int = 50) -> None:
