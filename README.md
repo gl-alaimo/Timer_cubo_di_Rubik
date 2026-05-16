@@ -78,3 +78,4 @@ LinkedIn: <a href="https://www.linkedin.com/in/giuseppe-luca-alaimo-9875b32a1/">
 
 ## Anteprima notebook_generale.ipynb
 <img src="immagini/Anteprima_notebook_generale.png">
+<img src="immagini/Anteprima_notebook_generale_2.png">
