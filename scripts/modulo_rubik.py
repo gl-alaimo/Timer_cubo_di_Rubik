@@ -694,7 +694,7 @@ def grafico_ultime_tot_risoluzioni(df_cubo: pandas.DataFrame, num_ultime_risoluz
     plt.grid(axis="y")
     plt.xticks(rotation=0)
     plt.ylabel("Secondi", fontweight="bold")
-    plt.xlabel("Numemo risoluzione", fontweight="bold")
+    plt.xlabel("Numero risoluzione", fontweight="bold")
     plt.legend()
     plt.show()
 
