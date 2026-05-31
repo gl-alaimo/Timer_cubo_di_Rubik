@@ -279,6 +279,8 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
                     print(f"Ci hai impiegato {minuti} minuto e {secondi} secondi in più rispetto al record")
                 else:
                     print(f"Ci hai impiegato {minuti} minuti e {secondi} secondi in più rispetto al record")
+            else:
+                print(f"Ci hai impiegato {round(number=differenza_di_tempo, ndigits=2)} secondi in più rispetto al record")
         elif tempo_impiegato == record:
             print("Hai eguagliato il tuo record")
         else:
