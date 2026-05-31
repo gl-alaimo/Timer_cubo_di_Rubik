@@ -20,6 +20,10 @@ def funzione_principale():
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
     print(titolo.renderText("Timer cubo di Rubik"))
     cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
+    record_personale = modulo_rubik.mostra_record(cubo=cubo)
+    media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
+    print("Media attuale:", media)
+
     if cubo in ("6x6x6", "7x7x7"):
         lista_round = [1,2,3]
     else:
@@ -50,7 +54,7 @@ def funzione_principale():
         modulo_rubik.controllo_nuovo_record(tempo_impiegato=tempo_impiegato, cubo=cubo)
         modulo_rubik.salvataggio_dati(tempo=tempo_impiegato, cubo=cubo)
         lista_risultati.append(tempo_impiegato)
-    
+
     print("\nLista di tutti i risultati", lista_risultati)
     tempo_massimo = max(lista_risultati)
     tempo_minimo = min(lista_risultati)

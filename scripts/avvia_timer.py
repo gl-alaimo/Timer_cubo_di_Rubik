@@ -30,24 +30,16 @@ def funzione_principale():
         else:
             modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_cubi_grandi)
 
-        record_personale = modulo_rubik.ricerca_record(cubo)
-        if record_personale != 0:
-            minuti, secondi = modulo_rubik.conversione_secondi(record_personale)
-            if minuti == 0:
-                print(f"Record attuale: {secondi} secondi")
-            elif minuti == 1:
-                print(f"Record attuale: {minuti} minuto e {secondi} secondi")
-            else:
-                print(f"Record attuale: {minuti} minuti e {secondi} secondi")
-        else:
-            print("Nessun record impostato al momento.")
+        record_personale = modulo_rubik.mostra_record(cubo=cubo)
+        media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
+        print("Media attuale:", media)
 
         tempo_impiegato, cubo = modulo_rubik.calcolo_tempo(cubo)
         # Informazioni sul record
         modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)
         modulo_rubik.diff_record_tempo_attuale(record=record_personale, tempo_impiegato=tempo_impiegato)
         # Informazioni sulla media
-        modulo_rubik.diffs_media_tempo_attuale(cubo=cubo, tempo_impiegato=tempo_impiegato)
+        modulo_rubik.diff_media_tempo_attuale(cubo=cubo, tempo_impiegato=tempo_impiegato)
         modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=100)
         modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=50)
         modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=12)
