@@ -202,14 +202,13 @@ def salvataggio_dati(tempo:int, cubo:str) -> None:
         db_file.write(f"{data}\t{tempo}\t{cubo}\n")
 
 
-def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
-    """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale
+def calcolo_media_assoluta(cubo:str) -> str:
+    """Calcola il tempo medio di tutte le risoluzioni
 
     Params:
         cubo (str): Tipo di cubo
-        tempo_impiegato (int): Tempo impiegato
     Returns:
-        Stampa informazioni sul terminale
+        media_in_minuti_formattata (str): Media in minuti formattata
     """
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) != 0:
@@ -224,14 +223,40 @@ def diffs_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuto e {media_in_minuti[1]} secondi"
         else:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
+    return media_in_minuti_formattata
 
-        print("Media di tutti i tempi:", media_in_minuti_formattata)
+
+def diff_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
+    """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale
+
+    Params:
+        cubo (str): Tipo di cubo
+        tempo_impiegato (int): Tempo impiegato
+    Returns:
+        Stampa informazioni sul terminale
+    """
+    df = pandas.read_csv("../database.csv", sep="\t")
+    if len(df[df["Cubo"] == cubo]) != 0:
+        media_df = df[df["Cubo"] == cubo]
+        media = media_df["Secondi"].mean()
+        media = round(number=media, ndigits=2)
+        piu_o_meno = ""
+        differenza_di_tempo = abs(round(number=media-tempo_impiegato, ndigits=2))
         if tempo_impiegato < media:
-            print(f"Ci hai impiegato {round(number=media-tempo_impiegato, ndigits=2)} secondi in meno rispetto alla media assoluta")
-        elif tempo_impiegato > media:
-            print(f"Ci hai impiegato {round(number=tempo_impiegato-media, ndigits=2)} secondi in piu rispetto alla media assoluta")
+            piu_o_meno = "meno"
+        elif tempo_impiegato > differenza_di_tempo:
+            piu_o_meno = "più"
         else:
             print("Ci hai impiegato come al solito")
+
+        if piu_o_meno != "":
+            minuti, secondi = conversione_secondi(differenza_di_tempo)
+            if minuti == 0:
+                print(f"Ci hai impiegato {secondi} secondi in {piu_o_meno} rispetto alla media assoluta")
+            elif minuti == 1:
+                print(f"Ci hai impiegato {minuti} minuto e {secondi} secondi in {piu_o_meno} rispetto alla media assoluta")
+            else:
+                print(f"Ci hai impiegato {minuti} minuti e {secondi} secondi in {piu_o_meno} rispetto alla media assoluta")
 
 
 def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
@@ -245,7 +270,15 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
     """
     if record != 0:
         if tempo_impiegato > record:
-            print("Ci hai impiegato", round(number=tempo_impiegato-record, ndigits=2), "secondi in più rispetto al record")
+            differenza_di_tempo = tempo_impiegato-record
+            if differenza_di_tempo >= 60:
+                minuti, secondi = conversione_secondi(differenza_di_tempo)
+                if minuti == 0:
+                    print(f"Ci hai impiegato {secondi} secondi in più rispetto al record")
+                elif minuti == 1:
+                    print(f"Ci hai impiegato {minuti} minuto e {secondi} secondi in più rispetto al record")
+                else:
+                    print(f"Ci hai impiegato {minuti} minuti e {secondi} secondi in più rispetto al record")
         elif tempo_impiegato == record:
             print("Hai eguagliato il tuo record")
         else:
@@ -301,6 +334,29 @@ def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
                                     12:"Dicembre"
                                     })
     return df_cubo
+
+
+def mostra_record(cubo:str) -> str:
+    """Mostra le informazioni riguardanti il record personale sul terminale.
+
+    Params:
+            cubo (str): Tipo di cubo
+        Returns:
+            record_personale (str): Mostra informazioni sul terminale
+    """
+    record_personale = ricerca_record(cubo)
+    if record_personale != 0:
+        minuti, secondi = conversione_secondi(record_personale)
+        if minuti == 0:
+            print(f"Risoluzione più veloce: {secondi} secondi")
+        elif minuti == 1:
+            print(f"Risoluzione più veloce: {minuti} minuto e {secondi} secondi")
+        else:
+            print(f"Risoluzione più veloce: {minuti} minuti e {secondi} secondi")
+    else:
+        print("Nessun record impostato al momento.")
+    return record_personale
+
 
 # Funzioni per i notebook
 
