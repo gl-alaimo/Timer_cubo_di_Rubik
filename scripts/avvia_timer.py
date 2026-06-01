@@ -1,6 +1,5 @@
-"""Script che calcola il tempo di risoluzione e fornisce varie statistiche"""
+"""Script che calcola il tempo di risoluzione e fornisce varie statistiche."""
 
-from pyfiglet import Figlet
 import modulo_rubik
 
 
@@ -14,11 +13,10 @@ movimenti_dodecaedro = modulo_rubik.movimenti_dodecaedro
 
 def funzione_principale():
     """Funzione principale"""
-    titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
-    print(titolo.renderText("Timer cubo di Rubik"))
+    modulo_rubik.mostra_titolo()
     cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
-    print()
     riprovare = "si"
+    print()
 
     while riprovare == "si":
         if cubo == "pyraminx":
@@ -33,7 +31,6 @@ def funzione_principale():
         record_personale = modulo_rubik.mostra_record(cubo=cubo)
         media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
         print("Media attuale:", media)
-
         tempo_impiegato, cubo = modulo_rubik.calcolo_tempo(cubo)
         # Informazioni sul record
         modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)
