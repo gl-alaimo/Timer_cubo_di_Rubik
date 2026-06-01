@@ -2,7 +2,6 @@
 quelli con tempo minimo e massimo"""
 
 from time import time
-from pyfiglet import Figlet
 import modulo_rubik
 
 
@@ -17,8 +16,7 @@ lista_risultati = []
 
 def funzione_principale():
     """Funzione principale"""
-    titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
-    print(titolo.renderText("Timer cubo di Rubik"))
+    modulo_rubik.mostra_titolo()
     cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
     record_personale = modulo_rubik.mostra_record(cubo=cubo)
     media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)

@@ -6,6 +6,7 @@ from random import choice, shuffle
 from colorama import Fore, Style
 import pandas
 from matplotlib import pyplot as plt
+from pyfiglet import Figlet
 
 
 lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror"]
@@ -35,6 +36,12 @@ GRIGIO = "#838d99"
 TURCHESE = "#479fa6"
 
 # Funzioni per gli script
+
+
+def mostra_titolo():
+    titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
+    print(titolo.renderText("Timer cubo di Rubik"))
+
 
 def genera_movimenti_casuali(lista_movimenti:list):
     """Genera una lista di movimenti casuali da fare per mischiare il cubo prima di risolverlo
@@ -165,7 +172,7 @@ def calcolo_tempo(cubo:str) -> tuple:
 
     while finito is False:
         ora_iniziale = time()
-        stop = input("Premi 'p' ed invio se vuoi mettere in pausa o invio per terminare: ")
+        stop = input("Digita 'p' e premi invio per mettere in pausa o premi invio per terminare: ")
         if stop == "p":
             ora_finale = time()
             tempo_parziale = round(number=tempo_parziale + ora_finale - ora_iniziale, ndigits=2)
@@ -176,7 +183,7 @@ def calcolo_tempo(cubo:str) -> tuple:
                 print(f"In pausa... Tempo impiegato fino ad ora: 1 minuto e {secondi} secondi")
             else:
                 print(f"In pausa... Tempo impiegato fino ad ora: {minuti} minuti e {secondi} secondi")
-            input("Premi invio per continuare")
+            input("Premi invio per continuare: ")
         else:
             finito = True
 
