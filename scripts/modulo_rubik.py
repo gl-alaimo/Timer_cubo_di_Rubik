@@ -1,4 +1,4 @@
-"""Modulo Rubik timer"""
+"""Modulo contentente codice che viene utilizzato nei vari script e notebook."""
 
 from datetime import datetime
 from time import time
@@ -39,13 +39,15 @@ TURCHESE = "#479fa6"
 
 
 def mostra_titolo():
+    """Mostra il titolo del progetto sul terminale."""
+
     titolo = Figlet(font="speed") # http://www.figlet.org/examples.html
     print(titolo.renderText("Timer cubo di Rubik"))
 
 
 def genera_movimenti_casuali(lista_movimenti:list):
-    """Genera una lista di movimenti casuali da fare per mischiare il cubo prima di risolverlo
-    
+    """Genera una lista di movimenti casuali da fare per mischiare il cubo prima di risolverlo.
+
     Params:
         lista_movimenti (list): Lista di liste contententi tutti i movimenti.
 
@@ -53,7 +55,6 @@ def genera_movimenti_casuali(lista_movimenti:list):
         None.
     
     """
-
     lista_movimenti_casuali = []
 
     for _ in range(2):
@@ -83,12 +84,13 @@ def genera_movimenti_casuali(lista_movimenti:list):
 
 
 def conversione_secondi(secondi: int) -> tuple:
-    """Converte i secondi in minuti e secondi
+    """Converte i secondi in minuti e secondi.
     
     Params:
-        secondi (int): Numero di secondi da convertire
+        secondi (int): Numero di secondi da convertire.
+
     Returns:
-        minuti, sec (tuple): Restituisce una tuple composta da minuti e secondi
+        minuti, sec (tuple): Restituisce una tuple composta da minuti e secondi.
     """
     minuti, sec = divmod(secondi, 60)
     minuti = int(minuti)
@@ -97,12 +99,13 @@ def conversione_secondi(secondi: int) -> tuple:
 
 
 def ricerca_record(cubo:str) -> int:
-    """Ricerca il record attuale nel database
+    """Ricerca il record attuale nel database.
 
     Params:
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
+
     Returns:
-        tempo_record (int): Restituisce il tempo record
+        tempo_record (int): Restituisce il tempo record.
     """
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) != 0:
@@ -117,10 +120,11 @@ def controllo_nuovo_record(tempo_impiegato:int, cubo:str) -> None:
     """Controlla se il record è stato battuto.
 
     Params:
-        tempo_impiegato (int): Tempo impiegato in secondi
-        cubo (str): Tipo di cubo
+        tempo_impiegato (int): Tempo impiegato in secondi.
+        cubo (str): Tipo di cubo.
+
     Returns:
-        Stampa informazioni sul record
+        Stampa informazioni sul record.
     """
     mio_record = ricerca_record(cubo)
     if tempo_impiegato < mio_record:
@@ -143,10 +147,11 @@ def mostra_tempo_attuale(minuti:int, secondi:int) -> None:
     """Mostra il tempo di risoluzione attuale impiegato.
 
     Params:
-        minuti (int): Minuti impiegati
-        secondi (int): Secondi impiegati
+        minuti (int): Minuti impiegati.
+        secondi (int): Secondi impiegati.
+
     Returns:
-        None
+        None.
     """
     if minuti == 0:
         print(Fore.CYAN + f"Tempo impiegato: {secondi} secondi" + Style.RESET_ALL)
@@ -160,10 +165,11 @@ def calcolo_tempo(cubo:str) -> tuple:
     """Calcola il tempo impiegato.
 
     Params:
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
+
     Returns:
         tempo_impiegato, cubo (tuple): Stampa informazioni e restiruisce una tuple
-        con il tempo impiegato e il tipo di cubo
+        con il tempo impiegato e il tipo di cubo.
     """
     input("Premi invio per iniziare: ")
     print("Timer avviato!")
@@ -197,13 +203,14 @@ def calcolo_tempo(cubo:str) -> tuple:
 
 
 def salvataggio_dati(tempo:int, cubo:str) -> None:
-    """Salva il tempo di risoluzione nel database
+    """Salva il tempo di risoluzione nel database.
 
     Params:
-        tempo (int): Tempo impiegato
-        cubo (str): Tipo di cubo
+        tempo (int): Tempo impiegato.
+        cubo (str): Tipo di cubo.
+
     Returns:
-        Salva i dati in un file csv
+        Salva i dati in un file csv.
     """
     data = datetime.now().date()
     with open(file="../database.csv", mode="a", encoding="utf-8") as db_file:
@@ -211,12 +218,13 @@ def salvataggio_dati(tempo:int, cubo:str) -> None:
 
 
 def calcolo_media_assoluta(cubo:str) -> str:
-    """Calcola il tempo medio di tutte le risoluzioni
+    """Calcola il tempo medio di tutte le risoluzioni.
 
     Params:
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
+
     Returns:
-        media_in_minuti_formattata (str): Media in minuti formattata
+        media_in_minuti_formattata (str): Media in minuti formattata.
     """
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) != 0:
@@ -237,13 +245,14 @@ def calcolo_media_assoluta(cubo:str) -> str:
 
 
 def diff_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
-    """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale
+    """Calcola la differenza del tempo medio di risoluzione e il tempo di risoluzione attuale.
 
     Params:
-        cubo (str): Tipo di cubo
-        tempo_impiegato (int): Tempo impiegato
+        cubo (str): Tipo di cubo.
+        tempo_impiegato (int): Tempo impiegato.
+
     Returns:
-        Stampa informazioni sul terminale
+        Mostra informazioni sul terminale.
     """
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) != 0:
@@ -270,13 +279,14 @@ def diff_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
 
 
 def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
-    """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale
+    """Calcola la differenza di tempo tra il record personale e il tempo di risoluzione attuale.
     
     Params:
-        record (int): Record attuale
-        tempo_impiegato (int): Tempo impiegato
+        record (int): Record attuale.
+        tempo_impiegato (int): Tempo impiegato.
+
     Returns:
-        Stampa informazioni sul terminale
+        Mostra informazioni sul terminale.
     """
     if record != 0:
         if tempo_impiegato > record:
@@ -298,13 +308,14 @@ def diff_record_tempo_attuale(record:int, tempo_impiegato:int) -> None:
 
 
 def media_ultime_tot_risoluzioni(cubo:str, num_ultime_risoluzioni: int) -> None:
-    """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo
+    """Calcola la media delle ultime 5 risoluzioni per un determinato tipo di cubo.
     
     Params:
-        cubo (str): Tipo di cubo
-        num_ultime_risoluzioni (int): Numero delle ultime risoluzioni
+        cubo (str): Tipo di cubo.
+        num_ultime_risoluzioni (int): Numero delle ultime risoluzioni.
+
     Returns:
-        Stampa informazioni sul terminale
+        Mostra informazioni sul terminale.
     """
     df = pandas.read_csv("../database.csv", sep="\t")
     if len(df[df["Cubo"] == cubo]) >= num_ultime_risoluzioni:
@@ -324,8 +335,9 @@ def aggiunta_colonne_data(df_cubo:pandas.DataFrame) -> pandas.DataFrame:
 
     Params:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
     Returns:
-        df_cubo (pandas.DataFrame): DataFrame aggiornato
+        df_cubo (pandas.DataFrame): DataFrame aggiornato.
     """
     df_cubo = df_cubo.assign(Anno=df_cubo["Data"].dt.year)
     df_cubo = df_cubo.assign(Mese=df_cubo["Data"].dt.month)
@@ -352,9 +364,10 @@ def mostra_record(cubo:str) -> str:
     """Mostra le informazioni riguardanti il record personale sul terminale.
 
     Params:
-            cubo (str): Tipo di cubo
-        Returns:
-            record_personale (str): Mostra informazioni sul terminale
+        cubo (str): Tipo di cubo.
+
+    Returns:
+        record_personale (str): Mostra informazioni sul terminale.
     """
     record_personale = ricerca_record(cubo)
     if record_personale != 0:
@@ -380,7 +393,7 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
         anno (int): Anno per cui calcolare le medie mensili.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=AZZURRO)
@@ -401,7 +414,7 @@ def mostra_record_mensili(df_cubo: pandas.DataFrame, anno: int):
         anno (int): Anno per cui calcolare i record mensili.
         
     Returns:
-        None
+        None.
     """
     df_records = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
     df_records = pandas.DataFrame(df_records)
@@ -419,7 +432,7 @@ def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
         anno (int): Anno per cui calcolare i record mensili.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VERDE)
@@ -439,7 +452,7 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].mean()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VIOLA, width=0.3)
@@ -453,14 +466,14 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
 
 
 def stampa_record_media_massimo(df_cubo: pandas.DataFrame, cubo:int) -> None:
-    """Stampa il tempo massimo, medio e minimo
+    """Stampa il tempo massimo, medio e minimo.
     
     Params:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
         
     Returns:
-        None
+        None.
     """
     record = ricerca_record(cubo)
     record_min, record_sec = conversione_secondi(record)
@@ -481,7 +494,7 @@ def grafico_record_media_massimo(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     plt.figure(figsize=(11,5))
     plt.bar(x=["Tempo minimo", "Tempo medio", "Tempo massimo"],
@@ -503,7 +516,7 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
         anno (int): Anno per cui calcolare il numero di risoluzioni mensili.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=GRIGIO)
@@ -523,7 +536,7 @@ def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo.drop(columns=["Data", "Tempo"]).groupby(by="Cubo").min().sort_values(by="Secondi")
     grafico = dati_per_grafico.plot.bar(figsize=(11,5), color=VERDE)
@@ -543,7 +556,7 @@ def mostra_tutti_record(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     df_records = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").min()
     df_records.insert(loc=1, column="Tempo", value=df_records["Secondi"].apply(conversione_secondi))
@@ -558,7 +571,7 @@ def calcola_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     medie_df = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().round(2)
     medie_df.insert(loc=1, column="Tempo", value=medie_df["Secondi"].apply(conversione_secondi))
@@ -573,7 +586,7 @@ def grafico_media_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo[["Secondi", "Cubo"]].groupby(by="Cubo").mean().round(2).sort_values(by="Secondi")
     grafico = dati_per_grafico.plot.bar(figsize=(11,5), color=AZZURRO)
@@ -593,7 +606,7 @@ def calcola_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     print(df_cubo["Cubo"].value_counts().sort_values(ascending=False))
 
@@ -605,7 +618,7 @@ def grafico_num_risoluzioni(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo["Cubo"].value_counts()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=TURCHESE)
@@ -625,7 +638,7 @@ def grafico_risoluzioni_recenti(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     plt.figure(figsize=(13,5))
     plt.title("Tempi e data delle risoluzioni recenti", fontweight="bold")
@@ -641,10 +654,10 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
     """Carica i dati dal database.
 
     Params:
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
     
     Returns:
-        df (pandas.DataFrame)
+        df (pandas.DataFrame): DataFrame.
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
     df = df[df["Cubo"] == cubo]
@@ -660,10 +673,10 @@ def caricamento_dati_notebook_generale() -> pandas.DataFrame:
     """Carica i dati di tutti i tipi di cubi dal database.
 
     Params:
-        None
+        None.
 
     Returns:
-        df (pandas.DataFrame): Dataframe con i dati caricati dal database
+        df (pandas.DataFrame): DataFrame con i dati caricati dal database.
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
     # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
@@ -674,13 +687,13 @@ def caricamento_dati_notebook_generale() -> pandas.DataFrame:
 
 
 def stampa_record(cubo:str) -> None:
-    """Stampa il record del cubo specificato
+    """Stampa il record del cubo specificato.
     
     Params:
-        cubo (str): Tipo di cubo
+        cubo (str): Tipo di cubo.
     
     Returns:
-        None
+        None.
     """
     minuti, secondi = conversione_secondi((ricerca_record(cubo)))
     if minuti == 0:
@@ -699,7 +712,7 @@ def medie_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Seri
         anno (int): Anno per cui calcolare le medie mensili.
     
     Returns:
-        None
+        None.
     """
     df_medie_mensili = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2)
     df_medie_mensili = pandas.DataFrame(df_medie_mensili)
@@ -714,10 +727,10 @@ def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Ser
 
     Params:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
-        anno (int): anno
+        anno (int): Anno.
     
     Returns:
-        None
+        None.
     """
     print(f"Numero di risoluzioni mensili del {anno}\n")
     print(df_cubo[df_cubo["Anno"]==anno]["Mese"].value_counts())
@@ -730,7 +743,7 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
     
     Returns:
-        None
+        None.
     """
     df_medie_annuali = df_cubo.groupby(by=["Anno"])["Secondi"].mean().round(2)
     df_medie_annuali = pandas.DataFrame(df_medie_annuali)
@@ -749,7 +762,7 @@ def grafico_ultime_tot_risoluzioni(df_cubo: pandas.DataFrame, num_ultime_risoluz
         Se non specificato, il suo valore predefinito è 50.
 
     Returns:
-        None
+        None.
     """
     df_cubo = df_cubo.tail(num_ultime_risoluzioni)
     media = df_cubo["Secondi"].mean().round(2)
@@ -777,7 +790,7 @@ def classifica_migliori_soluzioni(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
 
     Returns:
-        None
+        None.
     """
     print("Classifica delle 10 risoluzioni più veloci\n")
     df_top_10 = df_cubo.sort_values(by="Secondi", ascending=True).head(10).reset_index(drop=True)
@@ -794,7 +807,7 @@ def numero_risoluzioni_annuali(df_cubo:pandas.DataFrame) -> pandas.Series:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
     
     Returns:
-        None
+        None.
     """
     print("Numero di risoluzioni annuali\n")
     print(df_cubo["Anno"].value_counts().sort_values())
@@ -807,7 +820,7 @@ def grafico_risoluz_annuali(df_cubo: pandas.DataFrame) -> None:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
         
     Returns:
-        None
+        None.
     """
     dati_per_grafico = df_cubo["Anno"].value_counts().sort_index()
     grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), width=0.3, color=GIALLO)

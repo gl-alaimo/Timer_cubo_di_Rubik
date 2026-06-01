@@ -1,5 +1,4 @@
-"""Caricamento manuale del tempo di risoluzione del cubo al database."""
-
+"""Caricamento manuale nel database del tempo di risoluzione del cubo."""
 
 from datetime import datetime
 import modulo_rubik
@@ -20,8 +19,8 @@ while aggiungere_altra_soluzione == "si":
     minuti = int(input("Minuti: "))
     secondi = int(input("Secondi: "))
     millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
-    print()
     tempo_impiegato = (minuti * 60) + secondi + millesimi
+    print()
 
     modulo_rubik.controllo_nuovo_record(tempo_impiegato, cubo)
     record_personale = modulo_rubik.ricerca_record(cubo)

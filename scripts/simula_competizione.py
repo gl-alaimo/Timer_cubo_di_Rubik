@@ -1,5 +1,5 @@
-"""Script che calcola il tempo di 5 risoluzioni e fornisce la media dei risultati escludendo
-quelli con tempo minimo e massimo"""
+"""Script che calcola il tempo di 5 risoluzioni (oppure 3 nel caso di cubi grandi) e fornisce la media dei risultati escludendo
+quelli con tempo minimo e massimo."""
 
 from time import time
 import modulo_rubik
