@@ -42,6 +42,7 @@ def funzione_principale():
             modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_cubi_grandi)
 
         input("Premi invio per iniziare: ")
+        print("Timer avviato!")
         ora_iniziale = time()
         input("Premi invio per terminare: ")
         ora_finale = time()
