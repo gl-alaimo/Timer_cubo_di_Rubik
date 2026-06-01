@@ -159,6 +159,7 @@ def calcolo_tempo(cubo:str) -> tuple:
         con il tempo impiegato e il tipo di cubo
     """
     input("Premi invio per iniziare: ")
+    print("Timer avviato!")
     finito = False
     tempo_parziale = 0
 
@@ -223,7 +224,9 @@ def calcolo_media_assoluta(cubo:str) -> str:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuto e {media_in_minuti[1]} secondi"
         else:
             media_in_minuti_formattata = f"{media_in_minuti[0]} minuti e {media_in_minuti[1]} secondi"
-    return media_in_minuti_formattata
+        return media_in_minuti_formattata
+    else:
+        return "Nessuna"
 
 
 def diff_media_tempo_attuale(cubo:str, tempo_impiegato:int) -> None:
@@ -356,7 +359,7 @@ def mostra_record(cubo:str) -> str:
         else:
             print(f"Risoluzione più veloce: {minuti} minuti e {secondi} secondi")
     else:
-        print("Nessun record impostato al momento.")
+        print("Nessun record impostato al momento")
     return record_personale
 
 
