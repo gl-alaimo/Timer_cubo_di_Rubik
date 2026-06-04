@@ -5,6 +5,7 @@ from time import time
 from random import choice, shuffle
 from colorama import Fore, Style
 import pandas
+import seaborn as sns
 from matplotlib import pyplot as plt
 from pyfiglet import Figlet
 
@@ -830,4 +831,48 @@ def grafico_risoluz_annuali(df_cubo: pandas.DataFrame) -> None:
     plt.xticks(rotation=0)
     for la_barra in grafico.containers:
         grafico.bar_label(container=la_barra, labels=dati_per_grafico.values, label_type='center')
+    plt.show()
+
+
+def grafico_tutte_risoluzioni(df: pandas.DataFrame) -> None:
+    """Crea un grafico con i dati di tutte le risoluzioni di ogni tipo di cubo.
+
+    Params:
+        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        None.
+    """
+    plt.figure(figsize=(13,5))
+
+    for il_cubo in df["Cubo"].unique():
+        plt.scatter(df[df["Cubo"] == il_cubo].index,
+                    df[df["Cubo"] == il_cubo]["Secondi"],
+                    label=il_cubo)
+
+    plt.title("Tempi delle risoluzioni di tutti i tipi di cubi", fontweight="bold")
+    plt.grid(axis="y")
+    plt.ylabel("Secondi", fontweight="bold")
+    plt.xlabel("Numero risoluzione", fontweight="bold")
+    plt.legend()
+    plt.show()
+
+
+def grafico_concentrazione_dati(df: pandas.DataFrame) -> None:
+    """Crea un grafico con la concentrazione dei dati di tutte le risoluzioni.
+
+    Params:
+        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        None.
+    """
+    plt.figure(figsize=(11,5))
+    plt.title("Concetrazione dei dati di tutte le risoluzioni")
+    sns.scatterplot(data=df, x=df.index, y="Secondi", color="#8a6a5a")
+    sns.rugplot(data=df,
+                x=df.index,
+                y="Secondi",
+                color="#3e302c")
+    plt.xlabel("Numero risoluzione")
     plt.show()
