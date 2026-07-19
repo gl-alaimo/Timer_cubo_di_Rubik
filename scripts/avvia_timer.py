@@ -18,7 +18,7 @@ def funzione_principale():
     riprovare = "si"
     print()
 
-    while riprovare == "si":
+    while riprovare == "si" or riprovare == "sì":
         if cubo == "pyraminx":
             modulo_rubik.genera_movimenti_casuali(lista_movimenti=movimenti_pyraminx)
         elif cubo in lista_dodecaedri:

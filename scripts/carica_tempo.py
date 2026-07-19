@@ -15,7 +15,7 @@ media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
 print("Media attuale:", media, "\n")
 aggiungere_altra_soluzione = "si"
 
-while aggiungere_altra_soluzione == "si":
+while aggiungere_altra_soluzione == "si" or aggiungere_altra_soluzione == "sì":
     minuti = int(input("Minuti: "))
     secondi = int(input("Secondi: "))
     millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
