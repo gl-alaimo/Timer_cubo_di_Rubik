@@ -17,12 +17,19 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo. (Ad esempio <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts/notebook_cubo_3x3x3.ipynb">questo file notebook</a>)
 
 ## Requisiti
+- Python 3.x scaricabile dal sito https://www.python.org/downloads/
 
-- Python 3.x
-- Moduli aggiuntivi specificati nel file `requirements.txt` installabili tramite il comando `python -m pip install -r requirements.txt` dal terminale.
+## Installazione
+Eseguire i seguenti comandi nel terminale:
+- `git clone https://github.com/gl-alaimo/Timer_cubo_di_Rubik.git` oppure `git clone git@github.com:gl-alaimo/Timer_cubo_di_Rubik.git` per scaricare il progetto da GitHub.com
+- `cd Timer_cubo_di_Rubik` per aprire il progetto una volta scaricato
+- `python -m venv venv` per creare un ambiente virtuale
+- `source venv/bin/activate` (oppure `venv\Scripts\activate` su Windows) per attivare l'ambiente virtuale
+- `python -m pip install -r requirements.txt` per installare i moduli aggiuntivi
+
 
 ## Come funziona
-Per prima cosa bisogna scaricare o clonare il progetto e poi andare nella cartella "scripts" con il seguente comando dal terminale di Windows:
+Una volta scaricato o clonato il progetto bisogna andare nella cartella "scripts" con il seguente comando dal terminale di Windows:
 `cd .\scripts\` (oppure `cd scripts` da un terminale di tipo bash) e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
    Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione in tempo reale.<br>
