@@ -4,8 +4,8 @@ from datetime import datetime
 from time import time
 from random import choice, shuffle
 from colorama import Fore, Style
-import seaborn as sns
 import pandas
+import seaborn as sns
 from matplotlib import pyplot as plt
 from pyfiglet import Figlet
 
@@ -396,15 +396,19 @@ def grafico_medie_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     Returns:
         None.
     """
-    dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=AZZURRO)
-    plt.title(label=f"Tempo medio mensile delle risoluzioni nel {anno}", fontweight="bold")
-    plt.ylabel(ylabel="Secondi", fontweight="bold")
-    plt.xlabel(xlabel="Mese", fontweight="bold")
-    plt.xticks(rotation=0)
-    for la_barra in grafico.containers:
-        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
-    plt.show()
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean()
+        grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=AZZURRO)
+        plt.title(label=f"Tempo medio mensile delle risoluzioni nel {anno}", fontweight="bold")
+        plt.ylabel(ylabel="Secondi", fontweight="bold")
+        plt.xlabel(xlabel="Mese", fontweight="bold")
+        plt.xticks(rotation=0)
+        for la_barra in grafico.containers:
+            grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
+        plt.show()
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def mostra_record_mensili(df_cubo: pandas.DataFrame, anno: int):
@@ -417,12 +421,16 @@ def mostra_record_mensili(df_cubo: pandas.DataFrame, anno: int):
     Returns:
         None.
     """
-    df_records = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
-    df_records = pandas.DataFrame(df_records)
-    df_records.insert(loc=1, column="Tempo", value=df_records["Secondi"].apply(conversione_secondi))
-    df_records['Tempo'] = df_records['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
-    print("Record stabiliti ogni mese\n")
-    print(df_records)
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        df_records = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
+        df_records = pandas.DataFrame(df_records)
+        df_records.insert(loc=1, column="Tempo", value=df_records["Secondi"].apply(conversione_secondi))
+        df_records['Tempo'] = df_records['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+        print("Record stabiliti ogni mese\n")
+        print(df_records)
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
@@ -435,15 +443,19 @@ def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
     Returns:
         None.
     """
-    dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VERDE)
-    plt.title(label=f"Tempo record mensile delle risoluzioni nel {anno}", fontweight="bold")
-    plt.ylabel(ylabel="Secondi", fontweight="bold")
-    plt.xlabel(xlabel="Mese", fontweight="bold")
-    plt.xticks(rotation=0)
-    for la_barra in grafico.containers:
-        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
-    plt.show()
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        dati_per_grafico = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].min()
+        grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VERDE)
+        plt.title(label=f"Tempo record mensile delle risoluzioni nel {anno}", fontweight="bold")
+        plt.ylabel(ylabel="Secondi", fontweight="bold")
+        plt.xlabel(xlabel="Mese", fontweight="bold")
+        plt.xticks(rotation=0)
+        for la_barra in grafico.containers:
+            grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
+        plt.show()
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
@@ -519,15 +531,19 @@ def grafico_risoluz_mensile(df_cubo: pandas.DataFrame, anno: int) -> None:
     Returns:
         None.
     """
-    dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=GRIGIO)
-    plt.title(f"Numero risoluzioni mensili del {anno}", fontweight="bold")
-    plt.ylabel("Numero risoluzioni", fontweight="bold",)
-    plt.xlabel("Mese", fontweight="bold",)
-    plt.xticks(rotation=0)
-    for la_barra in grafico.containers:
-        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values, label_type='center')
-    plt.show()
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        dati_per_grafico = df_cubo[df_cubo["Anno"]==anno]["Data completa"].dt.month.value_counts().sort_index()
+        grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=GRIGIO)
+        plt.title(f"Numero risoluzioni mensili del {anno}", fontweight="bold")
+        plt.ylabel("Numero risoluzioni", fontweight="bold",)
+        plt.xlabel("Mese", fontweight="bold",)
+        plt.xticks(rotation=0)
+        for la_barra in grafico.containers:
+            grafico.bar_label(container=la_barra, labels=dati_per_grafico.values, label_type='center')
+        plt.show()
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def grafico_tutti_record(df_cubo: pandas.DataFrame) -> None:
@@ -661,13 +677,16 @@ def caricamento_dati(cubo: str) -> pandas.DataFrame:
         df (pandas.DataFrame): DataFrame.
     """
     df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Data"])
-    df = df[df["Cubo"] == cubo]
-    df = df.reset_index(drop=True)
-    # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
-    df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
-    df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
-    df = aggiunta_colonne_data(df)
-    return df
+    if cubo in df["Cubo"].values:
+        df = df[df["Cubo"] == cubo]
+        df = df.reset_index(drop=True)
+        # Inserimento colonna "Tempo" con i secondi convertiti in minuti e secondi
+        df.insert(loc=2, column="Tempo", value=df["Secondi"].apply(conversione_secondi))
+        df['Tempo'] = df['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+        df = aggiunta_colonne_data(df)
+        return df
+    else:
+        print("Nessuna risoluzione presente per questo cubo")
 
 
 def caricamento_dati_notebook_generale() -> pandas.DataFrame:
@@ -715,12 +734,16 @@ def medie_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Seri
     Returns:
         None.
     """
-    df_medie_mensili = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2)
-    df_medie_mensili = pandas.DataFrame(df_medie_mensili)
-    df_medie_mensili.insert(loc=1, column="Tempo", value=df_medie_mensili["Secondi"].apply(conversione_secondi))
-    df_medie_mensili['Tempo'] = df_medie_mensili['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
-    print("Tempi medi delle risoluzioni mensili\n")
-    print(df_medie_mensili)
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        df_medie_mensili = df_cubo[df_cubo["Anno"]==anno].groupby(by=["Mese"], sort=False)["Secondi"].mean().round(2)
+        df_medie_mensili = pandas.DataFrame(df_medie_mensili)
+        df_medie_mensili.insert(loc=1, column="Tempo", value=df_medie_mensili["Secondi"].apply(conversione_secondi))
+        df_medie_mensili['Tempo'] = df_medie_mensili['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+        print("Tempi medi delle risoluzioni mensili\n")
+        print(df_medie_mensili)
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Series:
@@ -733,8 +756,12 @@ def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Ser
     Returns:
         None.
     """
-    print(f"Numero di risoluzioni mensili del {anno}\n")
-    print(df_cubo[df_cubo["Anno"]==anno]["Mese"].value_counts())
+    anni = df_cubo["Anno"].values
+    if anno in anni:
+        print(f"Numero di risoluzioni mensili del {anno}\n")
+        print(df_cubo[df_cubo["Anno"]==anno]["Mese"].value_counts())
+    else:
+        print("Nessuna risoluzione presente per l'anno specificato")
 
 
 def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
