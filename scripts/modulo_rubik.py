@@ -876,3 +876,25 @@ def grafico_concentrazione_dati(df: pandas.DataFrame) -> None:
                 color="#3e302c")
     plt.xlabel("Numero risoluzione")
     plt.show()
+
+
+def calcolo_correlazione(df: pandas.DataFrame) -> float:
+    """Calcola il coefficente di correlazione
+
+    Params:
+        df (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        Coefficente (float): Coefficente di correlazione.
+    """
+    indici = pandas.Series(df.index.to_list())
+    coefficiente_di_correlazione = df["Secondi"].corr(indici)
+    print("Coefficiente di correlazione", coefficiente_di_correlazione)
+    if coefficiente_di_correlazione < 0 and coefficiente_di_correlazione > -1:
+        print("Questo valore indica che maggiore è il numero di risoluzioni, minore è il tempo di risoluzione")
+    elif coefficiente_di_correlazione == -1:
+        print("Questo valore indica che ogni singola volta che si risolve il cubo il tempo di risoluzione è minore")
+    elif coefficiente_di_correlazione > 0 and coefficiente_di_correlazione < 1:
+        print("Questo valore indica che maggiore è il numero di risoluzioni, maggiore è il tempo di risoluzione")
+    elif coefficiente_di_correlazione == 1:
+        print("Questo valore indica che ogni singola volta che si risolve il cubo il tempo di risoluzione è maggiore")
