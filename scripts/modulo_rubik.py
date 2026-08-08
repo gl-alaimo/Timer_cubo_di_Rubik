@@ -191,6 +191,7 @@ def calcolo_tempo(cubo:str) -> tuple:
             else:
                 print(f"In pausa... Tempo impiegato fino ad ora: {minuti} minuti e {secondi} secondi")
             input("Premi invio per continuare: ")
+            print("Timer riavviato!")
         else:
             finito = True
 
