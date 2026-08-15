@@ -1,6 +1,6 @@
 # Rubik's Cube Timer
 
-This project contains various Python scripts designed to record solve times for many types of Rubik's cubes in real-time, manually upload solve times, suggest moves to scramble the cube before starting to solve it, simulate a speedcubing competition, track personal records and average solve times, and much more.
+This project contains various Python scripts designed to track solve times for many types of Rubik's cubes in real-time, manually upload solve times, suggest moves to scramble the cube before starting to solve it, simulate a speedcubing competition, track personal records and average solve times, and much more.
 
 This project also contains various Jupyter Notebooks for analyzing data related to solve times through the creation of many charts and the calculation of various statistics.
 
@@ -14,7 +14,7 @@ Great for practicing and keeping track of your progress.
 - **upload_solve.py**: Script to manually upload solve times.
 - **simulate_competition.py**: Script to simulate a speedcubing competition.
 - **database.csv**: CSV file that stores solve times.
-- **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** etc.: Jupyter Notebooks for data analysis and visualizations.
+- **general_notebook**, **notebook_2x2x2**, **notebook_3x3x3** etc.: Jupyter Notebooks for data analysis and visualizations.
 
 The `giuseppe_alaimo` branch contains a version of this project with data and statistics of the author's (Giuseppe Alaimo) solves and is continuously updated. It might be useful to take a look at it and get an idea of how the notebooks are structured and have a detailed preview of the project before downloading or cloning it. (For example, <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts/notebook_cubo_3x3x3.ipynb">this notebook file</a>)
 
@@ -79,19 +79,19 @@ Email: <a href="gl.alaimo@protonmail.com">gl.alaimo@protonmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/giuseppe-luca-alaimo-9875b32a1/">Link</a>
 
 ## Preview of run_timer.py script
-<img src="immagini/Anteprima_script_run_timer.png">
+<img src="images/Anteprima_script_run_timer.png">
 
 ## Preview of upload_solve.py script
-<img src="immagini/Anteprima_script_upload_solve.png">
+<img src="images/Anteprima_script_upload_solve.png">
 
 ## Preview of simulate_competition.py script
-<img src="immagini/Anteprima_simulate_competition.png">
+<img src="images/Anteprima_simulate_competition.png">
 
 ## Preview of notebook_cubo_3x3x3.ipynb
-<img src="immagini/Anteprima_notebook_3x3x3_1.png">
-<img src="immagini/Anteprima_notebook_3x3x3_2.png">
-<img src="immagini/Anteprima_notebook_3x3x3_3.png">
+<img src="images/Anteprima_notebook_3x3x3_1.png">
+<img src="images/Anteprima_notebook_3x3x3_2.png">
+<img src="images/Anteprima_notebook_3x3x3_3.png">
 
 ## Preview of notebook_generale.ipynb
-<img src="immagini/Anteprima_notebook_generale.png">
-<img src="immagini/Anteprima_notebook_generale_2.png">
+<img src="images/Anteprima_notebook_generale.png">
+<img src="images/Anteprima_notebook_generale_2.png">
