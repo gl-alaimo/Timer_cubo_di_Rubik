@@ -446,7 +446,7 @@ def monthly_records_chart(df_cube: pandas.DataFrame, year: int) -> None:
     if year in years:
         chart_data = df_cube[df_cube["Year"] == year].groupby(by=["Month"], sort=False)["Seconds"].min()
         chart = chart_data.plot(kind="bar", figsize=(11, 5), color=GREEN)
-        plt.title(label=f"Monthly record solve time in {year}", fontweight="bold")
+        plt.title(label=f"Monthly best solve time in {year}", fontweight="bold")
         plt.ylabel(ylabel="Seconds", fontweight="bold")
         plt.xlabel(xlabel="Month", fontweight="bold")
         plt.xticks(rotation=0)
@@ -675,8 +675,8 @@ def load_data(cube: str) -> pandas.DataFrame:
     Returns:
         df (pandas.DataFrame): DataFrame with loaded data from the database.
     """
+    df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Date"])
     if cube in df["Cube"].values:
-        df = pandas.read_csv("../database.csv", sep="\t", parse_dates=["Date"])
         df = df[df["Cube"] == cube]
         df = df.reset_index(drop=True)
         # Insert "Time" column with seconds converted to minutes and seconds
