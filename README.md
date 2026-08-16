@@ -1,8 +1,8 @@
 # Rubik's Cube Timer
 
-This project contains various Python scripts designed to track solve times for many types of Rubik's cubes in real-time, manually upload solve times, suggest moves to scramble the cube before starting to solve it, simulate a speedcubing competition, track personal records and average solve times, and much more.
-
-This project also contains various Jupyter Notebooks for analyzing data related to solve times through the creation of many charts and the calculation of various statistics.
+This project contains <br>
+- various Python scripts designed to track solve times for many types of Rubik's cubes in real-time, manually upload solve times, suggest moves to scramble the cube before starting to solve it, simulate a speedcubing competition, track personal records and average solve times, and much more.<br>
+- various Jupyter Notebooks for analyzing data related to solve times through the creation of many charts and the calculation of various statistics.
 
 Great for practicing and keeping track of your progress.
 
@@ -79,19 +79,19 @@ Email: <a href="gl.alaimo@protonmail.com">gl.alaimo@protonmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/giuseppe-luca-alaimo-9875b32a1/">Link</a>
 
 ## Preview of run_timer.py script
-<img src="images/Anteprima_script_run_timer.png">
+<img src="images/script_run_timer_preview.png">
 
 ## Preview of upload_solve.py script
-<img src="images/Anteprima_script_upload_solve.png">
+<img src="images/script_upload_solve_preview.png">
 
 ## Preview of simulate_competition.py script
-<img src="images/Anteprima_simulate_competition.png">
+<img src="images/script_simulate_competition_preview.png">
 
 ## Preview of notebook_cubo_3x3x3.ipynb
-<img src="images/Anteprima_notebook_3x3x3_1.png">
-<img src="images/Anteprima_notebook_3x3x3_2.png">
-<img src="images/Anteprima_notebook_3x3x3_3.png">
+<img src="images/notebook_3x3x3_preview_1.png"><br>
+<img src="images/notebook_3x3x3_preview_2.png"><br>
+<img src="images/notebook_3x3x3_preview_3.png">
 
 ## Preview of notebook_generale.ipynb
-<img src="images/Anteprima_notebook_generale.png">
-<img src="images/Anteprima_notebook_generale_2.png">
+<img src="images/general_notebook_preview_1.png">
+<img src="images/general_notebook_preview_2.png">
