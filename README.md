@@ -1,7 +1,10 @@
 # Timer cubo di Rubik
 
-Questo progetto contiene vari script scritti in Python progettati per registrare i tempi di risoluzione di molti tipi di cubi di Rubik in tempo reale, caricare tempi di risoluzione manualmente, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, simulare una competizione di speedcubing, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro. 
-Questo progetto contiene inoltre vari Notebook per analizzare i dati relativi ai tempi di risoluzione grazie anche alla creazione di molti grafici ed al calcolo di varie statistiche. 
+(For English switch to <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/tree/english_version"> english_version </a> branch)
+
+Questo progetto contiene 
+- vari script scritti in Python progettati per registrare i tempi di risoluzione di molti tipi di cubi di Rubik in tempo reale, caricare tempi di risoluzione manualmente, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, simulare una competizione di speedcubing, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro. 
+- vari Notebook per analizzare i dati relativi ai tempi di risoluzione grazie anche alla creazione di molti grafici ed al calcolo di varie statistiche. 
 Ottimo per fare pratica e tenere traccia dei propri progressi.
 
 
@@ -14,7 +17,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
 
-Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo. (Ad esempio <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts/notebook_cubo_3x3x3.ipynb">questo file notebook</a>)
+Il branch `giuseppe_alaimo` contiene una versione di questo progetto con i dati e le statistiche delle risoluzioni dell'autore (Giuseppe Alaimo appunto) ed è in continuo aggiornamento. Potrebbe essere utile per dargli un'occhiata e farsi un'idea di come sono strutturati i notebook ed avere un'anteprima dettagliata del progetto prima di scaricarlo o clonarlo. (Ad esempio <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts_e_notebook/notebook_cubo_3x3x3.ipynb">questo file notebook</a>)
 
 ## Requisiti
 - Python 3.x scaricabile dal sito https://www.python.org/downloads/
@@ -30,7 +33,7 @@ Eseguire i seguenti comandi nel terminale:
 
 ## Come funziona
 Una volta scaricato o clonato il progetto bisogna andare nella cartella "scripts" con il seguente comando dal terminale di Windows:
-`cd .\scripts\` (oppure `cd scripts` da un terminale di tipo bash) e poi eseguire uno dei comandi descritti sotto:
+`cd .\scripts_e_notebook\` (oppure `cd scripts_e_notebook/` da un terminale di tipo bash) e poi eseguire uno dei comandi descritti sotto:
 1. **Avviare il Timer**:
    Eseguire lo script `avvia_timer.py` per registrare i tempi di risoluzione in tempo reale.<br>
    Da un terminale Windows:
