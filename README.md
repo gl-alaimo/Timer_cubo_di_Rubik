@@ -32,7 +32,7 @@ Run the following commands in the terminal:
 
 ## How it Works
 Once you have downloaded or cloned the project, go to the "scripts" folder with the following command from the Windows terminal:
-`cd .\scripts\` (or `cd scripts` from a bash terminal) and then run one of the commands described below:
+`cd .\scripts_and_notebooks\` (or `cd scripts_and_notebooks` from a bash terminal) and then run one of the commands described below:
 
 1. **Start the Timer**:
    Run the script `run_timer.py` to record solve times in real-time.<br>
