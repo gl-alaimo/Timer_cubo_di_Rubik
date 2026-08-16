@@ -16,7 +16,7 @@ Great for practicing and keeping track of your progress.
 - **database.csv**: CSV file that stores solve times.
 - **general_notebook**, **notebook_2x2x2**, **notebook_3x3x3** etc.: Jupyter Notebooks for data analysis and visualizations.
 
-The `giuseppe_alaimo` branch contains a version of this project with data and statistics of the author's (Giuseppe Alaimo) solves and is continuously updated. It might be useful to take a look at it and get an idea of how the notebooks are structured and have a detailed preview of the project before downloading or cloning it. (For example, <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts/notebook_cubo_3x3x3.ipynb">this notebook file</a>)
+The `giuseppe_alaimo` branch contains a version of this project with data and statistics of the author's (Giuseppe Alaimo) solves and is continuously updated. It might be useful to take a look at it and get an idea of how the notebooks are structured and have a detailed preview of the project before downloading or cloning it. (For example, <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/blob/giuseppe_alaimo/scripts_e_notebook/notebook_cubo_3x3x3.ipynb">this notebook file</a>)
 
 ## Requirements
 - Python 3.x downloadable from https://www.python.org/downloads/
