@@ -32,9 +32,15 @@ GIALLO = "#ffbf57"
 ROSSO = "#d21518"
 VERDE = "#73b06a"
 AZZURRO = "#0caaf6"
-VIOLA = "#7366cb"
 GRIGIO = "#838d99"
 TURCHESE = "#479fa6"
+
+
+mesi_ordinati = [
+            "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+            "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+            ]
+
 
 # Funzioni per gli script
 
@@ -459,8 +465,185 @@ def grafico_record_mensili(df_cubo: pandas.DataFrame, anno: int) -> None:
         print("Nessuna risoluzione presente per l'anno specificato")
 
 
+def calcola_record_mensili_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Calcola i record stabiliti ogni anno.
+
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+    Returns:
+        None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        df_pivot = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="min",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(mesi_ordinati)
+        df_pivot = df_pivot.fillna(value=0)
+        print(df_pivot)
+    else:
+        print("Dati non disponibili. Sono presenti risoluzioni per un solo anno.")
+
+
+
+def grafico_record_mensili_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Crea un grafico con i tempi record mensili delle soluzioni nei vari anni.
+
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+    Returns:
+        None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        dati_per_grafico = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="min",
+            sort=False,
+        )
+        colori_verdi = ["#1a5c4d", "#307457", "#4b8c5f", "#609d64", "#70ac74"]
+        dati_per_grafico = dati_per_grafico.reindex(mesi_ordinati)
+        dati_per_grafico.plot(kind="bar", figsize=(12, 6), width=0.8, color=colori_verdi)
+        plt.title(label="Tempo record mensile delle risoluzioni nei vari anni", fontweight="bold")
+        plt.ylabel(ylabel="Secondi", fontweight="bold")
+        plt.xlabel(xlabel="Mese", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Anno")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Grafico non disponibile. Sono presenti risoluzioni per un solo anno.")
+
+
+def calcola_medie_mensili_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Calcola i tempi medi stabiliti ogni anno.
+
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+    Returns:
+        None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        df_pivot = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="mean",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(mesi_ordinati)
+        df_pivot = df_pivot.fillna(value=0)
+        df_pivot = df_pivot.round(2)
+        print(df_pivot)
+    else:
+        print("Dati non disponibili. Sono presenti risoluzioni per un solo anno.")
+
+
+def grafico_medie_mensili_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Crea un grafico con i tempi medi mensili delle soluzioni nei vari anni.
+
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+    Returns:
+        None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        dati_per_grafico = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="mean",
+            sort=False,
+        )
+        colori_blu = ["#10829f", "#1293b3", "#14a3c7", "#43b5d2", "#72c8dd"]
+        dati_per_grafico = dati_per_grafico.reindex(mesi_ordinati)
+        dati_per_grafico.plot(kind="bar", figsize=(12, 6), width=0.8, color=colori_blu)
+        plt.title(label="Tempo medio mensile delle risoluzioni nei vari anni", fontweight="bold")
+        plt.ylabel(ylabel="Secondi", fontweight="bold")
+        plt.xlabel(xlabel="Mese", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Anno")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Grafico non disponibile. Sono presenti risoluzioni per un solo anno.")
+
+
+def calcola_num_risoluz_mensile_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Calcola il numero di risoluzioni mensili per ogni anno.
+
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+    Returns:
+        None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        df_pivot = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="count",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(mesi_ordinati)
+        df_pivot = df_pivot.fillna(value=0)
+        df_pivot = df_pivot.round().astype(int)
+        print(df_pivot)
+    else:
+        print("Dati non disponibili. Sono presenti risoluzioni per un solo anno.")
+
+
+def grafico_risoluz_mensile_tutti_anni(df_cubo: pandas.DataFrame) -> None:
+    """Crea un grafio con le risoluzioni mensili di ogni anno.
+
+        Params:
+            df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+
+        Returns:
+            None.
+    """
+    anni = set(df_cubo["Anno"].values)
+    if len(anni) > 1:
+        dati_per_grafico = df_cubo.pivot_table(
+            index="Mese",
+            columns="Anno",
+            values="Secondi",
+            aggfunc="count",
+            sort=False,
+        )
+        colori_grigi = ["#848789", "#939698", "#a3a5a7", "#b3b5b6", "#c3c5c5"]
+        dati_per_grafico = dati_per_grafico.reindex(mesi_ordinati)
+        dati_per_grafico.plot(kind="bar", figsize=(12, 6), width=0.8, color=colori_grigi)
+        plt.title(label="Numero delle risoluzioni mensili nei vari anni", fontweight="bold")
+        plt.ylabel(ylabel="Secondi", fontweight="bold")
+        plt.xlabel(xlabel="Mese", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Anno")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Grafico non disponibile. Sono presenti risoluzioni per un solo anno.")
+
+
 def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
-    """Crea un grafico con il tempo medio annuale delle soluzioni per un determinato tipo di cubo.
+    """Crea un grafico con il tempo medio annuale delle risoluzioni.
     
     Params:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
@@ -469,8 +652,28 @@ def grafico_medie_annuali(df_cubo: pandas.DataFrame) -> None:
         None.
     """
     dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].mean()
-    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VIOLA, width=0.3)
-    plt.title(label="Tempo medio annuale delle risoluzioni", fontweight="bold")
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=AZZURRO, width=0.3)
+    plt.title(label="Tempi medi delle risoluzioni annuali", fontweight="bold")
+    plt.ylabel(ylabel="Secondi", fontweight="bold")
+    plt.xlabel(xlabel="Anno", fontweight="bold")
+    plt.xticks(rotation=0)
+    for la_barra in grafico.containers:
+        grafico.bar_label(container=la_barra, labels=dati_per_grafico.values.round(2), label_type='center')
+    plt.show()
+
+
+def grafico_record_annuali(df_cubo: pandas.DataFrame) -> None:
+    """Crea un grafico con il tempo record annuale delle risoluzioni.
+    
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+        
+    Returns:
+        None.
+    """
+    dati_per_grafico = df_cubo.groupby(by=["Anno"])["Secondi"].min()
+    grafico = dati_per_grafico.plot(kind="bar", figsize=(11,5), color=VERDE, width=0.3)
+    plt.title(label="Tempi record delle risoluzioni annuali", fontweight="bold")
     plt.ylabel(ylabel="Secondi", fontweight="bold")
     plt.xlabel(xlabel="Anno", fontweight="bold")
     plt.xticks(rotation=0)
@@ -766,7 +969,7 @@ def numero_risoluzioni_mensili(df_cubo:pandas.DataFrame, anno:int) -> pandas.Ser
 
 
 def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
-    """Stampa i tempi medi di risoluzione annuali.
+    """Stampa i tempi medi delle risoluzioni annuali.
     
     Params:
         df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
@@ -778,7 +981,24 @@ def medie_risoluzioni_annuali(df_cubo:pandas.DataFrame):
     df_medie_annuali = pandas.DataFrame(df_medie_annuali)
     df_medie_annuali.insert(loc=1, column="Tempo", value=df_medie_annuali["Secondi"].apply(conversione_secondi))
     df_medie_annuali['Tempo'] = df_medie_annuali['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
-    print("Tempi medi mensili in secondi delle risoluzioni annuali\n")
+    print("Tempi medi delle risoluzioni annuali\n")
+    print(df_medie_annuali)
+
+
+def record_risoluzioni_annuali(df_cubo:pandas.DataFrame):
+    """Mostra i tempi record di risoluzione annuali.
+    
+    Params:
+        df_cubo (pandas.DataFrame): DataFrame contenente i dati delle risoluzioni.
+    
+    Returns:
+        None.
+    """
+    df_medie_annuali = df_cubo.groupby(by=["Anno"])["Secondi"].min().round(2)
+    df_medie_annuali = pandas.DataFrame(df_medie_annuali)
+    df_medie_annuali.insert(loc=1, column="Tempo", value=df_medie_annuali["Secondi"].apply(conversione_secondi))
+    df_medie_annuali['Tempo'] = df_medie_annuali['Tempo'].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+    print("Tempi record stabiliti ogni anno\n")
     print(df_medie_annuali)
 
 
