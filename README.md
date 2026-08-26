@@ -74,7 +74,7 @@ Once you have downloaded or cloned the project, go to the "scripts" folder with 
 This project is distributed under the MIT license. Check the <a href="LICENCE">LICENSE</a> file for more information.
 
 ## Contacts
-Giuseppe Alaimo<br>
+Giuseppe Luca Alaimo<br>
 Email: <a href="gl.alaimo@protonmail.com">gl.alaimo@protonmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/giuseppe-luca-alaimo-9875b32a1/">Link</a>
 
