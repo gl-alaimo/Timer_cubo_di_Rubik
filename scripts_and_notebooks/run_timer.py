@@ -18,7 +18,7 @@ def main_function():
     retry = "yes"
     print()
 
-    while retry == "yes" or retry == "si" or retry == "sì":
+    while retry in ("yes", "y"):
         if cube == "pyraminx":
             rubik_module.generate_random_moves(moves_list=pyraminx_moves)
         elif cube in dodecahedrons:
