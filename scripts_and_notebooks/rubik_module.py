@@ -36,6 +36,21 @@ PURPLE = "#7366cb"
 GRAY = "#838d99"
 TURQUOISE = "#479fa6"
 
+MONTHS_ORDER = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+]
+
 # Functions for scripts
 
 
@@ -467,7 +482,7 @@ def yearly_averages_chart(df_cube: pandas.DataFrame) -> None:
         None.
     """
     chart_data = df_cube.groupby(by=["Year"])["Seconds"].mean()
-    chart = chart_data.plot(kind="bar", figsize=(11, 5), color=PURPLE, width=0.3)
+    chart = chart_data.plot(kind="bar", figsize=(11, 5), color=BLUE, width=0.3)
     plt.title(label="Yearly average solve time", fontweight="bold")
     plt.ylabel(ylabel="Seconds", fontweight="bold")
     plt.xlabel(xlabel="Year", fontweight="bold")
@@ -925,3 +940,215 @@ def calculate_correlation(df: pandas.DataFrame) -> float:
     elif correlation_coefficient == 1:
         print("This value indicates that every single time you solve the cube, the solve time increases")
 
+
+def calculate_monthly_records_all_years(df_cube: pandas.DataFrame) -> None:
+    """Calculate the record (best) solve time for each month across multiple years.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        df_pivot = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="min",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(MONTHS_ORDER)
+        df_pivot = df_pivot.fillna(value=0)
+        print(df_pivot)
+    else:
+        print("Data not available. There are no solves registered for multiple years.")
+
+
+def monthly_records_chart_all_years(df_cube: pandas.DataFrame) -> None:
+    """Plot monthly best solve times for each year in the dataset.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        chart_data = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="min",
+            sort=False,
+        )
+        green_shades = ["#1a5c4d", "#307457", "#4b8c5f", "#609d64", "#70ac74"]
+        chart_data = chart_data.reindex(MONTHS_ORDER)
+        chart_data.plot(kind="bar", figsize=(12, 6), width=0.8, color=green_shades)
+        plt.title(label="Monthly best solve time across years", fontweight="bold")
+        plt.ylabel(ylabel="Seconds", fontweight="bold")
+        plt.xlabel(xlabel="Month", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Year")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Chart not available. There are no solves registered for multiple years.")
+
+
+def calculate_monthly_averages_all_years(df_cube: pandas.DataFrame) -> None:
+    """Calculate monthly average solve times for each year.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        df_pivot = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="mean",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(MONTHS_ORDER)
+        df_pivot = df_pivot.fillna(value=0)
+        df_pivot = df_pivot.round(2)
+        print(df_pivot)
+    else:
+        print("Data not available. There are no solves registered for multiple years.")
+
+
+def monthly_averages_chart_all_years(df_cube: pandas.DataFrame) -> None:
+    """Plot monthly average solve times for each year.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        chart_data = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="mean",
+            sort=False,
+        )
+        blue_shades = ["#10829f", "#1293b3", "#14a3c7", "#43b5d2", "#72c8dd"]
+        chart_data = chart_data.reindex(MONTHS_ORDER)
+        chart_data.plot(kind="bar", figsize=(12, 6), width=0.8, color=blue_shades)
+        plt.title(label="Monthly average solve time across years", fontweight="bold")
+        plt.ylabel(ylabel="Seconds", fontweight="bold")
+        plt.xlabel(xlabel="Month", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Year")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Chart not available. There are no solves registered for multiple years.")
+
+
+def calculate_monthly_solve_counts_all_years(df_cube: pandas.DataFrame) -> None:
+    """Calculate monthly solve counts for each year.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        df_pivot = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="count",
+            sort=False,
+        )
+        df_pivot = df_pivot.reindex(MONTHS_ORDER)
+        df_pivot = df_pivot.fillna(value=0)
+        df_pivot = df_pivot.round().astype(int)
+        print(df_pivot)
+    else:
+        print("Data not available. There are no solves registered for multiple years.")
+
+
+def monthly_solves_chart_all_years(df_cube: pandas.DataFrame) -> None:
+    """Plot monthly solve counts for each year.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data.
+
+    Returns:
+        None.
+    """
+    years = set(df_cube["Year"].values)
+    if len(years) > 1:
+        chart_data = df_cube.pivot_table(
+            index="Month",
+            columns="Year",
+            values="Seconds",
+            aggfunc="count",
+            sort=False,
+        )
+        gray_shades = ["#848789", "#939698", "#a3a5a7", "#b3b5b6", "#c3c5c5"]
+        chart_data = chart_data.reindex(MONTHS_ORDER)
+        chart_data.plot(kind="bar", figsize=(12, 6), width=0.8, color=gray_shades)
+        plt.title(label="Monthly solve counts across years", fontweight="bold")
+        plt.ylabel(ylabel="Count", fontweight="bold")
+        plt.xlabel(xlabel="Month", fontweight="bold")
+        plt.xticks(rotation=0)
+        plt.grid(axis="y")
+        plt.legend(title="Year")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Chart not available. There are no solves registered for multiple years.")
+
+
+def annual_records(df_cube: pandas.DataFrame) -> None:
+    """Show the yearly best solve times.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data with columns "Year" and "Seconds".
+
+    Returns:
+        None.
+    """
+    df_yearly = df_cube.groupby(by=["Year"])["Seconds"].min().round(2)
+    df_yearly = pandas.DataFrame(df_yearly)
+    df_yearly.insert(loc=1, column="Time", value=df_yearly["Seconds"].apply(convert_seconds))
+    df_yearly["Time"] = df_yearly["Time"].apply(lambda x: f"{x[0]}:{x[1]:05.2f}")
+    print("Yearly record solve times\n")
+    print(df_yearly)
+
+
+def annual_records_chart(df_cube: pandas.DataFrame) -> None:
+    """Plot the yearly best solve times.
+
+    Params:
+        df_cube (pandas.DataFrame): DataFrame containing solve data with columns "Year" and "Seconds".
+
+    Returns:
+        None.
+    """
+    chart_data = df_cube.groupby(by=["Year"])["Seconds"].min()
+    chart = chart_data.plot(kind="bar", figsize=(11, 5), color=GREEN, width=0.3)
+    plt.title(label="Yearly best solve times", fontweight="bold")
+    plt.ylabel(ylabel="Seconds", fontweight="bold")
+    plt.xlabel(xlabel="Year", fontweight="bold")
+    plt.xticks(rotation=0)
+    for bar in chart.containers:
+        chart.bar_label(container=bar, labels=chart_data.values.round(2), label_type='center')
+    plt.show()
