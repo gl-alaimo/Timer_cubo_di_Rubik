@@ -1,4 +1,4 @@
-# Rubik's Cube Timer
+# Rubik's Cube Timer and Data Analysis
 
 This project contains <br>
 - various Python scripts designed to track solve times for many types of Rubik's cubes in real-time, manually upload solve times, suggest moves to scramble the cube before starting to solve it, simulate a speedcubing competition, track personal records and average solve times, and much more.<br>
