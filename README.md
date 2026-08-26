@@ -1,4 +1,4 @@
-# Timer cubo di Rubik
+# Timer cubo di Rubik e analisi dei dati
 
 (For English switch to <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/tree/english_version"> english_version </a> branch)
 
