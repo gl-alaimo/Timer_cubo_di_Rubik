@@ -65,10 +65,10 @@ Una volta scaricato o clonato il progetto bisogna andare nella cartella "scripts
     Eseguire i notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/ o con Visual Studio Code dopo aver installato l'estenzione dedicata https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) dopo aver registrato o caricato varie risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro, grazie anche alla creazione di grafici.
 
 ## Licenza
-Questo progetto è distribuito sotto la licenza MIT. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni.
+Questo progetto è distribuito sotto la licenza MIT + CC. Controllare il file <a href="LICENCE">LICENSE</a> per ulteriori informazioni.
 
 ## Contatti
-Giuseppe Alaimo<br>
+Giuseppe Luca Alaimo<br>
 Email: <a href="gl.alaimo@protonmail.com">gl.alaimo@protonmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/giuseppe-luca-alaimo-9875b32a1/">Link</a>
 
