@@ -12,6 +12,8 @@ from pyfiglet import Figlet
 
 lista_tipi_cubo_piccoli = ["2x2x2", "3x3x3",  "mirror"]
 lista_dodecaedri = ["kilominx", "megaminx"]
+movimenti_square_1 = [1,2,3,4,5,6,-1,-2,-3,-4,-5,-6]
+movimenti_skewb = [["U", "U'"], ["L", "L'"], ["R", "R'"], ["B", "B'"]]
 movimenti_pyraminx = [["U", "U'"], ["L", "L'"], ["R", "R'"], ["F", "F'"]]
 movimenti_dodecaedro = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"],
                         ["F", "F'", "F2"], ["B", "B'", "B2"], ["BL", "BL'", "BL2"],
@@ -389,6 +391,36 @@ def mostra_record(cubo:str) -> str:
     else:
         print("Nessun record impostato al momento")
     return record_personale
+
+
+def mischiare_square_1():
+    """Genera una sequenza di movimenti casuali per mischiare il cubo square-1"""
+    for _ in range(20):
+        print("(" + str(choice(movimenti_square_1)) + "," + str(choice(movimenti_square_1)) + ")" + "/", end=" ")
+    print()
+
+
+def selezione_cubo(cubo):
+    """Esegue una delle varie funzioni per mischiare il cubo in base al cubo inserito
+    
+    Params:
+        cubo (str): Tipo di cubo.
+    
+    Returns:
+        None.
+    """
+    if cubo == "skewb":
+        genera_movimenti_casuali(lista_movimenti=movimenti_skewb)
+    elif cubo == "square-1":
+        mischiare_square_1()
+    elif cubo == "pyraminx":
+        genera_movimenti_casuali(lista_movimenti=movimenti_pyraminx)
+    elif cubo in lista_dodecaedri:
+        genera_movimenti_casuali(lista_movimenti=movimenti_dodecaedro)
+    elif cubo in lista_tipi_cubo_piccoli:
+        genera_movimenti_casuali(lista_movimenti=movimenti_cubi_piccoli)
+    else:
+        genera_movimenti_casuali(lista_movimenti=movimenti_cubi_grandi)
 
 
 # Funzioni per i notebook

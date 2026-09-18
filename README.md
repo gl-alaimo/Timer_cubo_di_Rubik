@@ -3,7 +3,7 @@
 (For English switch to <a href="https://github.com/gl-alaimo/Timer_cubo_di_Rubik/tree/english_version"> english_version </a> branch)
 
 Questo progetto contiene 
-- vari script scritti in Python progettati per registrare i tempi di risoluzione di molti tipi di cubi di Rubik in tempo reale, caricare tempi di risoluzione manualmente, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, simulare una competizione di speedcubing, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro. 
+- vari script scritti in Python progettati per registrare i tempi di risoluzione di molti tipi di cubi di Rubik in tempo reale, caricare tempi di risoluzione manualmente, importare i dati esportati da CS Timer, suggerire mosse per mischiare il cubo prima di iniziare a risolverlo, simulare una competizione di speedcubing, tenere traccia dei record personali e dei tempi medi di risoluzione e molto altro. 
 - vari Notebook per analizzare i dati relativi ai tempi di risoluzione grazie anche alla creazione di molti grafici ed al calcolo di varie statistiche. 
 Ottimo per fare pratica e tenere traccia dei propri progressi.
 
@@ -13,6 +13,7 @@ Ottimo per fare pratica e tenere traccia dei propri progressi.
 - **modulo_rubik.py**: Modulo Python contenente funzioni usate nei vari script e notebook.
 - **avvia_timer.py**: Script principale per avviare il timer e registrare i tempi di risoluzione.
 - **carica_tempo.py**: Script per caricare i tempi salvati da un file CSV.
+- **Importare i dati di CS Timer**: Importare i dati esportati da CS Timer.
 - **simula_competizione.py**: Script per simulare una competizione di speedcubing.
 - **database.csv**: File CSV che memorizza i tempi di risoluzione.
 - **notebook_generale**, **notebook_cubo_2x2x2**, **notebook_cubo_3x3x3** eccetera: Notebook Jupyter per analisi e visualizzazioni dei dati.
@@ -61,7 +62,17 @@ Una volta scaricato o clonato il progetto bisogna andare nella cartella "scripts
    Da un terminale bash:
    ```
    python simula_competizione.py
-4. **Eseguire i notebook**:
+4. **Importare i dati di CS Timer**:
+    Eseguire lo script `importa_dati_di_cs_timer.py` per importare i dati di CS Timer specificando anche il tipo di cubo e il percorso completo del file con i dati esportati da CS Timer. Ad esempio:<br>
+
+   Da Windows:
+   ```
+   python .\importa_dati_di_cs_timer.py --cubo 3x3x3 --file C:\Users\g.alaimo\Downloads\csTimerExport_20260916_141744.csv
+   ```
+   Da Linux:
+   ```
+   python importa_dati_di_cs_timer.py --cubo 3x3x3 --file home/g.alaimo/Downloads/csTimerExport_20260916_141744.csv
+5. **Eseguire i notebook**:
     Eseguire i notebook in un ambiente supportato (ad esempio tramite Jupyter Notebook https://jupyter.org/ o con Visual Studio Code dopo aver installato l'estenzione dedicata https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) dopo aver registrato o caricato varie risoluzioni, per analizzare i propri dati sulle risoluzioni come tempi record, tempi medi di risoluzione ed altro, grazie anche alla creazione di grafici.
 
 ## Licenza
