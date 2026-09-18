@@ -12,6 +12,7 @@ Great for practicing and keeping track of your progress.
 - **rubik_module.py**: Python module containing functions used in various scripts and notebooks.
 - **run_timer.py**: Main script to start the timer and record solve times.
 - **upload_solve.py**: Script to manually upload solve times.
+- **import_cs_timer_data.py**: Script to import CSV files exported from CS Timer into `database.csv`.
 - **simulate_competition.py**: Script to simulate a speedcubing competition.
 - **database.csv**: CSV file that stores solve times.
 - **general_notebook**, **notebook_2x2x2**, **notebook_3x3x3** etc.: Jupyter Notebooks for data analysis and visualizations.
@@ -56,7 +57,18 @@ Once you have downloaded or cloned the project, go to the "scripts" folder with 
    python upload_solve.py
    ```
 
-3. **Simulate a Competition**:
+3. **Import CS Timer data**:
+   Run the script `import_cs_timer_data.py` to import a CSV exported from CS Timer. The script converts times in the `M:S` format to seconds and appends rows with date, time (seconds), and cube type to `database.csv`.<br>
+   From a Windows terminal:
+   ```
+   python .\import_cs_timer_data.py -c <cube> -f <file.csv>
+   ```
+   From a bash terminal:
+   ```
+   python import_cs_timer_data.py -c <cube> -f <file.csv>
+   ```
+
+4. **Simulate a Competition**:
    Run the script `simulate_competition.py` to simulate a speedcubing competition.<br>
    From a Windows terminal:
    ```
