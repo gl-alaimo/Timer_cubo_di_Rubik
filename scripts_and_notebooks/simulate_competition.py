@@ -29,15 +29,7 @@ def main_function():
 
     for round_num in rounds_list:
         print(f"\nRound number {round_num}")
-
-        if cube == "pyraminx":
-            rubik_module.generate_random_moves(moves_list=pyraminx_moves)
-        elif cube in dodecahedrons:
-            rubik_module.generate_random_moves(moves_list=dodecahedron_moves)
-        elif cube in small_cube_types:
-            rubik_module.generate_random_moves(moves_list=small_cubes_moves)
-        else:
-            rubik_module.generate_random_moves(moves_list=large_cubes_moves)
+        rubik_module.select_cube_scramble(cube=cube)
 
         input("Press enter to start: ")
         print("Timer started!")

@@ -19,15 +19,7 @@ def main_function():
     print()
 
     while retry in ("yes", "y"):
-        if cube == "pyraminx":
-            rubik_module.generate_random_moves(moves_list=pyraminx_moves)
-        elif cube in dodecahedrons:
-            rubik_module.generate_random_moves(moves_list=dodecahedron_moves)
-        elif cube in small_cube_types:
-            rubik_module.generate_random_moves(moves_list=small_cubes_moves)
-        else:
-            rubik_module.generate_random_moves(moves_list=large_cubes_moves)
-
+        rubik_module.select_cube_scramble(cube=cube)
         personal_record = rubik_module.show_record(cube=cube)
         average = rubik_module.calculate_absolute_average(cube=cube)
         print("Current average:", average)

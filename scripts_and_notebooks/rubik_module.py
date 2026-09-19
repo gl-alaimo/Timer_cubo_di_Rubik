@@ -12,6 +12,8 @@ from pyfiglet import Figlet
 
 small_cube_types = ["2x2x2", "3x3x3",  "mirror"]
 dodecahedrons = ["kilominx", "megaminx"]
+square_1_moves = [1,2,3,4,5,6,-1,-2,-3,-4,-5,-6]
+skewb_moves = [["U", "U'"], ["L", "L'"], ["R", "R'"], ["B", "B'"]]
 pyraminx_moves = [["U", "U'"], ["L", "L'"], ["R", "R'"], ["F", "F'"]]
 dodecahedron_moves = [["U", "U'", "U2"], ["L", "L'", "L2"], ["R", "R'", "R2"],
                       ["F", "F'", "F2"], ["B", "B'", "B2"], ["BL", "BL'", "BL2"],
@@ -396,6 +398,36 @@ def show_record(cube: str) -> str:
     else:
         print("No record set at the moment")
     return personal_record
+
+
+def scramble_square_1():
+    """Generates a random sequance of moves to scramble the suare-1 cube."""
+    for _ in range(20):
+        print("(" + str(choice(square_1_moves)) + "," + str(choice(square_1_moves)) + ")" + "/", end=" ")
+    print()
+
+
+def select_cube_scramble(cube):
+    """Runs a specific function for scrambling the cube based on the cube type.
+    
+    Params:
+        cube (str): Tipe of cube.
+    
+    Returns:
+        None.
+    """
+    if cube == "skewb":
+        generate_random_moves(moves_list=skewb_moves)
+    elif cube == "square-1":
+        scramble_square_1()
+    elif cube == "pyraminx":
+        generate_random_moves(moves_list=pyraminx_moves)
+    elif cube in dodecahedrons:
+        generate_random_moves(moves_list=dodecahedron_moves)
+    elif cube in small_cube_types:
+        generate_random_moves(moves_list=small_cubes_moves)
+    else:
+        generate_random_moves(moves_list=large_cubes_moves)
 
 
 # Functions for notebooks
