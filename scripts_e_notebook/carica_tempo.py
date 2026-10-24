@@ -12,10 +12,12 @@ if data_risoluzione == "oggi":
 cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, Megaminx): ").lower()
 record_personale = modulo_rubik.mostra_record(cubo=cubo)
 media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
-print("Media attuale:", media, "\n")
+print("Media attuale:", media)
+modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=10)
+print()
 aggiungere_altra_soluzione = "si"
 
-while aggiungere_altra_soluzione in ("si","sì", "s"):
+while aggiungere_altra_soluzione in ("si", "sì", "s"):
     minuti = int(input("Minuti: "))
     secondi = int(input("Secondi: "))
     millesimi = float(input("Millesimi di secondo (ad esempio 0.43): "))
