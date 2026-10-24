@@ -21,6 +21,7 @@ def funzione_principale():
     record_personale = modulo_rubik.mostra_record(cubo=cubo)
     media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
     print("Media attuale:", media)
+    modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=5)
 
     if cubo in ("6x6x6", "7x7x7"):
         lista_round = [1,2,3]
