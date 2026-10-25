@@ -23,7 +23,7 @@ def funzione_principale():
         modulo_rubik.selezione_cubo(cubo=cubo)
         record_personale = modulo_rubik.mostra_record(cubo=cubo)
         media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
-        print("Media attuale:", media)
+        print("Media assoluta:", media)
         modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=10)
         tempo_impiegato, cubo = modulo_rubik.calcolo_tempo(cubo)
         # Informazioni sul record

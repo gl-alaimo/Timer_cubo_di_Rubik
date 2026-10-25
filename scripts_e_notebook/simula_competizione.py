@@ -20,7 +20,7 @@ def funzione_principale():
     cubo = input("Digita il tipo di cubo (ad esempio 2x2x2, 3x3x3, megaminx): ").lower()
     record_personale = modulo_rubik.mostra_record(cubo=cubo)
     media = modulo_rubik.calcolo_media_assoluta(cubo=cubo)
-    print("Media attuale:", media)
+    print("Media assoluta:", media)
     modulo_rubik.media_ultime_tot_risoluzioni(cubo=cubo, num_ultime_risoluzioni=5)
 
     if cubo in ("6x6x6", "7x7x7"):
