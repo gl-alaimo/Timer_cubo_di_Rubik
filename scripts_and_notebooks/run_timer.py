@@ -22,7 +22,8 @@ def main_function():
         rubik_module.select_cube_scramble(cube=cube)
         personal_record = rubik_module.show_record(cube=cube)
         average = rubik_module.calculate_absolute_average(cube=cube)
-        print("Current average:", average)
+        print("Average of all solves:", average)
+        rubik_module.average_last_total_solves(cube=cube, num_last_solves=10)
         time_taken, cube = rubik_module.calculate_time(cube)
         # Record information
         rubik_module.check_new_record(time_taken, cube)

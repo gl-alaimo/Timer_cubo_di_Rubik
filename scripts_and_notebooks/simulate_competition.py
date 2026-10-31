@@ -20,7 +20,8 @@ def main_function():
     cube = input("Enter the cube type (e.g., 2x2x2, 3x3x3, megaminx): ").lower()
     personal_record = rubik_module.show_record(cube=cube)
     average = rubik_module.calculate_absolute_average(cube=cube)
-    print("Current average:", average)
+    print("Average of all solves:", average)
+    rubik_module.average_last_total_solves(cube=cube, num_last_solves=5)
 
     if cube in ("6x6x6", "7x7x7"):
         rounds_list = [1, 2, 3]

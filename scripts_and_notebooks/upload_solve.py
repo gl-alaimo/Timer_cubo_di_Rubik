@@ -12,7 +12,8 @@ if solve_date == "today":
 cube = input("Enter the cube type (e.g., 2x2x2, 3x3x3, Megaminx): ").lower()
 personal_record = rubik_module.show_record(cube=cube)
 average = rubik_module.calculate_absolute_average(cube=cube)
-print("Current average:", average, "\n")
+print("Average of all solves:", average)
+rubik_module.average_last_total_solves(cube=cube, num_last_solves=10)
 upload_another_solve = "yes"
 
 while upload_another_solve in ("yes", "y"):
